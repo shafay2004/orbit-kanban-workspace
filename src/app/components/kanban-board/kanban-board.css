@@ -1,0 +1,5678 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+/* ==========================================================================
+   1. LUXURY COHESIVE SYSTEM CONTROLS & DYNAMIC THEMES
+   ========================================================================== */
+.orbit-design-system,
+.orbit-design-system .theme-dark {
+  --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
+  --bg-deep-space: #03030c;
+  --navy-dark-solid: #0b0c16;
+
+  /* Elite Brand Combinations */
+  --purple-royal: #6366f1;
+  --purple-glow: rgba(99, 102, 241, 0.22);
+  --gold-accent: #f59e0b;
+  --gold-glow: rgba(245, 158, 11, 0.25);
+
+  /* Premium Purple UI system variables */
+  --premium-purple-dark: #1b1236;
+  --premium-purple-card: linear-gradient(135deg, rgba(37, 22, 77, 0.95) 0%, rgba(21, 11, 46, 0.98) 100%);
+  --premium-purple-input: #190f38;
+  --premium-purple-focus: #0c061f;
+  --premium-purple-accent: #8b6ec8;
+  --premium-purple-accent-hover: #9d85d9;
+
+  /* High-Contrast Glassmorphism Base Overrides */
+  --glass-bg-premium: #0c0d19;
+  --glass-border-fine: rgba(255, 255, 255, 0.14);
+  /* Bounded clear layout borders */
+  --glass-border-glow: #6366f1;
+
+  /* High-Contrast WCAG Compliant Text Assets Palette */
+  --text-primary: #ffffff;
+  --text-secondary: #e2e8f0;
+  --text-muted: #cbd5e1;
+  /* Replaced dark grey with rich readable silver slate */
+
+  /* Status Color Engine Matrix */
+  --neon-blue: #38bdf8;
+  --neon-blue-glow: rgba(56, 189, 248, 0.2);
+  --neon-green: #10b981;
+  --neon-green-glow: rgba(16, 185, 129, 0.2);
+
+  /* Smooth Aesthetics & 3D Transitions */
+  --radius-premium: 20px;
+  --radius-interactive: 14px;
+  --transition-3d: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+  font-family: var(--font-primary);
+  background-color: var(--bg-deep-space);
+  color: var(--text-primary);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+/* Light Mode System Variations */
+.orbit-design-system .theme-light {
+  --bg-deep-space: #f8fafc;
+  --navy-dark-solid: #ffffff;
+  --glass-bg-premium: rgba(255, 255, 255, 0.95) !important;
+  --glass-border-fine: rgba(99, 102, 241, 0.14) !important;
+  --text-primary: #0f172a !important;
+  --text-secondary: #1e293b !important;
+  --text-muted: #64748b !important;
+
+  /* Premium Purple UI system variables for Light Theme */
+  --premium-purple-card: #eae2f8;
+  --premium-purple-input: #f1ebfc;
+  --premium-purple-focus: #ffffff;
+  --premium-purple-accent: #7c3aed;
+  --premium-purple-accent-hover: #6d28d9;
+}
+
+/* ==========================================================================
+   2. IMMERSIVE MOTION AMBIENCE BACKGROUNDS
+   ========================================================================== */
+.orbit-design-system .luxury-bg-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-deep-space);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.orbit-design-system .glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(140px);
+  opacity: 0.22;
+  mix-blend-mode: screen;
+}
+
+.orbit-design-system .orb-1 {
+  top: -10%;
+  left: -5%;
+  width: 45vw;
+  height: 45vw;
+  background: radial-gradient(circle, var(--purple-royal) 0%, transparent 70%);
+  animation: floatOrb1 30s infinite alternate ease-in-out;
+}
+
+.orbit-design-system .orb-2 {
+  bottom: -15%;
+  right: -5%;
+  width: 50vw;
+  height: 50vw;
+  background: radial-gradient(circle, #0a0a3a 0%, transparent 70%);
+}
+
+.orbit-design-system .orb-3 {
+  top: 30%;
+  left: 40%;
+  width: 35vw;
+  height: 35vw;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.08) 0%, transparent 70%);
+}
+
+@keyframes floatOrb1 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  100% {
+    transform: translate(50px, 30px) scale(1.1);
+  }
+}
+
+/* ==========================================================================
+   3. PERSPECTIVE VIEWPORTS & LAYOUT CONTROLLERS
+   ========================================================================== */
+.orbit-design-system .auth-viewport,
+.orbit-design-system .workspace-viewport {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+}
+
+.orbit-design-system .max-width-container {
+  max-width: 1320px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 2rem;
+  box-sizing: border-box;
+}
+
+.orbit-design-system main {
+  perspective: 1200px;
+}
+
+/* ==========================================================================
+   4. PREMIUM FIXED NAVIGATION HEADER STRIP
+   ========================================================================== */
+.orbit-design-system .premium-navbar {
+  position: relative;
+  z-index: 1100;
+  background: rgba(4, 4, 12, 0.45);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--glass-border-fine);
+  padding: 1.25rem 0;
+  margin-bottom: 4rem;
+}
+
+.orbit-design-system .nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 2rem;
+  box-sizing: border-box;
+}
+
+.orbit-design-system .brand-block {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.orbit-design-system .nav-brand-title {
+  font-size: 1.65rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin: 0;
+  background: linear-gradient(135deg, #ffffff 40%, var(--text-muted));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.orbit-design-system .theme-toggle-pill {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--glass-border-fine);
+  padding: 8px 16px;
+  border-radius: 100px;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-3d);
+}
+
+.orbit-design-system .theme-toggle-pill:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
+}
+
+.orbit-design-system .nav-actions-hub {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: nowrap;
+}
+
+.orbit-design-system .project-selector-glass {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--glass-border-fine);
+  padding: 4px 6px 4px 16px;
+  border-radius: 14px;
+  gap: 8px;
+}
+
+.orbit-design-system .selector-prefix {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-right: 10px;
+  letter-spacing: 0.05em;
+}
+
+/* CUSTOM DROPDOWN CHANGER HUB MATRIX */
+.orbit-design-system .custom-dropdown-container {
+  position: relative;
+}
+
+.orbit-design-system .dropdown-trigger-btn {
+  background: transparent;
+  border: none;
+  color: #a5b4fc;
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 6px 12px 6px 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  outline: none;
+  min-width: 120px;
+  max-width: 180px;
+  justify-content: space-between;
+}
+
+.orbit-design-system .current-value {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.orbit-design-system .action-icon-btn {
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 10px;
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-3d);
+  padding: 0;
+}
+
+.orbit-design-system .action-icon-btn:hover {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: rgba(239, 68, 68, 0.5);
+  transform: scale(1.05);
+}
+
+.orbit-design-system .action-icon-btn .icon {
+  font-size: 0.95rem;
+  line-height: 1;
+}
+
+.orbit-design-system .logout-btn-outline {
+  background: rgba(239, 68, 68, 0.02);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #f87171;
+  padding: 8px 18px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.88rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  transition: var(--transition-3d);
+  height: 44px;
+  box-sizing: border-box;
+}
+
+.orbit-design-system .logout-btn-outline:hover {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: #ef4444;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.15);
+}
+
+/* ==========================================================================
+   5. PREMIUM HERO SECTION DESCRIPTions
+   ========================================================================== */
+.orbit-design-system .workspace-hero-section {
+  margin-bottom: 4.5rem;
+}
+
+.orbit-design-system .hero-badge {
+  display: inline-block;
+  background: var(--purple-glow);
+  border: 1px solid rgba(99, 102, 241, 0.35);
+  color: #a5b4fc;
+  padding: 8px 18px;
+  border-radius: 100px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 1.5rem;
+}
+
+.orbit-design-system .hero-main-title {
+  font-size: 3.5rem;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1.15;
+  margin: 0 0 1.25rem 0;
+  background: linear-gradient(180deg, #ffffff 30%, #cbd5e1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.orbit-design-system .hero-sub-text {
+  font-size: 1.15rem;
+  color: var(--text-muted) !important;
+  max-width: 680px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   6. METRICS WIDGET ENGINE CONTROLS (FIXED BLEED COMPONENT BUG)
+   ========================================================================== */
+.orbit-design-system .metrics-grid-layout {
+  display: grid;
+  grid-template-columns: 6.5fr 3.5fr;
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.orbit-design-system .metrics-cards-subgrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.orbit-design-system .metrics-cards-subgrid .span-full {
+  grid-column: span 2;
+}
+
+/* FORCED TRANSLUCENT CONTAINER THEMING OVERRIDES */
+.orbit-design-system .premium-glass-card,
+.orbit-design-system .filter-card-wrapper,
+.orbit-design-system .metric-widget,
+.orbit-design-system .chart-analytics-widget {
+  background: var(--glass-bg-premium) !important;
+  border: 1px solid var(--glass-border-fine) !important;
+  color: var(--text-primary) !important;
+  border-radius: var(--radius-premium);
+  padding: 2rem;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition-3d);
+}
+
+.orbit-design-system .interactive-card:hover,
+.orbit-design-system .creation-form-card:hover,
+.orbit-design-system .filter-card-wrapper:hover {
+  transform: translateY(-8px) rotateX(3deg) rotateY(1deg);
+  border-color: var(--glass-border-glow) !important;
+  box-shadow: 0 30px 60px -15px rgba(99, 102, 241, 0.22), inset 0 1px 2px rgba(255, 255, 255, 0.15);
+}
+
+.orbit-design-system .metric-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #94a3b8;
+  letter-spacing: 0.06em;
+  margin: 0;
+}
+
+.orbit-design-system .text-warning-label {
+  color: #fbc02d !important;
+  font-weight: 700;
+}
+
+.orbit-design-system .text-success-label {
+  color: #26a69a !important;
+  font-weight: 700;
+}
+
+.orbit-design-system .metric-value {
+  font-size: 3rem;
+  font-weight: 800;
+  margin: 0.6rem 0 0 0;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.orbit-design-system .text-gradient-purple {
+  background: linear-gradient(135deg, #ffffff 20%, #818cf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.orbit-design-system .text-warning {
+  color: var(--gold-accent) !important;
+}
+
+.orbit-design-system .text-success {
+  color: var(--neon-green) !important;
+}
+
+.orbit-design-system .metric-card-content {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  width: 100% !important;
+  gap: 1.5rem !important;
+}
+
+.orbit-design-system .metric-text-details {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.orbit-design-system .metric-visual-container {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 80px !important;
+  height: 80px !important;
+  position: relative !important;
+}
+
+.orbit-design-system .sparkline-svg {
+  width: 130px !important;
+  height: 65px !important;
+  filter: drop-shadow(0 0 8px rgba(99, 102, 241, 0.4)) !important;
+}
+
+.orbit-design-system .sparkline-line {
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+  animation: drawSparkline 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes drawSparkline {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.orbit-design-system .sparkline-dot {
+  animation: pulseSparklineDot 2.5s infinite ease-in-out;
+}
+
+@keyframes pulseSparklineDot {
+  0% { r: 2px; opacity: 0.8; }
+  50% { r: 4.5px; opacity: 1; filter: drop-shadow(0 0 6px #3b82f6); }
+  100% { r: 2px; opacity: 0.8; }
+}
+
+.orbit-design-system .radial-progress-wrapper {
+  position: relative !important;
+  width: 76px !important;
+  height: 76px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.orbit-design-system .radial-progress-svg {
+  width: 100% !important;
+  height: 100% !important;
+  transform: rotate(-90deg) !important;
+}
+
+.orbit-design-system .radial-percentage {
+  position: absolute !important;
+  font-size: 0.8rem !important;
+  font-weight: 800 !important;
+}
+
+.orbit-design-system .ring-bg {
+  fill: none !important;
+  stroke: rgba(255, 255, 255, 0.05) !important;
+  stroke-width: 4 !important;
+}
+
+.orbit-design-system .ring-fg {
+  fill: none !important;
+  stroke-linecap: round !important;
+  stroke-width: 4 !important;
+  transition: stroke-dasharray 1.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.orbit-design-system .ring-pending {
+  stroke: var(--gold-accent) !important;
+  filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.4)) !important;
+}
+
+.orbit-design-system .ring-completed {
+  stroke: var(--neon-green) !important;
+  filter: drop-shadow(0 0 6px rgba(16, 185, 129, 0.4)) !important;
+}
+
+.orbit-design-system .chart-analytics-widget {
+  padding: 2rem 1.75rem;
+  transform-style: preserve-3d !important;
+  transition: transform 0.1s ease-out, box-shadow 0.25s ease-out, border-color 0.25s ease-out !important;
+}
+
+.orbit-design-system .chart-header-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1.5rem;
+  transform-style: preserve-3d !important;
+  transition: transform 0.15s ease-out !important;
+}
+
+.orbit-design-system .chart-pulse-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--neon-blue);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--neon-blue);
+}
+
+.orbit-design-system .chart-widget-title {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+.orbit-design-system .canvas-relative-container {
+  position: relative;
+  width: 100%;
+  height: 155px;
+  transform-style: preserve-3d !important;
+  transition: transform 0.15s ease-out !important;
+}
+
+/* ==========================================================================
+   7. CONTROL ENGINE HUD FILTER ARCHITECTURE
+   ========================================================================== */
+.orbit-design-system .filter-flex-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.orbit-design-system .search-block {
+  flex: 3.5;
+}
+
+.orbit-design-system .priority-block {
+  flex: 4;
+}
+
+.orbit-design-system .owner-block {
+  flex: 3.5;
+}
+
+.orbit-design-system .filter-inner-badge {
+  background: var(--purple-glow);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  color: #a5b4fc;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 6px;
+  align-self: flex-start;
+  margin-bottom: 6px;
+}
+
+.orbit-design-system .dark-badge {
+  background: rgba(0, 0, 0, 0.4);
+  color: var(--text-muted);
+  border-color: transparent;
+}
+
+.orbit-design-system .filter-search-input,
+.orbit-design-system .premium-segmented-control,
+.orbit-design-system .premium-select-inline,
+.orbit-design-system .premium-select-dropdown-trigger {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.35) !important;
+  border: 1px solid var(--glass-border-fine) !important;
+  padding: 13px 16px;
+  border-radius: var(--radius-interactive);
+  color: var(--text-primary) !important;
+  outline: none;
+  font-size: 0.95rem;
+  transition: var(--transition-3d);
+}
+
+.orbit-design-system .premium-select-dropdown-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+  font-weight: 500;
+  cursor: pointer;
+  gap: 10px !important;
+}
+
+.orbit-design-system .filter-search-input:focus,
+.orbit-design-system .premium-select-dropdown-trigger:focus {
+  border-color: var(--purple-royal) !important;
+  box-shadow: 0 0 12px var(--purple-glow) !important;
+  background: rgba(0, 0, 0, 0.6) !important;
+}
+
+.orbit-design-system .filter-label-text {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.orbit-design-system .premium-segmented-control {
+  display: inline-flex;
+  padding: 4px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.orbit-design-system .segment-btn {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  padding: 10px 14px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: var(--transition-3d);
+}
+
+.orbit-design-system .segment-btn:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.orbit-design-system .segment-btn.active {
+  background: var(--purple-royal);
+  color: white;
+  box-shadow: 0 6px 15px rgba(99, 102, 241, 0.35);
+}
+
+.orbit-design-system .segment-btn.active.btn-high {
+  background: #ef4444;
+  color: white;
+  box-shadow: 0 6px 15px rgba(239, 68, 68, 0.35);
+}
+
+/* ==========================================================================
+   8. DUAL SPRINT CREATOR HUB INJECTION FORMS
+   ========================================================================== */
+.orbit-design-system .dual-creation-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-bottom: 5rem;
+}
+
+.orbit-design-system .creation-form-card {
+  padding: 2.25rem;
+  border-top: 4px solid transparent !important;
+  background: rgba(12, 12, 40, 0.7) !important;
+  overflow: visible !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.orbit-design-system .form-section-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.01em;
+}
+
+.orbit-design-system .form-inputs-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.95rem;
+  flex-grow: 1 !important;
+}
+
+.orbit-design-system .form-inputs-stack button {
+  margin-top: auto !important;
+}
+
+.orbit-design-system .premium-input-field,
+.orbit-design-system .premium-select-field {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5) !important;
+  border: 1px solid var(--glass-border-fine) !important;
+  padding: 15px 18px;
+  border-radius: var(--radius-interactive);
+  color: #ffffff !important;
+  font-size: 0.95rem;
+  outline: none;
+  transition: var(--transition-3d);
+  box-sizing: border-box;
+}
+
+.orbit-design-system .project-desc-textarea {
+  height: 168px !important;
+  resize: none !important;
+}
+
+.orbit-design-system .premium-input-field::placeholder {
+  color: #52525b;
+}
+
+.orbit-design-system .premium-input-field:focus,
+.orbit-design-system .premium-select-field:focus {
+  border-color: var(--purple-royal) !important;
+  box-shadow: 0 0 14px var(--purple-glow);
+  background: rgba(0, 0, 0, 0.7) !important;
+}
+
+.orbit-design-system .premium-btn {
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 24px;
+  border-radius: var(--radius-interactive);
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: var(--transition-3d);
+}
+
+.orbit-design-system .btn-gold-action {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #020208;
+  box-shadow: 0 6px 20px var(--gold-glow);
+}
+
+.orbit-design-system .btn-purple-action {
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  color: #fff;
+  box-shadow: 0 6px 20px var(--purple-glow);
+}
+
+.orbit-design-system .btn-gold-action:hover,
+.orbit-design-system .btn-purple-action:hover {
+  transform: translateY(-3px) scale(1.015);
+  filter: brightness(1.15);
+}
+
+/* ==========================================================================
+   9. HARD SOLID KANBAN WORKSPACE GRID BOARDS
+   ========================================================================== */
+.orbit-design-system .kanban-board-grid-layout {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.orbit-design-system .kanban-column-card {
+  background: rgba(5, 5, 20, 0.65) !important;
+  border-radius: 24px;
+  padding: 1.75rem;
+  min-height: 700px;
+}
+
+.orbit-design-system .column-header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  margin-bottom: 1.75rem;
+}
+
+.orbit-design-system .column-title-pack {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.orbit-design-system .status-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.orbit-design-system .border-todo .status-indicator {
+  background: var(--text-muted);
+}
+
+.orbit-design-system .border-progress .status-indicator {
+  background: var(--neon-blue);
+  box-shadow: 0 0 10px var(--neon-blue);
+}
+
+.orbit-design-system .border-done .status-indicator {
+  background: var(--neon-green);
+  box-shadow: 0 0 10px var(--neon-green);
+}
+
+.orbit-design-system .column-heading {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.orbit-design-system .text-gradient-blue {
+  background: linear-gradient(135deg, #fff 30%, var(--neon-blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.orbit-design-system .text-gradient-green {
+  background: linear-gradient(135deg, #fff 30%, var(--neon-green));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.orbit-design-system .column-counter-badge {
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 100px;
+}
+
+.orbit-design-system .bg-blue-badge {
+  background: var(--neon-blue-glow);
+  color: var(--neon-blue);
+}
+
+.orbit-design-system .bg-green-badge {
+  background: var(--neon-green-glow);
+  color: var(--neon-green);
+}
+
+.orbit-design-system .kanban-cards-dropzone {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  min-height: 550px;
+}
+
+/* Draggable Luxury Task Bounded Element Card Nodes */
+.orbit-design-system .kanban-task-card {
+  background: #121424 !important;
+  /* Premium easy reading base layer context */
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  border-left: 5px solid transparent !important;
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4) !important;
+  transform-style: preserve-3d;
+  transform: translateZ(0);
+}
+
+.orbit-design-system .kanban-task-card:hover {
+  transform: translateY(-6px) rotateY(3deg) scale(1.02);
+  border-color: rgba(255, 255, 255, 0.25) !important;
+  background: #181c34 !important;
+  box-shadow: 0 22px 40px -10px rgba(0, 0, 0, 0.65);
+}
+
+.orbit-design-system .priority-todo-box {
+  border-left-color: #64748b !important;
+}
+
+.orbit-design-system .priority-progress-box {
+  border-left-color: #38bdf8 !important;
+}
+
+.orbit-design-system .priority-done-box {
+  border-left-color: #10b981 !important;
+}
+
+.orbit-design-system .task-title-text {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 0 0 0.5rem 0;
+  transform: translateZ(20px);
+}
+
+.orbit-design-system .task-desc-text {
+  color: #bdc5d4 !important;
+  /* Ultra high contrast read optimization override */
+  font-size: 0.92rem !important;
+  line-height: 1.5;
+  margin: 0;
+  margin-bottom: 1.25rem;
+}
+
+.orbit-design-system .task-delete-trigger {
+  background: transparent;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  opacity: 0.3;
+  transition: var(--transition-smooth);
+}
+
+.orbit-design-system .task-delete-trigger:hover {
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+.orbit-design-system .task-footer-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.orbit-design-system .task-priority-tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.orbit-design-system .tag-high {
+  background: rgba(239, 68, 68, 0.14);
+  color: #f87171;
+}
+
+.orbit-design-system .tag-med {
+  background: rgba(255, 255, 255, 0.05);
+  color: #a1a1aa;
+}
+
+.orbit-design-system .tag-low {
+  background: var(--neon-blue-glow);
+  color: var(--neon-blue);
+}
+
+.orbit-design-system .task-assignee-avatar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: #a5b4fc;
+}
+
+/* ==========================================================================
+   10. HIGH CONTRAST MODALS DIALOGS
+   ========================================================================== */
+.orbit-design-system .modal-blur-viewport {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(2, 2, 8, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 1.5rem;
+}
+
+.orbit-design-system .modal-glass-card {
+  background: var(--premium-purple-card) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  border-radius: 32px !important;
+  padding: 2.25rem !important;
+  width: 100%;
+  max-width: 560px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 35px 90px rgba(0, 0, 0, 0.65), inset 0 1px 1px rgba(255, 255, 255, 0.05);
+  animation: modalScaleUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes modalScaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.orbit-design-system .modal-accent-top-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--purple-royal), var(--gold-accent));
+}
+
+.orbit-design-system .modal-header-block {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 0.75rem !important;
+}
+
+.orbit-design-system .modal-title-text {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.orbit-design-system .modal-close-trigger {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.orbit-design-system .modal-close-trigger:hover {
+  color: #fff;
+  transform: rotate(90deg);
+}
+
+.orbit-design-system .modal-body-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem !important;
+}
+
+.orbit-design-system .modal-body-stack .input-field-group {
+  margin-bottom: 0 !important;
+}
+
+.orbit-design-system .modal-glass-card .premium-input-field,
+.orbit-design-system .modal-glass-card .premium-select-field {
+  padding: 11px 15px !important;
+  font-size: 0.92rem !important;
+}
+
+.orbit-design-system .modal-glass-card .premium-btn {
+  padding: 11px 22px !important;
+  font-size: 0.92rem !important;
+}
+
+.orbit-design-system .modal-split-fields {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.orbit-design-system .width-half {
+  flex: 1;
+}
+
+.orbit-design-system .modal-actions-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1.25rem !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 1.25rem !important;
+}
+
+.orbit-design-system .btn-secondary-dim {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--glass-border-fine);
+  color: #fff;
+  font-weight: 600;
+}
+
+.orbit-design-system .btn-secondary-dim:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-2px);
+}
+
+/* Custom Alert Modal Styles */
+.orbit-design-system .alert-modal-viewport {
+  z-index: 3000 !important; /* Make sure it stays on top of any edit modal */
+}
+
+.orbit-design-system .alert-modal-card {
+  max-width: 440px !important;
+  padding: 2.25rem 2.25rem 1.75rem 2.25rem !important;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.95), inset 0 1px 1px rgba(255, 255, 255, 0.25) !important;
+}
+
+.orbit-design-system .alert-accent-glow {
+  background: linear-gradient(90deg, var(--gold-accent), #f43f5e) !important;
+}
+
+.orbit-design-system .alert-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.orbit-design-system .alert-icon-ring {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.25rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  margin-bottom: 0.5rem;
+}
+
+.orbit-design-system .alert-icon-animate {
+  animation: alertIconReveal 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes alertIconReveal {
+  0% { transform: scale(0.3) rotate(-20deg); opacity: 0; }
+  70% { transform: scale(1.15) rotate(5deg); }
+  100% { transform: scale(1) rotate(0); opacity: 1; }
+}
+
+.orbit-design-system .alert-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.orbit-design-system .alert-message {
+  font-size: 0.95rem;
+  color: #94a3b8;
+  line-height: 1.5;
+  margin: 0 0 0.5rem 0;
+  font-weight: 500;
+}
+
+/* Light Theme overrides for Alert Modal */
+.orbit-design-system .theme-light .alert-modal-card {
+  background: #fbf9f4 !important;
+  border: 1px solid rgba(120, 113, 108, 0.2) !important;
+  box-shadow: 0 30px 80px rgba(28, 25, 23, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.8) !important;
+}
+
+.orbit-design-system .theme-light .alert-icon-ring {
+  background: rgba(28, 25, 23, 0.03);
+  border: 1px solid rgba(120, 113, 108, 0.15);
+  box-shadow: 0 10px 25px rgba(28, 25, 23, 0.05), inset 0 1px 1px rgba(255, 255, 255, 0.9);
+}
+
+.orbit-design-system .theme-light .alert-title {
+  color: #1c1917 !important;
+}
+
+.orbit-design-system .theme-light .alert-message {
+  color: #57534e !important;
+}
+
+/* ==========================================================================
+   11. HOVER TRIGGER SENSITIVITY CONFIGURATIONS
+   ========================================================================== */
+.dropdown-trigger-btn,
+.luxury-option-item,
+.luxury-option-item span,
+.theme-toggle-pill,
+.logout-btn-outline {
+  cursor: pointer !important;
+  user-select: none;
+}
+
+.luxury-dropdown-menu {
+  position: absolute !important;
+  top: 100% !important;
+  left: 0 !important;
+  background: rgba(15, 18, 25, 0.98) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6) !important;
+  padding: 8px 0 !important;
+  margin-top: 6px !important;
+  z-index: 1000;
+}
+
+.luxury-option-item {
+  padding: 10px 16px !important;
+  transition: all 0.2s ease-in-out !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  white-space: nowrap !important;
+}
+
+.luxury-option-item:hover {
+  background: rgba(255, 255, 255, 0.05) !important;
+  color: #a461f7 !important;
+}
+
+.orbit-design-system .dropdown-options-list {
+  max-height: 180px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(99, 102, 241, 0.3) transparent;
+}
+
+.orbit-design-system .dropdown-options-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.orbit-design-system .dropdown-options-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.orbit-design-system .dropdown-options-list::-webkit-scrollbar-thumb {
+  background: rgba(99, 102, 241, 0.3);
+  border-radius: 10px;
+}
+
+.orbit-design-system .dropdown-options-list::-webkit-scrollbar-thumb:hover {
+  background: rgba(99, 102, 241, 0.5);
+}
+
+/* ==========================================================================
+   12. ANIMATION CORE RUNTIME PIPELINES
+   ========================================================================== */
+.orbit-design-system .animate-reveal {
+  animation: revKey 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.orbit-design-system .animate-fade-in {
+  animation: fInKey 0.45s ease-out forwards;
+}
+
+@keyframes revKey {
+  0% {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fInKey {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.orbit-design-system .workspace-footer {
+  border-top: 1px solid var(--glass-border-fine);
+  padding: 2.5rem 0;
+  margin-top: 6rem;
+  position: relative;
+  z-index: 2;
+}
+
+.orbit-design-system .footer-copy {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.orbit-design-system .footer-status-tag {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--neon-green);
+}
+
+.orbit-design-system .status-pulse {
+  width: 8px;
+  height: 8px;
+  background: var(--neon-green);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--neon-green);
+}
+
+/* ==========================================================================
+   13. RESPONSIVE SCREEN CONTROLS OVERLAYS
+   ========================================================================== */
+@media (max-width: 1024px) {
+
+  .orbit-design-system .metrics-grid-layout,
+  .orbit-design-system .kanban-board-grid-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .orbit-design-system .kanban-column-card {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .orbit-design-system .filter-flex-row,
+  .orbit-design-system .dual-creation-grid,
+  .orbit-design-system .modal-split-fields {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .orbit-design-system .metrics-cards-subgrid {
+    grid-template-columns: 1fr;
+  }
+
+  .orbit-design-system .metrics-cards-subgrid .span-full {
+    grid-column: span 1;
+  }
+
+  .orbit-design-system .nav-container {
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+  }
+
+  .orbit-design-system .nav-actions-hub {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .orbit-design-system .project-selector-glass {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .orbit-design-system .logout-btn-outline {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+
+
+/* ==========================================================================
+   1. LUXURY SYSTEM CONTROLS & RESOLVED ROOT VALUES
+   ========================================================================== */
+.orbit-design-system {
+  --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
+  --bg-deep-space: #03030c;
+  --navy-dark-solid: #09091e;
+
+  --purple-royal: #6366f1;
+  --purple-glow: rgba(99, 102, 241, 0.22);
+  --gold-accent: #f59e0b;
+  --gold-glow: rgba(245, 158, 11, 0.25);
+
+  --neon-blue: #38bdf8;
+  --neon-blue-glow: rgba(56, 189, 248, 0.2);
+  --neon-green: #10b981;
+  --neon-green-glow: rgba(16, 185, 129, 0.2);
+
+  --radius-premium: 20px;
+  --radius-interactive: 14px;
+  --transition-3d: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+  font-family: var(--font-primary);
+  background-color: var(--bg-deep-space);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+/* 🌙 DYNAMIC VARIATIONS FOR THEME-DARK SUBSETS */
+.orbit-design-system .theme-dark {
+  --bg-deep-space: #03030c;
+  --navy-dark-solid: #0b0c16;
+  --glass-bg-premium: #111322 !important;
+  /* Elegant slate profile to clean bright cards */
+  --glass-border-fine: rgba(255, 255, 255, 0.12) !important;
+  --glass-border-glow: #6366f1;
+  --text-primary: #ffffff !important;
+  --text-secondary: #e2e8f0 !important;
+  --text-muted: #94a3b8 !important;
+}
+
+/* ☀️ DYNAMIC VARIATIONS FOR THEME-LIGHT SUBSETS */
+.orbit-design-system .theme-light {
+  --bg-deep-space: #f8fafc;
+  --navy-dark-solid: #ffffff;
+  --glass-bg-premium: rgba(255, 255, 255, 0.95) !important;
+  --glass-border-fine: rgba(99, 102, 241, 0.14) !important;
+  --text-primary: #0f172a !important;
+  --text-secondary: #1e293b !important;
+  --text-muted: #64748b !important;
+}
+
+/* Force structural sync to keep elements clean */
+.orbit-design-system .workspace-viewport {
+  background-color: var(--bg-deep-space);
+  color: var(--text-primary);
+}
+
+/* ==========================================================================
+   2. RE-ENGINEERED COMPONENT CONTAINER SURFACES
+   ========================================================================== */
+.orbit-design-system .premium-glass-card,
+.orbit-design-system .filter-card-wrapper,
+.orbit-design-system .metric-widget,
+.orbit-design-system .chart-analytics-widget {
+  background: var(--glass-bg-premium) !important;
+  border: 1px solid var(--glass-border-fine) !important;
+  color: var(--text-primary) !important;
+  border-radius: var(--radius-premium);
+  padding: 2rem;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition-3d);
+}
+
+.orbit-design-system .interactive-card:hover,
+.orbit-design-system .creation-form-card:hover,
+.orbit-design-system .filter-card-wrapper:hover {
+  transform: translateY(-5px) scale(1.005);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6) !important;
+}
+
+.orbit-design-system .metric-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted) !important;
+  letter-spacing: 0.06em;
+  margin: 0;
+}
+
+.orbit-design-system .text-warning-label {
+  color: #fbc02d !important;
+  font-weight: 700;
+}
+
+.orbit-design-system .text-success-label {
+  color: #26a69a !important;
+  font-weight: 700;
+}
+
+.orbit-design-system .metric-value {
+  font-size: 3.2rem !important;
+  font-weight: 800;
+  margin: 0.6rem 0 0 0;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--text-primary) !important;
+}
+
+/* ==========================================================================
+   3. SPACING UPGRADES BEFORE SEARCH / OWNER FILTERS
+   ========================================================================== */
+/* Created precise 8px margin spacing ahead of input boundaries */
+.orbit-design-system .filter-inner-badge,
+.orbit-design-system .filter-label-text {
+  margin-bottom: 8px !important;
+  display: inline-block;
+}
+
+.orbit-design-system .filter-search-input,
+.orbit-design-system .premium-segmented-control,
+.orbit-design-system .premium-select-inline {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.45) !important;
+  border: 1px solid var(--glass-border-fine) !important;
+  padding: 13px 16px;
+  border-radius: var(--radius-interactive);
+  color: var(--text-primary) !important;
+  outline: none;
+  font-size: 0.95rem;
+  transition: var(--transition-3d);
+}
+
+/* ==========================================================================
+   4. SYSTEM ELEMENT CONFIGURATIONS MATRIX
+   ========================================================================== */
+.orbit-design-system .luxury-bg-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-deep-space);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.orbit-design-system .glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(140px);
+  opacity: 0.22;
+  mix-blend-mode: screen;
+}
+
+.orbit-design-system .orb-1 {
+  top: -10%;
+  left: -5%;
+  width: 45vw;
+  height: 45vw;
+  background: radial-gradient(circle, var(--purple-royal) 0%, transparent 70%);
+  animation: floatOrb1 30s infinite alternate ease-in-out;
+}
+
+.orbit-design-system .orb-2 {
+  bottom: -15%;
+  right: -5%;
+  width: 50vw;
+  height: 50vw;
+  background: radial-gradient(circle, #0a0a3a 0%, transparent 70%);
+}
+
+.orbit-design-system .orb-3 {
+  top: 30%;
+  left: 40%;
+  width: 35vw;
+  height: 35vw;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.08) 0%, transparent 70%);
+}
+
+@keyframes floatOrb1 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  100% {
+    transform: translate(50px, 30px) scale(1.1);
+  }
+}
+
+.orbit-design-system .auth-viewport,
+.orbit-design-system .workspace-viewport {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+}
+
+.orbit-design-system .premium-navbar {
+  position: relative;
+  z-index: 1100;
+  background: rgba(4, 4, 12, 0.45);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--glass-border-fine);
+  padding: 1.25rem 0;
+  margin-bottom: 4rem;
+}
+
+.orbit-design-system .nav-brand-title {
+  font-size: 1.65rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin: 0;
+  background: linear-gradient(135deg, #ffffff 40%, var(--text-muted));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* KANBAN DRIFT NODES */
+.orbit-design-system .kanban-column-card {
+  background: rgba(5, 5, 20, 0.4) !important;
+  border: 1px solid var(--glass-border-fine) !important;
+  border-radius: 24px;
+  padding: 1.75rem;
+  min-height: 700px;
+}
+
+.orbit-design-system .kanban-task-card {
+  background: #121424 !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  border-left: 5px solid transparent !important;
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4) !important;
+}
+
+.orbit-design-system .kanban-task-card:hover {
+  background: #171a30 !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+}
+
+.orbit-design-system .task-title-text {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 0;
+  margin-bottom: 0.5rem;
+}
+
+.orbit-design-system .task-desc-text {
+  color: #bdc5d4 !important;
+  font-size: 0.92rem !important;
+  line-height: 1.5;
+  margin: 0;
+  margin-bottom: 1.25rem;
+}
+
+.orbit-design-system .priority-todo-box {
+  border-left: 5px solid #64748b !important;
+}
+
+.orbit-design-system .priority-progress-box {
+  border-left: 5px solid #38bdf8 !important;
+}
+
+.orbit-design-system .priority-done-box {
+  border-left: 5px solid #10b981 !important;
+}
+
+/* DYNAMIC ACTIONS */
+.dropdown-trigger-btn,
+.luxury-option-item,
+.theme-toggle-pill,
+.logout-btn-outline {
+  cursor: pointer !important;
+  user-select: none;
+}
+
+.luxury-dropdown-menu {
+  background: rgba(15, 18, 25, 0.98) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6) !important;
+  padding: 8px 0 !important;
+  margin-top: 6px !important;
+  z-index: 1000;
+}
+
+.luxury-option-item:hover {
+  background: rgba(255, 255, 255, 0.05) !important;
+  color: #a461f7 !important;
+}
+
+.orbit-design-system .animate-reveal {
+  animation: revKey 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.orbit-design-system .animate-fade-in {
+  animation: fInKey 0.45s ease-out forwards;
+}
+
+@keyframes revKey {
+  0% {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fInKey {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* ALL OTHER STRUCTURAL RESPONSIVE RULES KEPT UNTOUCHED */
+.orbit-design-system .workspace-footer {
+  border-top: 1px solid var(--glass-border-fine);
+  padding: 2.5rem 0;
+  margin-top: 6rem;
+  position: relative;
+  z-index: 2;
+}
+
+.orbit-design-system .footer-copy {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.orbit-design-system .footer-status-tag {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--neon-green);
+}
+
+.orbit-design-system .status-pulse {
+  width: 8px;
+  height: 8px;
+  background: var(--neon-green);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--neon-green);
+}
+
+@media (max-width: 1024px) {
+
+  .orbit-design-system .metrics-grid-layout,
+  .orbit-design-system .kanban-board-grid-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .orbit-design-system .kanban-column-card {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .orbit-design-system .filter-flex-row,
+  .orbit-design-system .dual-creation-grid,
+  .orbit-design-system .modal-split-fields {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .orbit-design-system .metrics-cards-subgrid {
+    grid-template-columns: 1fr;
+  }
+
+  .orbit-design-system .metrics-cards-subgrid .span-full {
+    grid-column: span 1;
+  }
+
+  .orbit-design-system .nav-container {
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+  }
+
+  .orbit-design-system .nav-actions-hub {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .orbit-design-system .project-selector-glass {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .orbit-design-system .logout-btn-outline {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ==========================================================================
+   14. SYSTEM LIGHT THEME OPTIMIZATIONS (ELEGANT WARM CHAMPAGNE SAND & IVORY THEME)
+   ========================================================================== */
+.orbit-design-system .theme-light {
+  /* Layout and Base background adjustments */
+  --bg-deep-space: #f5f2eb !important; /* Elegant warm champagne sand/linen */
+  --navy-dark-solid: #fbfaf7 !important; /* Soft warm ivory white */
+  --glass-bg-premium: #fbf9f4 !important; /* Soft luxurious cream glass background */
+  --glass-border-fine: rgba(99, 102, 241, 0.1) !important;
+  
+  /* Text adjustments */
+  --text-primary: #1c1917 !important; /* Dark warm charcoal */
+  --text-secondary: #44403c !important; /* Medium warm charcoal */
+  --text-muted: #78716c !important; /* Muted warm grey */
+}
+
+/* Elegant Slate/Navy titles */
+.orbit-design-system .theme-light .hero-main-title {
+  background: linear-gradient(180deg, #1c1917 30%, #57534e 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+.orbit-design-system .theme-light .nav-brand-title {
+  background: linear-gradient(135deg, #1c1917 40%, #78716c 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+/* Light mode form input fields */
+.orbit-design-system .theme-light .premium-input-field,
+.orbit-design-system .theme-light .premium-select-field,
+.orbit-design-system .theme-light .filter-search-input,
+.orbit-design-system .theme-light .premium-select-inline,
+.orbit-design-system .theme-light .premium-select-dropdown-trigger {
+  background: rgba(28, 25, 23, 0.04) !important;
+  border: 1px solid rgba(120, 113, 108, 0.15) !important;
+  color: #1c1917 !important;
+}
+
+.orbit-design-system .theme-light .premium-input-field::placeholder,
+.orbit-design-system .theme-light .filter-search-input::placeholder {
+  color: #a8a29e !important;
+}
+
+.orbit-design-system .theme-light .premium-input-field:focus,
+.orbit-design-system .theme-light .premium-select-field:focus,
+.orbit-design-system .theme-light .filter-search-input:focus,
+.orbit-design-system .theme-light .premium-select-inline:focus,
+.orbit-design-system .theme-light .premium-select-dropdown-trigger:focus {
+  background: #ffffff !important;
+  border-color: #6366f1 !important;
+  box-shadow: 0 0 14px rgba(99, 102, 241, 0.15) !important;
+}
+
+/* Segmented controls adjustments */
+.orbit-design-system .theme-light .premium-segmented-control {
+  background: rgba(28, 25, 23, 0.04) !important;
+  border: 1px solid rgba(120, 113, 108, 0.15) !important;
+}
+
+.orbit-design-system .theme-light .segment-btn {
+  color: #78716c !important;
+}
+
+.orbit-design-system .theme-light .segment-btn:hover {
+  color: #1c1917 !important;
+  background: rgba(28, 25, 23, 0.03) !important;
+}
+
+.orbit-design-system .theme-light .segment-btn.active {
+  background: #6366f1 !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2) !important;
+}
+
+.orbit-design-system .theme-light .segment-btn.active.btn-high {
+  background: #ef4444 !important;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2) !important;
+}
+
+/* Kanban column and cards in light mode */
+.orbit-design-system .theme-light .kanban-column-card {
+  background: #e9e5db !important; /* Warm column sand background */
+  border: 1px solid rgba(120, 113, 108, 0.15) !important;
+}
+
+.orbit-design-system .theme-light .kanban-task-card {
+  background: #fbfaf7 !important; /* Soft warm ivory white cards */
+  border: 1px solid rgba(120, 113, 108, 0.15) !important;
+  box-shadow: 0 4px 12px rgba(28, 25, 23, 0.03) !important;
+}
+
+.orbit-design-system .theme-light .kanban-task-card:hover {
+  background: #ffffff !important;
+  border-color: rgba(99, 102, 241, 0.25) !important;
+  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.08) !important;
+}
+
+.orbit-design-system .theme-light .task-title-text {
+  color: #1c1917 !important;
+}
+
+.orbit-design-system .theme-light .task-desc-text {
+  color: #44403c !important;
+}
+
+.orbit-design-system .theme-light .task-assignee-avatar {
+  color: #4f46e5 !important;
+}
+
+.orbit-design-system .theme-light .task-delete-trigger {
+  color: #a8a29e !important;
+}
+
+.orbit-design-system .theme-light .filter-inner-badge {
+  background: rgba(79, 70, 229, 0.08) !important;
+  border: 1px solid rgba(79, 70, 229, 0.18) !important;
+  color: #4f46e5 !important;
+}
+
+/* Project Selector & Navbar refinements */
+.orbit-design-system .theme-light .premium-navbar {
+  background: rgba(251, 250, 247, 0.8) !important;
+  border-bottom: 1px solid rgba(120, 113, 108, 0.12) !important;
+}
+
+.orbit-design-system .theme-light .project-selector-glass {
+  background: rgba(28, 25, 23, 0.03) !important;
+  border: 1px solid rgba(120, 113, 108, 0.12) !important;
+}
+
+.orbit-design-system .theme-light .dropdown-trigger-btn {
+  color: #4f46e5 !important;
+}
+
+.orbit-design-system .theme-light .theme-toggle-pill {
+  background: rgba(28, 25, 23, 0.03) !important;
+  border: 1px solid rgba(120, 113, 108, 0.12) !important;
+  color: #44403c !important;
+}
+
+.orbit-design-system .theme-light .theme-toggle-pill:hover {
+  background: rgba(28, 25, 23, 0.06) !important;
+}
+
+.orbit-design-system .theme-light .logout-btn-outline {
+  background: rgba(239, 68, 68, 0.04) !important;
+  border: 1px solid rgba(239, 68, 68, 0.2) !important;
+  color: #dc2626 !important;
+}
+
+.orbit-design-system .theme-light .logout-btn-outline:hover {
+  background: rgba(239, 68, 68, 0.1) !important;
+  border-color: #ef4444 !important;
+}
+
+/* Luxury dropdown inside light theme */
+.orbit-design-system .theme-light .luxury-dropdown-menu {
+  background: #fbfaf7 !important;
+  border: 1px solid rgba(120, 113, 108, 0.15) !important;
+  box-shadow: 0 10px 30px rgba(28, 25, 23, 0.08) !important;
+}
+
+.orbit-design-system .theme-light .luxury-option-item {
+  color: #44403c !important;
+}
+
+.orbit-design-system .theme-light .luxury-option-item:hover {
+  background: rgba(99, 102, 241, 0.05) !important;
+  color: #4f46e5 !important;
+}
+
+/* Metrics readability overrides */
+.orbit-design-system .theme-light .text-gradient-purple {
+  background: linear-gradient(135deg, #1e1b4b 20%, #4338ca 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+.orbit-design-system .theme-light .text-warning-label {
+  color: #b45309 !important;
+}
+
+.orbit-design-system .theme-light .text-success-label {
+  color: #047857 !important;
+}
+
+.orbit-design-system .theme-light .text-warning {
+  color: #d97706 !important;
+}
+
+.orbit-design-system .theme-light .ring-bg {
+  stroke: rgba(28, 25, 23, 0.08) !important;
+}
+
+.orbit-design-system .theme-light .ring-pending {
+  stroke: #d97706 !important;
+  filter: drop-shadow(0 0 4px rgba(217, 119, 6, 0.2)) !important;
+}
+
+.orbit-design-system .theme-light .ring-completed {
+  stroke: #059669 !important;
+  filter: drop-shadow(0 0 4px rgba(5, 150, 105, 0.2)) !important;
+}
+
+/* Kanban column header text gradients overrides for readability in Light Mode */
+.orbit-design-system .theme-light .text-gradient-blue {
+  background: linear-gradient(135deg, #0284c7 30%, #0369a1 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+.orbit-design-system .theme-light .text-gradient-green {
+  background: linear-gradient(135deg, #059669 30%, #047857 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+/* Modal and Dialog overrides inside Light Mode */
+.orbit-design-system .theme-light .modal-blur-viewport {
+  background: rgba(28, 25, 23, 0.6) !important;
+}
+
+.orbit-design-system .theme-light .modal-glass-card {
+  background: #fbf9f4 !important;
+  border: 1px solid rgba(120, 113, 108, 0.15) !important;
+  box-shadow: 0 40px 120px rgba(28, 25, 23, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.8) !important;
+}
+
+.orbit-design-system .theme-light .modal-title-text {
+  color: #1c1917 !important;
+}
+
+.orbit-design-system .theme-light .modal-close-trigger {
+  color: #78716c !important;
+}
+
+.orbit-design-system .theme-light .modal-close-trigger:hover {
+  color: #1c1917 !important;
+}
+
+.orbit-design-system .theme-light .btn-secondary-dim {
+  background: rgba(28, 25, 23, 0.05) !important;
+  border: 1px solid rgba(120, 113, 108, 0.12) !important;
+  color: #44403c !important;
+}
+
+.orbit-design-system .theme-light .btn-secondary-dim:hover {
+  background: rgba(28, 25, 23, 0.1) !important;
+}
+
+/* Custom owner dropdown width and spacing overrides */
+.orbit-design-system .owner-block .custom-dropdown-container {
+  width: 100%;
+}
+
+.orbit-design-system .owner-block .luxury-dropdown-menu {
+  width: 100% !important;
+  min-width: 200px;
+}
+
+.orbit-design-system .theme-light .dropdown-options-list {
+  scrollbar-color: rgba(120, 113, 108, 0.3) transparent !important;
+}
+
+.orbit-design-system .theme-light .dropdown-options-list::-webkit-scrollbar-thumb {
+  background: rgba(120, 113, 108, 0.3) !important;
+}
+
+.orbit-design-system .theme-light .dropdown-options-list::-webkit-scrollbar-thumb:hover {
+  background: rgba(120, 113, 108, 0.5) !important;
+}
+
+.orbit-design-system .filter-card-wrapper {
+  overflow: visible !important;
+}
+
+.orbit-design-system .filter-control-panel-hub {
+  position: relative;
+  z-index: 10;
+}
+
+/* Custom project dropdown width and spacing overrides */
+.orbit-design-system .project-selector-glass .luxury-dropdown-menu {
+  width: max-content !important;
+  min-width: 280px !important;
+}
+
+/* Disabled option styling for fallback messages */
+.orbit-design-system .luxury-option-item.disabled-option {
+  color: var(--text-muted) !important;
+  cursor: default !important;
+}
+.orbit-design-system .luxury-option-item.disabled-option:hover {
+  background: transparent !important;
+  color: var(--text-muted) !important;
+}
+.orbit-design-system .theme-light .luxury-option-item.disabled-option {
+  color: #a8a29e !important;
+}
+.orbit-design-system .theme-light .luxury-option-item.disabled-option:hover {
+  background: transparent !important;
+  color: #a8a29e !important;
+}
+
+/* ==========================================================================
+   13. PREMIUM SECURE LOGIN GATEWAY STYLES (AURUM INTEGRATION)
+   ========================================================================== */
+
+.orbit-design-system {
+  /* Aurum Palette Tokens */
+  --aurum-ivory:       #F7F5F0;
+  --aurum-ivory-deep:  #EDE9E0;
+  --aurum-taupe:       #D6CCBC;
+  --aurum-walnut:      #8B7355;
+  --aurum-gold:        #C9A96E;
+  --aurum-gold-light:  #DEC48E;
+  --aurum-charcoal:    #1C1C1E;
+  --aurum-charcoal-80: rgba(28, 28, 30, 0.80);
+  --aurum-charcoal-60: rgba(28, 28, 30, 0.60);
+  --aurum-charcoal-30: rgba(28, 28, 30, 0.30);
+  --aurum-charcoal-10: rgba(28, 28, 30, 0.08);
+
+  /* Aurum Typography */
+  --aurum-font-display: 'Cormorant Garamond', Georgia, serif;
+  --aurum-font-ui:      'Inter', system-ui, sans-serif;
+
+  /* Aurum Radii */
+  --aurum-r-sm:  6px;
+  --aurum-r-md:  12px;
+  --aurum-r-lg:  20px;
+  --aurum-r-xl:  28px;
+
+  /* Aurum Shadows */
+  --aurum-shadow-card: 0 24px 80px rgba(28, 28, 30, 0.12), 0 4px 16px rgba(28, 28, 30, 0.06);
+  --aurum-shadow-input: 0 1px 3px rgba(28, 28, 30, 0.06);
+  --aurum-shadow-btn:   0 8px 32px rgba(28, 28, 30, 0.22);
+  --aurum-shadow-btn-gold: 0 8px 28px rgba(201, 169, 110, 0.38);
+
+  /* Aurum Transitions */
+  --aurum-ease-smooth: cubic-bezier(0.23, 1, 0.32, 1);
+  --aurum-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.orbit-design-system .auth-viewport {
+  position: relative !important;
+  z-index: 2 !important;
+  min-height: 100vh !important;
+  background-color: var(--aurum-ivory) !important;
+  font-family: var(--aurum-font-ui) !important;
+  color: var(--aurum-charcoal) !important;
+  overflow-x: hidden !important;
+  line-height: 1.6 !important;
+  box-sizing: border-box !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Light Space override (default ivory) */
+.orbit-design-system .auth-viewport.theme-light {
+  background-color: var(--aurum-ivory) !important;
+  color: var(--aurum-charcoal) !important;
+}
+
+/* Dark Space override (charcoal/amethyst theme) */
+.orbit-design-system .auth-viewport.theme-dark {
+  background-color: #06070c !important;
+  color: var(--aurum-ivory) !important;
+}
+
+/* Authentication Theme Toggle Positioning & Aesthetics */
+.orbit-design-system .auth-theme-toggle {
+  position: absolute !important;
+  top: 3rem !important;
+  right: 3rem !important;
+  z-index: 100 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 10px 18px !important;
+  border-radius: 100px !important;
+  font-family: var(--aurum-font-ui) !important;
+  font-size: 0.8rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+  cursor: pointer !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* Light theme toggle appearance in Auth Viewport */
+.orbit-design-system .theme-light .auth-theme-toggle {
+  background: rgba(247, 245, 240, 0.6) !important;
+  border: 1px solid rgba(139, 115, 85, 0.18) !important;
+  color: var(--aurum-charcoal) !important;
+  box-shadow: 0 4px 20px rgba(139, 115, 85, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.4) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+}
+
+.orbit-design-system .theme-light .auth-theme-toggle:hover {
+  background: rgba(247, 245, 240, 0.9) !important;
+  border-color: rgba(139, 115, 85, 0.35) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 24px rgba(139, 115, 85, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Dark theme toggle appearance in Auth Viewport */
+.orbit-design-system .theme-dark .auth-theme-toggle {
+  background: rgba(28, 28, 30, 0.4) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  color: var(--aurum-ivory) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+}
+
+.orbit-design-system .theme-dark .auth-theme-toggle:hover {
+  background: rgba(28, 28, 30, 0.75) !important;
+  border-color: rgba(201, 169, 110, 0.3) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Ambient Background Orbs */
+.orbit-design-system .ambient-bg {
+  position: absolute !important;
+  inset: 0 !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+  overflow: hidden !important;
+}
+
+.orbit-design-system .orb {
+  position: absolute !important;
+  border-radius: 50% !important;
+  filter: blur(80px) !important;
+  opacity: 0.45 !important;
+  will-change: transform !important;
+}
+
+.orbit-design-system .orb-1 {
+  width: 700px !important;
+  height: 700px !important;
+  background: radial-gradient(circle, rgba(201,169,110,0.3) 0%, transparent 70%) !important;
+  top: -200px !important;
+  left: -200px !important;
+  animation: driftA 18s ease-in-out infinite alternate !important;
+}
+
+.orbit-design-system .orb-2 {
+  width: 500px !important;
+  height: 500px !important;
+  background: radial-gradient(circle, rgba(139,115,85,0.2) 0%, transparent 70%) !important;
+  bottom: -100px !important;
+  right: 30% !important;
+  animation: driftB 22s ease-in-out infinite alternate !important;
+}
+
+.orbit-design-system .orb-3 {
+  width: 400px !important;
+  height: 400px !important;
+  background: radial-gradient(circle, rgba(222,196,142,0.2) 0%, transparent 70%) !important;
+  top: 40% !important;
+  right: -100px !important;
+  animation: driftC 16s ease-in-out infinite alternate !important;
+}
+
+@keyframes driftA {
+  0%   { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(80px, 60px) scale(1.1); }
+}
+@keyframes driftB {
+  0%   { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(-60px, -80px) scale(0.9); }
+}
+@keyframes driftC {
+  0%   { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(-40px, 50px) scale(1.15); }
+}
+
+/* Page Layout */
+.orbit-design-system .page-wrapper {
+  position: relative !important;
+  z-index: 1 !important;
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  min-height: 100vh !important;
+  width: 100% !important;
+  animation: pageReveal 0.8s var(--aurum-ease-smooth) both !important;
+}
+
+@keyframes pageReveal {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Brand Panel (Left) */
+.orbit-design-system .brand-panel {
+  position: relative !important;
+  overflow: hidden !important;
+  background: radial-gradient(circle at 100% 0%, rgba(201, 169, 110, 0.08) 0%, transparent 65%), linear-gradient(135deg, #0e0f17 0%, #05050a 100%) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.03) !important;
+  display: flex !important;
+  align-items: stretch !important;
+  padding: 3rem 3rem !important;
+  box-sizing: border-box !important;
+}
+
+.orbit-design-system .brand-panel::after {
+  content: '' !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C9A96E' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") !important;
+  pointer-events: none !important;
+}
+
+.orbit-design-system .brand-panel__inner {
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+  z-index: 10 !important;
+}
+
+/* Mouse-follow glow */
+.orbit-design-system .glow-follow {
+  position: absolute !important;
+  width: 500px !important;
+  height: 500px !important;
+  border-radius: 50% !important;
+  background: radial-gradient(circle, rgba(201,169,110,0.14) 0%, transparent 65%) !important;
+  pointer-events: none !important;
+  transform: translate(-50%, -50%) !important;
+  transition: left 0.1s linear, top 0.1s linear !important;
+  left: 50%;
+  top: 50%;
+  will-change: left, top;
+  z-index: 2 !important;
+}
+
+/* Logo */
+.orbit-design-system .logo {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  text-decoration: none !important;
+  animation: fadeUp 0.7s var(--aurum-ease-smooth) 0.1s both !important;
+}
+
+.orbit-design-system .logo__mark {
+  font-size: 1.5rem !important;
+  color: var(--aurum-gold) !important;
+  line-height: 1 !important;
+}
+
+.orbit-design-system .logo__wordmark {
+  font-family: var(--aurum-font-display) !important;
+  font-size: 1.5rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.12em !important;
+  color: var(--aurum-ivory) !important;
+}
+
+/* Desktop vs Mobile Logo styling */
+.orbit-design-system .logo--mobile { display: none !important; }
+
+/* Editorial content */
+.orbit-design-system .brand-editorial {
+  animation: fadeUp 0.8s var(--aurum-ease-smooth) 0.25s both !important;
+  text-align: left !important;
+}
+
+.orbit-design-system .brand-editorial__eyebrow {
+  font-family: var(--aurum-font-ui) !important;
+  font-size: 0.6875rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.2em !important;
+  text-transform: uppercase !important;
+  color: var(--aurum-gold) !important;
+  margin-bottom: 1.25rem !important;
+}
+
+.orbit-design-system .brand-editorial__headline {
+  font-family: var(--aurum-font-display) !important;
+  font-size: clamp(2.5rem, 4vw, 3.75rem) !important;
+  font-weight: 300 !important;
+  line-height: 1.12 !important;
+  color: var(--aurum-ivory) !important;
+  margin-bottom: 1.5rem !important;
+  letter-spacing: -0.01em !important;
+}
+
+.orbit-design-system .brand-editorial__headline em {
+  font-style: italic !important;
+  color: var(--aurum-gold-light) !important;
+}
+
+.orbit-design-system .brand-editorial__body {
+  font-size: 0.9375rem !important;
+  color: rgba(247, 245, 240, 0.55) !important;
+  max-width: 28ch !important;
+  line-height: 1.7 !important;
+  font-weight: 300 !important;
+}
+
+/* Trust row */
+.orbit-design-system .trust-row {
+  display: flex !important;
+  align-items: center !important;
+  gap: 1.5rem !important;
+  animation: fadeUp 0.8s var(--aurum-ease-smooth) 0.4s both !important;
+}
+
+.orbit-design-system .trust-item {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 2px !important;
+  text-align: left !important;
+}
+
+.orbit-design-system .trust-item__number {
+  font-family: var(--aurum-font-display) !important;
+  font-size: 1.375rem !important;
+  font-weight: 500 !important;
+  color: var(--aurum-ivory) !important;
+  letter-spacing: 0.01em !important;
+}
+
+.orbit-design-system .trust-item__label {
+  font-size: 0.6875rem !important;
+  color: rgba(247, 245, 240, 0.45) !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+}
+
+.orbit-design-system .trust-divider {
+  width: 1px !important;
+  height: 32px !important;
+  background: rgba(201, 169, 110, 0.2) !important;
+}
+
+/* Form Panel (Right) */
+.orbit-design-system .form-panel {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 2.5rem 2rem !important;
+  background: #fbfaf6 !important;
+  box-sizing: border-box !important;
+  z-index: 2 !important;
+}
+
+/* Form Panel Dark theme override */
+.orbit-design-system .theme-dark .form-panel {
+  background: #06070c !important;
+}
+
+.orbit-design-system .form-card {
+  width: 100% !important;
+  max-width: 420px !important;
+  animation: formReveal 0.9s var(--aurum-ease-smooth) 0.2s both !important;
+  box-sizing: border-box !important;
+}
+
+@keyframes formReveal {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Card header */
+.orbit-design-system .form-card__header {
+  margin-bottom: 2rem !important;
+  text-align: left !important;
+}
+
+.orbit-design-system .form-card__title {
+  font-family: var(--aurum-font-display) !important;
+  font-size: 2.25rem !important;
+  font-weight: 400 !important;
+  color: var(--aurum-charcoal) !important;
+  letter-spacing: -0.02em !important;
+  line-height: 1.15 !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.orbit-design-system .theme-dark .form-card__title {
+  color: var(--aurum-ivory) !important;
+}
+
+.orbit-design-system .form-card__subtitle {
+  font-size: 0.9375rem !important;
+  color: var(--aurum-charcoal-60) !important;
+  font-weight: 300 !important;
+}
+
+.orbit-design-system .theme-dark .form-card__subtitle {
+  color: rgba(247, 245, 240, 0.6) !important;
+}
+
+/* Auth Form */
+.orbit-design-system .auth-form {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1.25rem !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* Field group */
+.orbit-design-system .field-group {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.5rem !important;
+  animation: fadeUp 0.6s var(--aurum-ease-smooth) both !important;
+  box-sizing: border-box !important;
+}
+
+.orbit-design-system .field-group:nth-child(1) { animation-delay: 0.3s !important; }
+.orbit-design-system .field-group:nth-child(2) { animation-delay: 0.38s !important; }
+
+.orbit-design-system .field-label-row {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+
+.orbit-design-system .field-label {
+  font-size: 0.8125rem !important;
+  font-weight: 500 !important;
+  color: var(--aurum-charcoal-80) !important;
+  letter-spacing: 0.01em !important;
+  text-align: left !important;
+}
+
+.orbit-design-system .theme-dark .field-label {
+  color: rgba(247, 245, 240, 0.85) !important;
+}
+
+/* Input wrap */
+.orbit-design-system .field-wrap {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
+.orbit-design-system .field-icon {
+  position: absolute !important;
+  left: 14px !important;
+  width: 16px !important;
+  height: 16px !important;
+  color: var(--aurum-walnut) !important;
+  opacity: 0.55 !important;
+  pointer-events: none !important;
+  transition: opacity 0.25s ease, color 0.25s ease !important;
+}
+
+.orbit-design-system .theme-dark .field-icon {
+  color: var(--aurum-gold) !important;
+}
+
+.orbit-design-system .field-input {
+  width: 100% !important;
+  height: 52px !important;
+  padding: 0 44px !important;
+  border: 1px solid rgba(139, 115, 85, 0.16) !important;
+  border-radius: 12px !important;
+  background: rgba(255, 255, 255, 0.5) !important;
+  font-size: 0.9375rem !important;
+  font-weight: 400 !important;
+  color: var(--aurum-charcoal) !important;
+  transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease !important;
+  outline: none !important;
+  -webkit-appearance: none !important;
+}
+
+.orbit-design-system .theme-dark .field-input {
+  background: rgba(255, 255, 255, 0.02) !important;
+  border-color: rgba(255, 255, 255, 0.06) !important;
+  color: var(--aurum-ivory) !important;
+}
+
+.orbit-design-system .field-input::placeholder {
+  color: var(--aurum-charcoal-30) !important;
+}
+
+.orbit-design-system .theme-dark .field-input::placeholder {
+  color: rgba(247, 245, 240, 0.3) !important;
+}
+
+.orbit-design-system .field-input:hover {
+  border-color: rgba(139, 115, 85, 0.35) !important;
+  background: rgba(255, 255, 255, 0.75) !important;
+}
+
+.orbit-design-system .theme-dark .field-input:hover {
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+}
+
+.orbit-design-system .field-input:focus {
+  border-color: #c9a96e !important;
+  background: #ffffff !important;
+  box-shadow: 0 0 0 4px rgba(201, 169, 110, 0.08) !important;
+}
+
+.orbit-design-system .theme-dark .field-input:focus {
+  border-color: #dfc380 !important;
+  background: rgba(0, 0, 0, 0.4) !important;
+  box-shadow: 0 0 25px rgba(223, 195, 128, 0.1) !important;
+}
+
+.orbit-design-system .field-input:focus + .toggle-password,
+.orbit-design-system .field-wrap:focus-within .field-icon {
+  opacity: 0.8 !important;
+  color: var(--aurum-gold) !important;
+}
+
+/* Password toggle */
+.orbit-design-system .toggle-password {
+  position: absolute !important;
+  right: 14px !important;
+  width: 24px !important;
+  height: 24px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: var(--aurum-walnut) !important;
+  opacity: 0.55 !important;
+  transition: opacity 0.2s ease, color 0.2s ease !important;
+  border-radius: var(--aurum-r-sm) !important;
+  padding: 0 !important;
+  background: none !important;
+}
+
+.orbit-design-system .theme-dark .toggle-password {
+  color: var(--aurum-gold) !important;
+}
+
+.orbit-design-system .toggle-password:hover {
+  opacity: 1 !important;
+  color: var(--aurum-charcoal) !important;
+}
+
+.orbit-design-system .theme-dark .toggle-password:hover {
+  color: var(--aurum-ivory) !important;
+}
+
+.orbit-design-system .eye-icon {
+  width: 16px !important;
+  height: 16px !important;
+}
+
+/* Forgot link */
+.orbit-design-system .forgot-link {
+  font-size: 0.8125rem !important;
+  color: var(--aurum-walnut) !important;
+  font-weight: 400 !important;
+  transition: color 0.2s ease !important;
+  position: relative !important;
+}
+
+.orbit-design-system .theme-dark .forgot-link {
+  color: var(--aurum-gold-light) !important;
+}
+
+.orbit-design-system .forgot-link::after {
+  content: '' !important;
+  position: absolute !important;
+  bottom: -1px !important;
+  left: 0 !important;
+  width: 0 !important;
+  height: 1px !important;
+  background: var(--aurum-gold) !important;
+  transition: width 0.25s var(--aurum-ease-smooth) !important;
+}
+
+.orbit-design-system .forgot-link:hover { color: var(--aurum-gold) !important; }
+.orbit-design-system .forgot-link:hover::after { width: 100% !important; }
+
+/* Remember Me */
+.orbit-design-system .remember-row {
+  animation: fadeUp 0.6s var(--aurum-ease-smooth) 0.44s both !important;
+  text-align: left !important;
+}
+
+.orbit-design-system .checkbox-label {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  cursor: pointer !important;
+  user-select: none !important;
+}
+
+.orbit-design-system .checkbox-input {
+  position: absolute !important;
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+.orbit-design-system .checkbox-custom {
+  width: 18px !important;
+  height: 18px !important;
+  border: 1.5px solid var(--aurum-taupe) !important;
+  border-radius: 4px !important;
+  background: rgba(255, 255, 255, 0.7) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.15s var(--aurum-ease-spring) !important;
+  flex-shrink: 0 !important;
+  position: relative !important;
+}
+
+.orbit-design-system .theme-dark .checkbox-custom {
+  background: rgba(255, 255, 255, 0.03) !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+.orbit-design-system .checkbox-custom::after {
+  content: '' !important;
+  width: 5px !important;
+  height: 9px !important;
+  border-right: 1.5px solid #ffffff !important;
+  border-bottom: 1.5px solid #ffffff !important;
+  transform: rotate(45deg) scale(0) translateY(-1px) !important;
+  transition: transform 0.18s var(--aurum-ease-spring) !important;
+}
+
+.orbit-design-system .checkbox-input:checked + .checkbox-custom {
+  background: var(--aurum-charcoal) !important;
+  border-color: var(--aurum-charcoal) !important;
+  transform: scale(1.05) !important;
+}
+
+.orbit-design-system .theme-dark .checkbox-input:checked + .checkbox-custom {
+  background: var(--aurum-gold) !important;
+  border-color: var(--aurum-gold) !important;
+}
+
+.orbit-design-system .checkbox-input:checked + .checkbox-custom::after {
+  transform: rotate(45deg) scale(1) translateY(-1px) !important;
+}
+
+.orbit-design-system .checkbox-label:hover .checkbox-custom {
+  border-color: var(--aurum-walnut) !important;
+}
+
+.orbit-design-system .theme-dark .checkbox-label:hover .checkbox-custom {
+  border-color: var(--aurum-gold) !important;
+}
+
+.orbit-design-system .checkbox-text {
+  font-size: 0.875rem !important;
+  color: var(--aurum-charcoal-80) !important;
+  font-weight: 400 !important;
+}
+
+.orbit-design-system .theme-dark .checkbox-text {
+  color: rgba(247, 245, 240, 0.8) !important;
+}
+
+/* Primary Button */
+.orbit-design-system .btn-primary {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 12px !important;
+  width: 100% !important;
+  height: 54px !important;
+  background: linear-gradient(135deg, #1c1917 0%, #0c0a09 100%) !important;
+  color: #ffffff !important;
+  border-radius: 12px !important;
+  font-size: 0.9375rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.04em !important;
+  overflow: hidden !important;
+  transition: transform 0.2s var(--aurum-ease-spring), box-shadow 0.25s ease, background 0.25s ease !important;
+  animation: fadeUp 0.6s var(--aurum-ease-smooth) 0.5s both !important;
+  border: none !important;
+}
+
+.orbit-design-system .theme-dark .btn-primary {
+  background: linear-gradient(135deg, #dfc380 0%, #c9a96e 100%) !important;
+  color: #080911 !important;
+  box-shadow: 0 4px 20px rgba(201, 169, 110, 0.15) !important;
+}
+
+/* Shimmer sweep on hover */
+.orbit-design-system .btn-primary::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: -100% !important;
+  width: 60% !important;
+  height: 100% !important;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent) !important;
+  transition: left 0.5s var(--aurum-ease-smooth) !important;
+}
+
+.orbit-design-system .theme-dark .btn-primary::before {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent) !important;
+}
+
+.orbit-design-system .btn-primary:hover {
+  background: linear-gradient(135deg, #2e2a24 0%, #1c1917 100%) !important;
+  box-shadow: 0 8px 24px rgba(28, 25, 23, 0.18) !important;
+  transform: translateY(-1px) !important;
+}
+
+.orbit-design-system .theme-dark .btn-primary:hover {
+  background: linear-gradient(135deg, #ebd6a4 0%, #dfc380 100%) !important;
+  box-shadow: 0 10px 35px rgba(201, 169, 110, 0.45) !important;
+}
+
+.orbit-design-system .btn-primary:hover::before {
+  left: 160% !important;
+}
+
+.orbit-design-system .btn-primary:active {
+  transform: translateY(0) scale(0.985) !important;
+}
+
+.orbit-design-system .btn-primary__arrow {
+  width: 16px !important;
+  height: 16px !important;
+  transition: transform 0.2s var(--aurum-ease-spring) !important;
+  stroke: currentColor !important;
+}
+
+.orbit-design-system .btn-primary:hover .btn-primary__arrow {
+  transform: translateX(3px) !important;
+}
+
+/* Sign Up Prompt */
+.orbit-design-system .signup-prompt {
+  margin-top: 1.5rem !important;
+  text-align: center !important;
+  font-size: 0.875rem !important;
+  color: var(--aurum-charcoal-60) !important;
+  animation: fadeUp 0.6s var(--aurum-ease-smooth) 0.68s both !important;
+}
+
+.orbit-design-system .theme-dark .signup-prompt {
+  color: rgba(247, 245, 240, 0.6) !important;
+}
+
+.orbit-design-system .signup-link {
+  color: var(--aurum-walnut) !important;
+  font-weight: 500 !important;
+  margin-left: 4px !important;
+  position: relative !important;
+  transition: color 0.2s ease !important;
+}
+
+.orbit-design-system .theme-dark .signup-link {
+  color: var(--aurum-gold-light) !important;
+}
+
+.orbit-design-system .signup-link::after {
+  content: '' !important;
+  position: absolute !important;
+  bottom: -1px !important;
+  left: 0 !important;
+  width: 0 !important;
+  height: 1px !important;
+  background: var(--aurum-gold) !important;
+  transition: width 0.25s var(--aurum-ease-smooth) !important;
+}
+
+.orbit-design-system .signup-link:hover { color: var(--aurum-gold) !important; }
+.orbit-design-system .signup-link:hover::after { width: 100% !important; }
+
+/* Form Footer */
+.orbit-design-system .form-card__footer {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  margin-top: 2.5rem !important;
+  padding-top: 1.5rem !important;
+  border-top: 1px solid var(--aurum-ivory-deep) !important;
+  font-size: 0.6875rem !important;
+  color: var(--aurum-charcoal-30) !important;
+  letter-spacing: 0.04em !important;
+  animation: fadeUp 0.6s var(--aurum-ease-smooth) 0.74s both !important;
+}
+
+.orbit-design-system .theme-dark .form-card__footer {
+  border-top-color: rgba(255, 255, 255, 0.08) !important;
+  color: rgba(247, 245, 240, 0.3) !important;
+}
+
+.orbit-design-system .footer-lock {
+  width: 13px !important;
+  height: 13px !important;
+  color: var(--aurum-walnut) !important;
+  opacity: 0.55 !important;
+  flex-shrink: 0 !important;
+  stroke: currentColor !important;
+}
+
+.orbit-design-system .theme-dark .footer-lock {
+  color: var(--aurum-gold) !important;
+}
+
+/* Shared keyframes */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   14. Custom Compact Dropdown styling overrides
+   ========================================================================== */
+.orbit-design-system .compact-trigger {
+  padding: 10px 14px !important;
+  font-size: 0.9rem !important;
+  border-radius: 10px !important;
+  height: auto !important;
+  min-height: 42px !important;
+  width: 100% !important;
+  background: rgba(0, 0, 0, 0.5) !important;
+  border: 1px solid var(--glass-border-fine) !important;
+  color: #ffffff !important;
+}
+
+.orbit-design-system .compact-menu {
+  width: 100% !important;
+  min-width: 180px !important;
+  margin-top: 4px !important;
+  padding: 4px 0 !important;
+  border-radius: 10px !important;
+}
+
+.orbit-design-system .compact-menu .dropdown-options-list {
+  max-height: 95px !important;
+  overflow-y: auto !important;
+}
+
+.orbit-design-system .compact-option {
+  padding: 8px 12px !important;
+  font-size: 0.88rem !important;
+  border-radius: 6px !important;
+  margin: 2px 6px !important;
+}
+
+/* Light theme overrides for compact dropdown components */
+.orbit-design-system.theme-light .compact-trigger,
+.orbit-design-system .theme-light .compact-trigger {
+  background: rgba(255, 255, 255, 0.8) !important;
+  border-color: rgba(120, 113, 108, 0.25) !important;
+  color: #1c1917 !important;
+}
+
+.orbit-design-system.theme-light .compact-trigger:focus,
+.orbit-design-system .theme-light .compact-trigger:focus {
+  border-color: #6366f1 !important;
+  box-shadow: 0 0 14px rgba(99, 102, 241, 0.15) !important;
+  background: #ffffff !important;
+}
+
+/* ==========================================================================
+   15. ADVANCED RESPONSIVENESS AND MULTI-SCREEN OPTIMIZATIONS
+   ========================================================================== */
+
+/* Fix modal overlays: center vertically by default, but align to top on very short screens for scroll accessibility */
+.orbit-design-system .modal-blur-viewport {
+  display: flex !important;
+  align-items: center !important; /* Centered vertically by default for equal 4-side spacing */
+  justify-content: center !important;
+  overflow-y: auto !important;
+  padding: 2.5rem 1.5rem !important;
+}
+
+.orbit-design-system .modal-glass-card {
+  margin: auto !important;
+}
+
+.orbit-design-system .alert-modal-card {
+  margin: auto !important;
+}
+
+/* Tablet viewports (under 768px) */
+@media (max-width: 768px) {
+  .orbit-design-system .max-width-container {
+    padding: 0 1rem !important;
+  }
+  
+  .orbit-design-system .modal-glass-card {
+    padding: 1.75rem 1.25rem !important;
+    border-radius: 16px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  
+  .orbit-design-system .alert-modal-card {
+    padding: 1.75rem 1.25rem 1.25rem 1.25rem !important;
+    border-radius: 16px !important;
+    width: 100% !important;
+    max-width: 380px !important;
+  }
+
+  .orbit-design-system .modal-header-block {
+    margin-bottom: 1rem !important;
+    padding-bottom: 0.75rem !important;
+  }
+
+  .orbit-design-system .modal-title-text {
+    font-size: 1.15rem !important;
+  }
+
+  .orbit-design-system .modal-body-stack {
+    gap: 1rem !important;
+  }
+
+  .orbit-design-system .modal-split-fields {
+    gap: 1rem !important;
+    flex-direction: column !important;
+  }
+
+  .orbit-design-system .modal-split-fields .width-half {
+    width: 100% !important;
+    flex: none !important;
+  }
+
+  .orbit-design-system .premium-select-field,
+  .orbit-design-system .premium-input-field {
+    font-size: 0.9rem !important;
+    padding: 10px 14px !important;
+  }
+
+  .orbit-design-system .hero-main-title {
+    font-size: 1.75rem !important;
+  }
+
+  .orbit-design-system .hero-sub-text {
+    font-size: 0.9rem !important;
+  }
+
+  .orbit-design-system .chart-analytics-widget {
+    padding: 1.25rem !important;
+  }
+
+  /* Dual creation forms responsiveness */
+  .orbit-design-system .dual-creation-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+
+  /* Filter items responsiveness */
+  .orbit-design-system .filter-flex-row {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 1rem !important;
+  }
+
+  .orbit-design-system .filter-input-container {
+    width: 100% !important;
+  }
+
+  /* Keep Orbit Workspace title on the left and the theme toggle pill on the right on smaller viewports */
+  .orbit-design-system .brand-block {
+    width: 100% !important;
+    justify-content: space-between !important;
+    display: flex !important;
+  }
+
+  /* Align Project Dropdown to the Navbar container on mobile/tablet to ensure it fits full width without clipping */
+  .orbit-design-system .project-selector-glass .custom-dropdown-container {
+    position: static !important;
+  }
+
+  .orbit-design-system .project-selector-glass .luxury-dropdown-menu {
+    left: 1rem !important;
+    right: 1rem !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+  }
+
+  /* Responsive dropdown menus - align to right edge and restrict width to prevent screen clipping */
+  .orbit-design-system .luxury-dropdown-menu {
+    left: auto !important;
+    right: 0 !important;
+    max-width: calc(100vw - 2rem) !important;
+  }
+
+  .orbit-design-system .luxury-option-item {
+    white-space: normal !important;
+    word-break: break-word !important;
+  }
+}
+
+/* Mobile viewports (under 480px) */
+@media (max-width: 480px) {
+  .orbit-design-system .nav-brand-title {
+    font-size: 1.35rem !important;
+  }
+
+  .orbit-design-system .hero-main-title {
+    font-size: 1.45rem !important;
+  }
+
+  .orbit-design-system .brand-badge {
+    font-size: 0.75rem !important;
+    padding: 4px 10px !important;
+  }
+
+  .orbit-design-system .nav-actions-hub {
+    gap: 0.75rem !important;
+  }
+
+  .orbit-design-system .project-selector-glass {
+    flex-direction: column !important;
+    gap: 0.75rem !important;
+    align-items: stretch !important;
+    padding: 10px !important;
+  }
+
+  .orbit-design-system .project-selector-glass .custom-dropdown-container {
+    width: 100% !important;
+  }
+
+  .orbit-design-system .project-selector-glass .btn-destructive {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  /* Reduce metrics height/padding */
+  .orbit-design-system .metrics-cards-subgrid {
+    gap: 1rem !important;
+  }
+
+  .orbit-design-system .metric-widget {
+    padding: 1.25rem !important;
+  }
+
+  .orbit-design-system .metric-value {
+    font-size: 1.75rem !important;
+  }
+
+  /* Fix canvas responsive container height constraints */
+  .orbit-design-system .canvas-relative-container {
+    height: 140px !important;
+  }
+}
+
+/* ==========================================================================
+   16. GLOBAL TEXT SELECTABILITY & CURSOR OVERRIDES
+   ========================================================================== */
+
+/* Disable text selection globally across the Orbit application space */
+.orbit-design-system {
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+}
+
+/* Force standard arrow/default cursor on all elements, avoiding the text I-beam */
+.orbit-design-system,
+.orbit-design-system * {
+  cursor: default !important;
+}
+
+/* Allow text selection and I-beam text cursor inside text fields/inputs/textareas for editing functionality */
+.orbit-design-system input,
+.orbit-design-system textarea,
+.orbit-design-system input *,
+.orbit-design-system textarea * {
+  user-select: text !important;
+  -webkit-user-select: text !important;
+  -moz-user-select: text !important;
+  -ms-user-select: text !important;
+  cursor: text !important;
+}
+
+/* Ensure active clickable items preserve pointer cursor style for good UX */
+.orbit-design-system button,
+.orbit-design-system a,
+.orbit-design-system [role="button"],
+.orbit-design-system .premium-btn,
+.orbit-design-system .theme-toggle-pill,
+.orbit-design-system .logout-btn-outline,
+.orbit-design-system .dropdown-trigger-btn,
+.orbit-design-system .luxury-option-item,
+.orbit-design-system .premium-select-dropdown-trigger,
+.orbit-design-system .kanban-task-card,
+.orbit-design-system .segment-btn,
+.orbit-design-system .modal-close-trigger,
+.orbit-design-system .task-delete-trigger,
+.orbit-design-system .action-icon-btn,
+.orbit-design-system button *,
+.orbit-design-system a *,
+.orbit-design-system .premium-btn *,
+.orbit-design-system .theme-toggle-pill *,
+.orbit-design-system .logout-btn-outline *,
+.orbit-design-system .dropdown-trigger-btn *,
+.orbit-design-system .luxury-option-item *,
+.orbit-design-system .premium-select-dropdown-trigger *,
+.orbit-design-system .segment-btn *,
+.orbit-design-system .task-delete-trigger * {
+  cursor: pointer !important;
+}
+
+/* Exit Animations (0.2s) for closing boxes */
+.orbit-design-system .animate-fade-out {
+  animation: fOutKey 0.2s ease-in forwards !important;
+}
+
+.orbit-design-system .animate-scale-down {
+  animation: scaleDownKey 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+}
+
+@keyframes fOutKey {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes scaleDownKey {
+  from {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+}
+
+/* Dropdown search styling adjustments */
+.orbit-design-system .dropdown-search-wrapper {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.orbit-design-system .theme-light .dropdown-search-wrapper {
+  border-bottom: 1px solid rgba(120, 113, 108, 0.15) !important;
+}
+
+.orbit-design-system .project-search-input {
+  font-size: 0.85rem !important;
+  height: 34px !important;
+  padding: 6px 12px !important;
+  border-radius: 6px !important;
+}
+
+/* Premium 0.2s smooth close/open animation transitions for dropdowns */
+.orbit-design-system .luxury-dropdown-menu {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transform: scale(0.95) translateY(10px) !important;
+  pointer-events: none !important;
+  transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.2s !important;
+}
+
+.orbit-design-system .luxury-dropdown-menu.open {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: scale(1) translateY(0) !important;
+  pointer-events: auto !important;
+  transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), visibility 0s !important;
+}
+
+/* Premium Assigned Project Badge Styles */
+.orbit-design-system .assigned-badge {
+  background: rgba(99, 102, 241, 0.15) !important;
+  border: 1px solid rgba(99, 102, 241, 0.3) !important;
+  color: #a5b4fc !important;
+  padding: 2px 6px !important;
+  font-size: 0.65rem !important;
+  font-weight: 700 !important;
+  border-radius: 4px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.03em !important;
+  margin-left: auto !important;
+}
+
+.orbit-design-system .theme-light .assigned-badge {
+  background: rgba(79, 70, 229, 0.08) !important;
+  border: 1px solid rgba(79, 70, 229, 0.2) !important;
+  color: #4f46e5 !important;
+}
+
+/* Premium Eye Toggle Password Visibility Button */
+.orbit-design-system .eye-toggle-btn {
+  position: absolute !important;
+  right: 14px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  background: transparent !important;
+  border: none !important;
+  color: #94a3b8 !important;
+  cursor: pointer !important;
+  padding: 4px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  outline: none !important;
+  z-index: 10 !important;
+  transition: color 0.2s ease, transform 0.2s ease !important;
+}
+
+.orbit-design-system .eye-toggle-btn:hover {
+  color: #ffffff !important;
+  transform: translateY(-50%) scale(1.1) !important;
+}
+
+.orbit-design-system .theme-light .eye-toggle-btn {
+  color: #78716c !important;
+}
+
+.orbit-design-system .theme-light .eye-toggle-btn:hover {
+  color: #1c1917 !important;
+}
+
+.orbit-design-system .premium-input.password-input-field {
+  padding-right: 44px !important;
+}
+
+/* Premium User Registry Modal Overrides */
+.orbit-design-system .user-registry-modal-container {
+  max-width: 420px !important;
+  width: 100% !important;
+}
+
+.orbit-design-system .user-registry-label {
+  display: block !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  margin-bottom: 6px !important;
+  text-transform: uppercase !important;
+  color: #cbd5e1 !important;
+  transition: color 0.2s ease !important;
+}
+
+.orbit-design-system .theme-light .user-registry-label {
+  color: #57534e !important;
+}
+
+.orbit-design-system .user-registry-input {
+  width: 100% !important;
+  padding: 10px 12px !important;
+  background: rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 8px !important;
+  color: #ffffff !important;
+  font-size: 13px !important;
+  outline: none !important;
+  transition: all 0.2s ease !important;
+}
+
+.orbit-design-system .user-registry-input:focus {
+  border-color: #6366f1 !important;
+  background: rgba(0, 0, 0, 0.2) !important;
+  box-shadow: 0 0 10px rgba(99, 102, 241, 0.15) !important;
+}
+
+.orbit-design-system .theme-light .user-registry-input {
+  background: rgba(28, 25, 23, 0.04) !important;
+  border: 1px solid rgba(120, 113, 108, 0.15) !important;
+  color: #1c1917 !important;
+}
+
+.orbit-design-system .theme-light .user-registry-input:focus {
+  background: #ffffff !important;
+  border-color: #6366f1 !important;
+  box-shadow: 0 0 10px rgba(99, 102, 241, 0.1) !important;
+}
+
+.orbit-design-system .user-registry-input.password-input-field {
+  padding-right: 38px !important;
+}
+
+.orbit-design-system .user-registry-select {
+  width: 100% !important;
+  padding: 10px 12px !important;
+  background: #1e293b !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 8px !important;
+  color: #ffffff !important;
+  font-size: 13px !important;
+  outline: none !important;
+  transition: all 0.2s ease !important;
+}
+
+.orbit-design-system .theme-light .user-registry-select {
+  background: #f5f5f4 !important;
+  border: 1px solid rgba(120, 113, 108, 0.2) !important;
+  color: #1c1917 !important;
+}
+
+.orbit-design-system .user-registry-title {
+  margin: 0 !important;
+  color: #ffffff !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.5px !important;
+}
+
+.orbit-design-system .theme-light .user-registry-title {
+  color: #1c1917 !important;
+}
+
+.orbit-design-system .user-registry-subtitle {
+  margin: 0 !important;
+  color: #94a3b8 !important;
+  font-size: 11px !important;
+}
+
+.orbit-design-system .theme-light .user-registry-subtitle {
+  color: #78716c !important;
+}
+
+.orbit-design-system .user-registry-header {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  margin-bottom: 20px !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+  padding-bottom: 12px !important;
+}
+
+.orbit-design-system .theme-light .user-registry-header {
+  border-bottom: 1px solid rgba(120, 113, 108, 0.1) !important;
+}
+
+/* Select options premium themes */
+.orbit-design-system select.premium-input option {
+  background: #1e293b !important;
+  color: #ffffff !important;
+}
+
+.orbit-design-system.theme-light select.premium-input option,
+.orbit-design-system .theme-light select.premium-input option {
+  background: #ffffff !important;
+  color: #1c1917 !important;
+}
+
+/* ==========================================================================
+   ULTRA-PREMIUM LUXURY REDESIGN: VISIBILITY, SOCIAL AUTH, SHIMMER & TRANSITIONS
+   ========================================================================== */
+
+/* Luxury Input visibility constraint: solid when focused or containing text */
+.orbit-design-system .premium-input,
+.orbit-design-system .premium-input-field,
+.orbit-design-system .user-registry-input {
+  background: rgba(18, 12, 38, 0.45) !important;
+  border: 1px solid rgba(139, 110, 200, 0.15) !important;
+  border-radius: 16px !important;
+  color: #ffffff !important;
+  padding: 14px 18px !important;
+  font-size: 0.95rem !important;
+  outline: none !important;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15) !important;
+  box-sizing: border-box !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.orbit-design-system .premium-input:focus,
+.orbit-design-system .premium-input:not(:placeholder-shown),
+.orbit-design-system .premium-input-field:focus,
+.orbit-design-system .premium-input-field:not(:placeholder-shown),
+.orbit-design-system .user-registry-input:focus,
+.orbit-design-system .user-registry-input:not(:placeholder-shown) {
+  background: rgba(12, 6, 26, 0.85) !important;
+  border-color: #9d85d9 !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 0 3px rgba(139, 110, 200, 0.18), inset 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Light mode luxury input overrides */
+.orbit-design-system .theme-light .premium-input,
+.orbit-design-system .theme-light .premium-input-field,
+.orbit-design-system .theme-light .user-registry-input {
+  background: rgba(255, 255, 255, 0.75) !important;
+  border: 1px solid rgba(124, 58, 237, 0.15) !important;
+  color: #1c1917 !important;
+  box-shadow: inset 0 1px 2px rgba(124, 58, 237, 0.05) !important;
+}
+
+.orbit-design-system .theme-light .premium-input:focus,
+.orbit-design-system .theme-light .premium-input:not(:placeholder-shown),
+.orbit-design-system .theme-light .premium-input-field:focus,
+.orbit-design-system .theme-light .premium-input-field:not(:placeholder-shown),
+.orbit-design-system .theme-light .user-registry-input:focus,
+.orbit-design-system .theme-light .user-registry-input:not(:placeholder-shown) {
+  background: #ffffff !important;
+  border-color: #7c3aed !important;
+  color: #1c1917 !important;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.12), inset 0 1px 2px rgba(124, 58, 237, 0.05) !important;
+}
+
+/* Dropdown trigger visibility overrides */
+.orbit-design-system .premium-select-dropdown-trigger {
+  background: rgba(18, 12, 38, 0.45) !important;
+  border: 1px solid rgba(139, 110, 200, 0.15) !important;
+  border-radius: 16px !important;
+  color: #ffffff !important;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15) !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.orbit-design-system .premium-select-dropdown-trigger:focus {
+  background: rgba(12, 6, 26, 0.85) !important;
+  border-color: #9d85d9 !important;
+  box-shadow: 0 0 0 3px rgba(139, 110, 200, 0.18), inset 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+.orbit-design-system .theme-light .premium-select-dropdown-trigger {
+  background: rgba(255, 255, 255, 0.75) !important;
+  border: 1px solid rgba(124, 58, 237, 0.15) !important;
+  color: #1c1917 !important;
+  box-shadow: inset 0 1px 2px rgba(124, 58, 237, 0.05) !important;
+}
+
+.orbit-design-system .theme-light .premium-select-dropdown-trigger:focus {
+  background: #ffffff !important;
+  border-color: #7c3aed !important;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.12), inset 0 1px 2px rgba(124, 58, 237, 0.05) !important;
+}
+
+/* Premium Buttons: Luxury Shimmer */
+.orbit-design-system .premium-btn.btn-primary-glow,
+.orbit-design-system .user-registry-modal-container button[type="button"]:nth-child(2),
+.orbit-design-system .modal-glass-card button.btn-primary-glow {
+  background: linear-gradient(90deg, #7c3aed, #9d85d9, #6366f1, #7c3aed) !important;
+  background-size: 300% 100% !important;
+  animation: shimmerFlow 6s infinite linear !important;
+  border: none !important;
+  border-radius: 20px !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  font-size: 0.95rem !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+  box-shadow: 0 0 20px rgba(139, 110, 200, 0.28) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  transition: all 0.2s ease !important;
+}
+
+@keyframes shimmerFlow {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 100% 0%; }
+}
+
+.orbit-design-system .premium-btn.btn-primary-glow::after,
+.orbit-design-system .user-registry-modal-container button[type="button"]:nth-child(2)::after,
+.orbit-design-system .modal-glass-card button.btn-primary-glow::after {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: -50% !important;
+  width: 30% !important;
+  height: 100% !important;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0) 100%) !important;
+  transform: skewX(-25deg) !important;
+  animation: shineSwipe 4s infinite ease-in-out !important;
+}
+
+@keyframes shineSwipe {
+  0% { left: -50%; }
+  30% { left: 150%; }
+  100% { left: 150%; }
+}
+
+.orbit-design-system .premium-btn.btn-primary-glow:hover,
+.orbit-design-system .user-registry-modal-container button[type="button"]:nth-child(2):hover,
+.orbit-design-system .modal-glass-card button.btn-primary-glow:hover {
+  transform: translateY(-2px) scale(1.02) !important;
+  box-shadow: 0 12px 30px rgba(139, 110, 200, 0.45) !important;
+}
+
+.orbit-design-system .premium-btn.btn-primary-glow:active,
+.orbit-design-system .user-registry-modal-container button[type="button"]:nth-child(2):active,
+.orbit-design-system .modal-glass-card button.btn-primary-glow:active {
+  transform: translateY(0) scale(1) !important;
+}
+
+/* Secondary Cancel buttons */
+.orbit-design-system .user-registry-modal-container button[type="button"]:nth-child(1),
+.orbit-design-system .modal-glass-card button.btn-secondary-dim {
+  border-radius: 20px !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  color: #cbd5e1 !important;
+  transition: all 0.2s ease !important;
+}
+
+.orbit-design-system .user-registry-modal-container button[type="button"]:nth-child(1):hover,
+.orbit-design-system .modal-glass-card button.btn-secondary-dim:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
+}
+
+.orbit-design-system .theme-light .user-registry-modal-container button[type="button"]:nth-child(1),
+.orbit-design-system .theme-light .modal-glass-card button.btn-secondary-dim {
+  background: rgba(124, 58, 237, 0.05) !important;
+  border: 1px solid rgba(124, 58, 237, 0.12) !important;
+  color: #57534e !important;
+}
+
+.orbit-design-system .theme-light .user-registry-modal-container button[type="button"]:nth-child(1):hover,
+.orbit-design-system .theme-light .modal-glass-card button.btn-secondary-dim:hover {
+  background: rgba(124, 58, 237, 0.1) !important;
+  color: #1c1917 !important;
+}
+
+/* Luxury Social authentication buttons */
+.orbit-design-system .social-auth-btn {
+  width: 100% !important;
+  padding: 12px 18px !important;
+  border-radius: 20px !important;
+  background: rgba(25, 18, 48, 0.45) !important;
+  border: 1px solid rgba(139, 110, 200, 0.12) !important;
+  color: #ffffff !important;
+  font-size: 0.9rem !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 12px !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  margin-top: 8px !important;
+}
+
+.orbit-design-system .social-auth-btn:hover {
+  background: rgba(30, 20, 60, 0.75) !important;
+  transform: translateY(-2px) scale(1.01) !important;
+  border-color: rgba(139, 110, 200, 0.3) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35) !important;
+}
+
+.orbit-design-system .theme-light .social-auth-btn {
+  background: rgba(255, 255, 255, 0.8) !important;
+  border: 1px solid rgba(124, 58, 237, 0.12) !important;
+  color: #1c1917 !important;
+  box-shadow: 0 2px 4px rgba(124, 58, 237, 0.03) !important;
+}
+
+.orbit-design-system .theme-light .social-auth-btn:hover {
+  background: #ffffff !important;
+  border-color: rgba(124, 58, 237, 0.3) !important;
+  box-shadow: 0 8px 24px rgba(124, 58, 237, 0.08) !important;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN BREAKPOINTS
+   ========================================================================== */
+@media (max-width: 600px) {
+  .orbit-design-system .modal-glass-card {
+    padding: 1.5rem !important;
+    border-radius: 24px !important;
+  }
+
+  .orbit-design-system .modal-split-fields {
+    flex-direction: column !important;
+    gap: 0.75rem !important;
+  }
+
+  .orbit-design-system .width-half {
+    width: 100% !important;
+  }
+  
+  .orbit-design-system .modal-premium-header,
+  .orbit-design-system .user-registry-header {
+    margin-bottom: 14px !important;
+    padding-bottom: 8px !important;
+  }
+}
+
+/* Large screen spacious visual scale */
+@media (min-width: 1200px) {
+  .orbit-design-system .premium-input-field {
+    padding: 16px 20px !important;
+    font-size: 1rem !important;
+  }
+}
+
+/* Responsive login split layout and mobile theme toggle positioning */
+@media (max-width: 820px) {
+  .orbit-design-system .page-wrapper {
+    grid-template-columns: 1fr !important;
+  }
+
+  .orbit-design-system .brand-panel {
+    display: none !important;
+  }
+
+  .orbit-design-system .logo--mobile {
+    display: inline-flex !important;
+    margin-bottom: 2rem !important;
+  }
+
+  .orbit-design-system .auth-theme-toggle {
+    top: 1.5rem !important;
+    right: 1.5rem !important;
+  }
+}
+
+/* 📝 ENTERPRISE MARKDOWN RENDERING LAYOUT ENGINE OVERRIDES */
+.markdown-live-viewer-stream ul, .markdown-preview-node ul {
+    padding-left: 18px !important;
+    margin: 4px 0 !important;
+}
+
+.markdown-live-viewer-stream ul li, .markdown-preview-node ul li {
+    list-style-type: square !important;
+    color: #cbd5e1 !important;
+}
+
+.markdown-live-viewer-stream code, .markdown-preview-node code {
+    background: rgba(99, 102, 241, 0.15) !important;
+    color: #a5b4fc !important;
+    padding: 2px 6px !important;
+    border-radius: 4px !important;
+    font-family: 'Courier New', Courier, monospace !important;
+    font-size: 12px !important;
+    border: 1px solid rgba(99, 102, 241, 0.2) !important;
+}
+
+.task-desc-text.markdown-preview-node p {
+    margin-bottom: 4px !important;
+    line-height: 1.4 !important;
+}
+
+/* ==========================================================================
+   14. CYBER-GLASSMORPHISM OBSIDIAN SUITE DYNAMIC NEON MASK HOVERS
+   ========================================================================== */
+.orbit-design-system .premium-glass-card,
+.orbit-design-system .creation-form-card,
+.orbit-design-system .filter-card-wrapper,
+.orbit-design-system .kanban-column-card,
+.orbit-design-system .kanban-task-card,
+.orbit-design-system .audit-log-container {
+  position: relative !important;
+}
+
+.orbit-design-system .premium-glass-card::before,
+.orbit-design-system .creation-form-card::before,
+.orbit-design-system .filter-card-wrapper::before,
+.orbit-design-system .kanban-column-card::before,
+.orbit-design-system .kanban-task-card::before,
+.orbit-design-system .audit-log-container::before {
+  content: '' !important;
+  position: absolute !important;
+  inset: 0 !important;
+  border-radius: inherit !important;
+  padding: 1px !important;
+  background: radial-gradient(
+    250px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
+    rgba(99, 102, 241, 0.45) 0%,
+    rgba(139, 92, 246, 0.3) 30%,
+    rgba(56, 189, 248, 0.15) 60%,
+    transparent 100%
+  ) !important;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0) !important;
+  -webkit-mask-composite: xor !important;
+  mask-composite: exclude !important;
+  pointer-events: none !important;
+  opacity: 0 !important;
+  transition: opacity 0.4s ease !important;
+  z-index: 2 !important;
+}
+
+.orbit-design-system .premium-glass-card:hover::before,
+.orbit-design-system .creation-form-card:hover::before,
+.orbit-design-system .filter-card-wrapper:hover::before,
+.orbit-design-system .kanban-column-card:hover::before,
+.orbit-design-system .kanban-task-card:hover::before,
+.orbit-design-system .audit-log-container:hover::before {
+  opacity: 1 !important;
+}
+
+/* Background hover spotlight glow */
+.orbit-design-system .premium-glass-card::after,
+.orbit-design-system .creation-form-card::after,
+.orbit-design-system .filter-card-wrapper::after,
+.orbit-design-system .kanban-column-card::after,
+.orbit-design-system .kanban-task-card::after,
+.orbit-design-system .audit-log-container::after {
+  content: '' !important;
+  position: absolute !important;
+  inset: 0 !important;
+  border-radius: inherit !important;
+  background: radial-gradient(
+    350px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
+    rgba(99, 102, 241, 0.05),
+    transparent 80%
+  ) !important;
+  pointer-events: none !important;
+  opacity: 0 !important;
+  transition: opacity 0.4s ease !important;
+  z-index: 0 !important;
+}
+
+.orbit-design-system .premium-glass-card:hover::after,
+.orbit-design-system .creation-form-card:hover::after,
+.orbit-design-system .filter-card-wrapper:hover::after,
+.orbit-design-system .kanban-column-card:hover::after,
+.orbit-design-system .kanban-task-card:hover::after,
+.orbit-design-system .audit-log-container:hover::after {
+  opacity: 1 !important;
+}
+
+/* Dropdown Search Input Style */
+.orbit-design-system .dropdown-search-input {
+  width: 100% !important;
+  padding: 8px 12px !important;
+  background: rgba(9, 9, 11, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 8px !important;
+  color: #fff !important;
+  font-size: 0.85rem !important;
+  outline: none !important;
+  transition: all 0.2s ease !important;
+}
+
+.orbit-design-system .dropdown-search-input:focus {
+  border-color: rgba(99, 102, 241, 0.45) !important;
+  box-shadow: 0 0 8px rgba(99, 102, 241, 0.25) !important;
+}
+
+/* User Profile Badge (Navbar component) */
+.orbit-design-system .user-profile-badge {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  background: rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid var(--glass-border-fine) !important;
+  padding: 4px 12px !important;
+  border-radius: 8px !important;
+  height: 36px !important;
+}
+
+.orbit-design-system .user-avatar-dot {
+  font-size: 14px !important;
+  opacity: 0.8 !important;
+}
+
+.orbit-design-system .user-fullname {
+  font-weight: 600 !important;
+  color: var(--text-primary) !important;
+  font-size: 11px !important;
+  line-height: 1.2 !important;
+}
+
+.orbit-design-system .user-username {
+  font-family: monospace !important;
+  font-weight: 700 !important;
+  color: var(--purple-royal) !important;
+  font-size: 9px !important;
+  line-height: 1 !important;
+}
+
+/* Task Edit Modal Grid Sizing */
+.orbit-design-system .task-edit-modal-card {
+  max-width: 960px !important;
+  width: 95% !important;
+  padding: 2rem !important;
+}
+
+.orbit-design-system .task-edit-grid {
+  display: grid !important;
+  grid-template-columns: 1.1fr 0.9fr !important;
+  gap: 28px !important;
+  align-items: start !important;
+}
+
+.orbit-design-system .description-grid-wrapper {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 14px !important;
+  min-height: 140px !important;
+}
+
+@media (max-width: 768px) {
+  .orbit-design-system .task-edit-modal-card {
+    padding: 1.5rem !important;
+  }
+  .orbit-design-system .task-edit-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+  .orbit-design-system .description-grid-wrapper {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 520px) {
+  .orbit-design-system .task-edit-modal-card {
+    padding: 1rem !important;
+    border-radius: 20px !important;
+  }
+  .orbit-design-system .task-edit-modal-card .modal-split-fields {
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+} 
+
+/* ==========================================================================
+   16. LUXURY DESIGN AUTHENTICATION PAGE OVERRIDES
+   ========================================================================== */
+
+/* Overall Page Layout & Backgrounds */
+.orbit-design-system .auth-viewport {
+  position: relative !important;
+  z-index: 2 !important;
+  height: 100vh !important;
+  min-height: 100vh !important;
+  background-color: #09090B !important;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  color: #FAFAF8 !important;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+  box-sizing: border-box !important;
+}
+
+.orbit-design-system .luxury-noise-overlay {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 1 !important;
+  pointer-events: none !important;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E") !important;
+}
+
+.orbit-design-system .ambient-glows {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+  overflow: hidden !important;
+}
+
+.orbit-design-system .ambient-glow-circle {
+  position: absolute !important;
+  border-radius: 50% !important;
+  filter: blur(120px) !important;
+  opacity: 0.25 !important;
+  mix-blend-mode: screen !important;
+}
+
+.orbit-design-system .ambient-glow-circle.circle-1 {
+  width: 500px !important;
+  height: 500px !important;
+  background: radial-gradient(circle, rgba(216, 178, 110, 0.15) 0%, transparent 70%) !important;
+  top: -100px !important;
+  left: -100px !important;
+  animation: floatSlowly 20s ease-in-out infinite alternate !important;
+}
+
+.orbit-design-system .ambient-glow-circle.circle-2 {
+  width: 600px !important;
+  height: 600px !important;
+  background: radial-gradient(circle, rgba(185, 137, 93, 0.1) 0%, transparent 70%) !important;
+  bottom: -200px !important;
+  right: 10% !important;
+  animation: floatSlowly 25s ease-in-out infinite alternate-reverse !important;
+}
+
+.orbit-design-system .ambient-glow-circle.circle-3 {
+  width: 400px !important;
+  height: 400px !important;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%) !important;
+  top: 30% !important;
+  right: -100px !important;
+}
+
+@keyframes floatSlowly {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(60px, 40px) scale(1.1); }
+}
+
+/* Theme Toggle Button */
+.orbit-design-system .luxury-theme-toggle {
+  position: absolute !important;
+  top: 2rem !important;
+  right: 2rem !important;
+  z-index: 100 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 8px 16px !important;
+  border-radius: 999px !important;
+  font-size: 0.75rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  background: rgba(17, 17, 19, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  color: #F8F6F2 !important;
+  cursor: pointer !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.orbit-design-system .luxury-theme-toggle:hover {
+  border-color: #D8B26E !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(216, 178, 110, 0.1) !important;
+}
+
+/* Two-column layout grid */
+.orbit-design-system .luxury-page-wrapper {
+  position: relative !important;
+  z-index: 2 !important;
+  display: grid !important;
+  grid-template-columns: 45fr 55fr !important;
+  min-height: 100vh !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* Left Brand Panel */
+.orbit-design-system .luxury-brand-panel {
+  position: relative !important;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  padding: 4rem 4.5rem !important;
+  background: linear-gradient(135deg, #111113 0%, #09090B 100%) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.04) !important;
+  box-sizing: border-box !important;
+}
+
+.orbit-design-system .luxury-brand-panel::before {
+  content: '' !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background: linear-gradient(rgba(216, 178, 110, 0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(216, 178, 110, 0.015) 1px, transparent 1px) !important;
+  background-size: 50px 50px !important;
+  pointer-events: none !important;
+}
+
+.orbit-design-system .luxury-brand-inner {
+  position: relative !important;
+  z-index: 10 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  height: 100% !important;
+  max-width: 520px !important;
+  margin: 0 auto !important;
+  width: 100% !important;
+}
+
+.orbit-design-system .luxury-logo-header {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  font-family: 'Cormorant Garamond', serif !important;
+  font-size: 1.6rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.1em !important;
+  color: #F8F6F2 !important;
+}
+
+.orbit-design-system .luxury-logo-icon {
+  color: #D8B26E !important;
+  font-size: 1.8rem !important;
+}
+
+.orbit-design-system .luxury-brand-editorial {
+  margin: auto 0 !important;
+  text-align: left !important;
+}
+
+.orbit-design-system .luxury-eyebrow {
+  font-size: 0.7rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.25em !important;
+  text-transform: uppercase !important;
+  color: #D8B26E !important;
+  margin-bottom: 1.5rem !important;
+}
+
+.orbit-design-system .luxury-headline {
+  font-family: 'Cormorant Garamond', serif !important;
+  font-size: clamp(2.6rem, 4.5vw, 3.8rem) !important;
+  font-weight: 300 !important;
+  line-height: 1.15 !important;
+  color: #F8F6F2 !important;
+  margin-bottom: 1.5rem !important;
+  letter-spacing: -0.01em !important;
+}
+
+.orbit-design-system .gold-gradient-highlight {
+  font-family: 'Cormorant Garamond', serif !important;
+  font-style: italic !important;
+  background: linear-gradient(135deg, #D8B26E 0%, #C89B3C 50%, #B9895D 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+.orbit-design-system .luxury-description {
+  font-size: 0.95rem !important;
+  font-weight: 300 !important;
+  line-height: 1.7 !important;
+  color: rgba(248, 246, 242, 0.55) !important;
+  max-width: 40ch !important;
+}
+
+/* Statistics Grid */
+.orbit-design-system .luxury-stats-grid {
+  display: flex !important;
+  align-items: center !important;
+  gap: 24px !important;
+  width: 100% !important;
+  margin-top: auto !important;
+}
+
+.orbit-design-system .luxury-stat-card {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  text-align: left !important;
+  transition: all 0.3s ease !important;
+}
+
+.orbit-design-system .stat-icon-wrapper {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 50% !important;
+  background: rgba(216, 178, 110, 0.05) !important;
+  border: 1px solid rgba(216, 178, 110, 0.1) !important;
+  color: #D8B26E !important;
+  transition: all 0.3s ease !important;
+}
+
+.orbit-design-system .stat-icon-svg {
+  width: 16px !important;
+  height: 16px !important;
+}
+
+.orbit-design-system .luxury-stat-card:hover .stat-icon-wrapper {
+  background: rgba(216, 178, 110, 0.1) !important;
+  border-color: #D8B26E !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 15px rgba(216, 178, 110, 0.15) !important;
+}
+
+.orbit-design-system .stat-info {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 2px !important;
+}
+
+.orbit-design-system .stat-num {
+  font-family: 'Cormorant Garamond', serif !important;
+  font-size: 1.3rem !important;
+  font-weight: 500 !important;
+  color: #F8F6F2 !important;
+}
+
+.orbit-design-system .stat-lbl {
+  font-size: 0.65rem !important;
+  font-weight: 500 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+  color: rgba(248, 246, 242, 0.4) !important;
+}
+
+.orbit-design-system .stat-divider-line {
+  width: 1px !important;
+  height: 28px !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+
+/* Right Form Panel */
+.orbit-design-system .luxury-form-panel {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 3rem 4rem !important;
+  background: #09090B !important;
+  box-sizing: border-box !important;
+}
+
+.orbit-design-system .theme-light .luxury-form-panel {
+  background: #FAFAF8 !important;
+}
+
+/* Floating Luxury Card */
+.orbit-design-system .luxury-auth-card {
+  width: 100% !important;
+  max-width: 440px !important;
+  padding: 3rem !important;
+  border-radius: 24px !important;
+  background: radial-gradient(circle at 0% 0%, rgba(216, 178, 110, 0.04) 0%, rgba(17, 17, 19, 0.95) 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.04) !important;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3), 0 24px 80px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.03) !important;
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
+  box-sizing: border-box !important;
+}
+
+.orbit-design-system .theme-light .luxury-auth-card {
+  background: radial-gradient(circle at 0% 0%, rgba(216, 178, 110, 0.05) 0%, rgba(255, 255, 255, 0.98) 100%) !important;
+  border: 1px solid rgba(139, 115, 85, 0.08) !important;
+  box-shadow: 0 4px 30px rgba(139, 115, 85, 0.05), 0 24px 60px rgba(139, 115, 85, 0.1) !important;
+}
+
+/* Card Header */
+.orbit-design-system .luxury-card-header {
+  margin-bottom: 2rem !important;
+  text-align: left !important;
+}
+
+.orbit-design-system .luxury-card-badge {
+  display: inline-block !important;
+  padding: 6px 14px !important;
+  background: rgba(216, 178, 110, 0.08) !important;
+  border: 1px solid rgba(216, 178, 110, 0.2) !important;
+  border-radius: 999px !important;
+  font-size: 0.65rem !important;
+  font-weight: 700 !important;
+  color: #D8B26E !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.12em !important;
+  margin-bottom: 1.25rem !important;
+}
+
+.orbit-design-system .luxury-card-title {
+  font-family: 'Cormorant Garamond', serif !important;
+  font-size: 2.2rem !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.01em !important;
+  color: #F8F6F2 !important;
+  margin: 0 0 0.5rem 0 !important;
+}
+
+.orbit-design-system .theme-light .luxury-card-title {
+  color: #111113 !important;
+}
+
+.orbit-design-system .luxury-card-subtitle {
+  font-size: 0.85rem !important;
+  line-height: 1.6 !important;
+  color: rgba(248, 246, 242, 0.5) !important;
+  font-weight: 300 !important;
+  margin: 0 !important;
+}
+
+.orbit-design-system .theme-light .luxury-card-subtitle {
+  color: rgba(17, 17, 19, 0.6) !important;
+}
+
+/* Luxury Input Fields & Floating Labels */
+.orbit-design-system .luxury-auth-form {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1.5rem !important;
+}
+
+.orbit-design-system .luxury-field-group {
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+}
+
+.orbit-design-system .luxury-field-wrap {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
+.orbit-design-system .luxury-field-icon {
+  position: absolute !important;
+  left: 16px !important;
+  width: 16px !important;
+  height: 16px !important;
+  color: rgba(248, 246, 242, 0.35) !important;
+  pointer-events: none !important;
+  transition: all 0.3s ease !important;
+}
+
+.orbit-design-system .theme-light .luxury-field-icon {
+  color: rgba(17, 17, 19, 0.4) !important;
+}
+
+.orbit-design-system .luxury-field-input {
+  width: 100% !important;
+  height: 56px !important;
+  padding: 0 44px !important;
+  border-radius: 16px !important;
+  background: rgba(0, 0, 0, 0.25) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  color: #FAFAF8 !important;
+  font-size: 0.9rem !important;
+  font-weight: 400 !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  outline: none !important;
+}
+
+.orbit-design-system .theme-light .luxury-field-input {
+  background: rgba(0, 0, 0, 0.015) !important;
+  border-color: rgba(139, 115, 85, 0.12) !important;
+  color: #111113 !important;
+}
+
+.orbit-design-system .luxury-field-label {
+  position: absolute !important;
+  left: 44px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  color: rgba(248, 246, 242, 0.35) !important;
+  font-size: 0.9rem !important;
+  font-weight: 300 !important;
+  pointer-events: none !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.orbit-design-system .theme-light .luxury-field-label {
+  color: rgba(17, 17, 19, 0.5) !important;
+}
+
+/* Floating behavior */
+.orbit-design-system .luxury-field-input:focus ~ .luxury-field-label,
+.orbit-design-system .luxury-field-input:not(:placeholder-shown) ~ .luxury-field-label {
+  top: 0 !important;
+  transform: translateY(-50%) scale(0.78) !important;
+  left: 18px !important;
+  color: #D8B26E !important;
+  background: #121214 !important;
+  padding: 0 6px !important;
+}
+
+.orbit-design-system .theme-light .luxury-field-input:focus ~ .luxury-field-label,
+.orbit-design-system .theme-light .luxury-field-input:not(:placeholder-shown) ~ .luxury-field-label {
+  background: #ffffff !important;
+  color: #C89B3C !important;
+}
+
+.orbit-design-system .luxury-field-input:focus {
+  border-color: #D8B26E !important;
+  box-shadow: 0 0 20px rgba(216, 178, 110, 0.12), inset 0 0 0 1px rgba(216, 178, 110, 0.05) !important;
+  background: rgba(0, 0, 0, 0.35) !important;
+}
+
+.orbit-design-system .theme-light .luxury-field-input:focus {
+  border-color: #C89B3C !important;
+  box-shadow: 0 0 20px rgba(200, 155, 60, 0.08) !important;
+  background: #ffffff !important;
+}
+
+.orbit-design-system .luxury-field-wrap:focus-within .luxury-field-icon {
+  color: #D8B26E !important;
+  transform: translateX(1px) !important;
+}
+
+.orbit-design-system .theme-light .luxury-field-wrap:focus-within .luxury-field-icon {
+  color: #C89B3C !important;
+}
+
+/* Eye password toggle button */
+.orbit-design-system .luxury-toggle-password {
+  position: absolute !important;
+  right: 16px !important;
+  background: transparent !important;
+  border: none !important;
+  color: rgba(248, 246, 242, 0.35) !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  padding: 0 !important;
+  transition: all 0.3s ease !important;
+}
+
+.orbit-design-system .theme-light .luxury-toggle-password {
+  color: rgba(17, 17, 19, 0.4) !important;
+}
+
+.orbit-design-system .luxury-toggle-password:hover {
+  color: #D8B26E !important;
+}
+
+.orbit-design-system .theme-light .luxury-toggle-password:hover {
+  color: #C89B3C !important;
+}
+
+.orbit-design-system .eye-icon-svg {
+  width: 18px !important;
+  height: 18px !important;
+}
+
+/* Username At Prefix Symbol */
+.orbit-design-system .luxury-at-symbol {
+  position: absolute !important;
+  left: 18px !important;
+  color: #D8B26E !important;
+  font-weight: 700 !important;
+  font-size: 0.95rem !important;
+  pointer-events: none !important;
+}
+
+/* Form Actions Row */
+.orbit-design-system .luxury-form-actions {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  margin-top: -0.25rem !important;
+}
+
+/* Premium Checkbox */
+.orbit-design-system .luxury-checkbox-container {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  cursor: pointer !important;
+  user-select: none !important;
+}
+
+.orbit-design-system .luxury-checkbox-input {
+  position: absolute !important;
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+.orbit-design-system .luxury-checkbox-box {
+  width: 18px !important;
+  height: 18px !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 5px !important;
+  background: rgba(0, 0, 0, 0.3) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.orbit-design-system .theme-light .luxury-checkbox-box {
+  background: #ffffff !important;
+  border-color: rgba(139, 115, 85, 0.16) !important;
+}
+
+.orbit-design-system .luxury-checkbox-box::after {
+  content: '' !important;
+  width: 4px !important;
+  height: 8px !important;
+  border-right: 1.5px solid #09090B !important;
+  border-bottom: 1.5px solid #09090B !important;
+  transform: rotate(45deg) scale(0) !important;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.orbit-design-system .theme-light .luxury-checkbox-box::after {
+  border-right-color: #ffffff !important;
+  border-bottom-color: #ffffff !important;
+}
+
+.orbit-design-system .luxury-checkbox-input:checked + .luxury-checkbox-box {
+  background: #D8B26E !important;
+  border-color: #D8B26E !important;
+}
+
+.orbit-design-system .theme-light .luxury-checkbox-input:checked + .luxury-checkbox-box {
+  background: #C89B3C !important;
+  border-color: #C89B3C !important;
+}
+
+.orbit-design-system .luxury-checkbox-input:checked + .luxury-checkbox-box::after {
+  transform: rotate(45deg) scale(1) translateY(-1px) !important;
+}
+
+.orbit-design-system .luxury-checkbox-text {
+  font-size: 0.8rem !important;
+  color: rgba(248, 246, 242, 0.5) !important;
+}
+
+.orbit-design-system .theme-light .luxury-checkbox-text {
+  color: rgba(17, 17, 19, 0.6) !important;
+}
+
+/* Links */
+.orbit-design-system .luxury-forgot-link,
+.orbit-design-system .luxury-signup-link {
+  font-size: 0.8rem !important;
+  color: #D8B26E !important;
+  text-decoration: none !important;
+  font-weight: 500 !important;
+  transition: color 0.3s ease !important;
+}
+
+.orbit-design-system .theme-light .luxury-forgot-link,
+.orbit-design-system .theme-light .luxury-signup-link {
+  color: #C89B3C !important;
+}
+
+.orbit-design-system .luxury-forgot-link:hover,
+.orbit-design-system .luxury-signup-link:hover {
+  color: #FAFAF8 !important;
+  text-shadow: 0 0 10px rgba(216, 178, 110, 0.3) !important;
+}
+
+.orbit-design-system .theme-light .luxury-forgot-link:hover,
+.orbit-design-system .theme-light .luxury-signup-link:hover {
+  color: #111113 !important;
+}
+
+/* Primary Action Button */
+.orbit-design-system .btn-primary-luxury {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 12px !important;
+  width: 100% !important;
+  height: 56px !important;
+  background: linear-gradient(135deg, #161618 0%, #09090b 100%) !important;
+  border: 1px solid rgba(216, 178, 110, 0.2) !important;
+  color: #F8F6F2 !important;
+  border-radius: 18px !important;
+  font-size: 0.9375rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.03em !important;
+  overflow: hidden !important;
+  cursor: pointer !important;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.orbit-design-system .theme-light .btn-primary-luxury {
+  background: linear-gradient(135deg, #1c1917 0%, #0c0a09 100%) !important;
+  border: 1px solid rgba(0, 0, 0, 0.15) !important;
+  color: #ffffff !important;
+}
+
+.orbit-design-system .btn-primary-luxury::after {
+  content: '' !important;
+  position: absolute !important;
+  top: 0; left: -150%; width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(216, 178, 110, 0.35), transparent) !important;
+  transform: skewX(-20deg) !important;
+  transition: all 0.75s ease !important;
+}
+
+.orbit-design-system .btn-primary-luxury:hover::after {
+  left: 150% !important;
+}
+
+.orbit-design-system .btn-primary-luxury:hover {
+  border-color: #D8B26E !important;
+  box-shadow: 0 8px 25px rgba(216, 178, 110, 0.2) !important;
+  transform: translateY(-2px) !important;
+}
+
+.orbit-design-system .theme-light .btn-primary-luxury:hover {
+  border-color: #C89B3C !important;
+  box-shadow: 0 8px 24px rgba(28, 25, 23, 0.15) !important;
+}
+
+.orbit-design-system .btn-primary-luxury:active {
+  transform: translateY(0) scale(0.97) !important;
+}
+
+.orbit-design-system .btn-arrow-icon {
+  width: 16px !important;
+  height: 16px !important;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.orbit-design-system .btn-primary-luxury:hover .btn-arrow-icon {
+  transform: translateX(3px) !important;
+}
+
+/* Error Banner styling */
+.orbit-design-system .luxury-error-banner {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  padding: 12px 16px !important;
+  background: rgba(239, 68, 68, 0.08) !important;
+  border: 1px solid rgba(239, 68, 68, 0.2) !important;
+  border-radius: 12px !important;
+  margin-bottom: 1.5rem !important;
+  text-align: left !important;
+}
+
+.orbit-design-system .error-banner-icon {
+  width: 18px !important;
+  height: 18px !important;
+  color: #f87171 !important;
+  flex-shrink: 0 !important;
+}
+
+.orbit-design-system .error-banner-text {
+  font-size: 0.8rem !important;
+  color: #f87171 !important;
+  font-weight: 500 !important;
+}
+
+/* Prompt Below Card */
+.orbit-design-system .luxury-signup-prompt {
+  margin-top: 1.5rem !important;
+  text-align: center !important;
+  font-size: 0.85rem !important;
+  color: rgba(248, 246, 242, 0.4) !important;
+}
+
+.orbit-design-system .theme-light .luxury-signup-prompt {
+  color: rgba(17, 17, 19, 0.5) !important;
+}
+
+/* Card Compliance Footer */
+.orbit-design-system .luxury-card-footer {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  margin-top: 2.5rem !important;
+  padding-top: 1.5rem !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
+  font-size: 0.7rem !important;
+  color: rgba(248, 246, 242, 0.3) !important;
+  letter-spacing: 0.02em !important;
+}
+
+.orbit-design-system .theme-light .luxury-card-footer {
+  border-top-color: rgba(0, 0, 0, 0.06) !important;
+  color: rgba(17, 17, 19, 0.4) !important;
+}
+
+.orbit-design-system .luxury-footer-lock {
+  width: 12px !important;
+  height: 12px !important;
+  color: #D8B26E !important;
+  opacity: 0.6 !important;
+}
+
+.orbit-design-system .theme-light .luxury-footer-lock {
+  color: #C89B3C !important;
+}
+
+/* Micro-animations Reveal Staggers */
+.orbit-design-system .animate-fade-rise {
+  animation: fadeRiseKey 0.9s cubic-bezier(0.16, 1, 0.3, 1) both !important;
+}
+
+@keyframes fadeRiseKey {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.orbit-design-system .animate-stagger-1 {
+  animation: fadeRiseKey 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both !important;
+}
+
+.orbit-design-system .animate-stagger-2 {
+  animation: fadeRiseKey 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both !important;
+}
+
+/* Responsive Overrides */
+@media (max-width: 992px) {
+  .orbit-design-system .luxury-page-wrapper {
+    grid-template-columns: 1fr !important;
+  }
+  .orbit-design-system .luxury-brand-panel {
+    display: none !important;
+  }
+  .orbit-design-system .luxury-form-panel {
+    padding: 3rem 1.5rem !important;
+  }
+  .orbit-design-system .luxury-auth-card {
+    padding: 2.25rem 1.75rem !important;
+  }
+}
+
+/* ==========================================================================
+   17. SIMPLE PREMIUM CENTURED AUTHENTICATION PAGE OVERRIDES
+   ========================================================================== */
+
+.orbit-design-system .simple-page-wrapper {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 100vh !important;
+  min-height: 100vh !important;
+  width: 100% !important;
+  padding: 1rem !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+}
+
+.orbit-design-system .simple-form-panel {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  width: 100% !important;
+  max-width: 480px !important;
+}
+
+.orbit-design-system .simple-form-row {
+  display: flex !important;
+  gap: 12px !important;
+  width: 100% !important;
+}
+
+.orbit-design-system .simple-form-row .simple-field-group {
+  flex: 1 !important;
+  min-width: 0 !important;
+}
+
+.orbit-design-system .simple-logo-header {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  margin-bottom: 2rem !important;
+  font-family: 'Inter', -apple-system, sans-serif !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.08em !important;
+  font-size: 1.25rem !important;
+  text-transform: uppercase !important;
+  color: #F8F6F2 !important;
+}
+
+.orbit-design-system .theme-light .simple-logo-header {
+  color: #111113 !important;
+}
+
+.orbit-design-system .simple-logo-icon {
+  color: #D8B26E !important;
+}
+
+.orbit-design-system .simple-auth-card {
+  width: 100% !important;
+  padding: 2.25rem 2.5rem !important;
+  border-radius: 20px !important;
+  background: rgba(17, 17, 19, 0.65) !important;
+  border: 1px solid rgba(255, 255, 255, 0.04) !important;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3), 0 20px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.03) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  box-sizing: border-box !important;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.orbit-design-system .simple-auth-card:hover {
+  border-color: rgba(216, 178, 110, 0.25) !important;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4), 
+              0 25px 70px rgba(0, 0, 0, 0.6), 
+              0 0 35px rgba(216, 178, 110, 0.09), 
+              inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+}
+
+.orbit-design-system .theme-light .simple-auth-card {
+  background: rgba(255, 255, 255, 0.8) !important;
+  border: 1px solid rgba(139, 115, 85, 0.1) !important;
+  box-shadow: 0 4px 30px rgba(139, 115, 85, 0.04), 0 20px 50px rgba(139, 115, 85, 0.08) !important;
+}
+
+.orbit-design-system .theme-light .simple-auth-card:hover {
+  border-color: rgba(200, 155, 60, 0.35) !important;
+  box-shadow: 0 8px 40px rgba(139, 115, 85, 0.06), 
+              0 25px 60px rgba(139, 115, 85, 0.12), 
+              0 0 35px rgba(200, 155, 60, 0.07) !important;
+}
+
+.orbit-design-system .simple-card-header {
+  margin-bottom: 1.5rem !important;
+  text-align: center !important;
+}
+
+.orbit-design-system .simple-card-title {
+  font-family: 'Cormorant Garamond', serif !important;
+  font-size: 1.85rem !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.01em !important;
+  color: #F8F6F2 !important;
+  margin: 0 0 0.5rem 0 !important;
+}
+
+.orbit-design-system .theme-light .simple-card-title {
+  color: #111113 !important;
+}
+
+.orbit-design-system .simple-card-subtitle {
+  font-size: 0.8rem !important;
+  line-height: 1.5 !important;
+  color: rgba(248, 246, 242, 0.45) !important;
+  font-weight: 300 !important;
+  margin: 0 !important;
+}
+
+.orbit-design-system .theme-light .simple-card-subtitle {
+  color: rgba(17, 17, 19, 0.55) !important;
+}
+
+.orbit-design-system .simple-field-group {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+  width: 100% !important;
+}
+
+.orbit-design-system .simple-field-label {
+  font-size: 0.72rem !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+  color: rgba(248, 246, 242, 0.4) !important;
+  text-align: left !important;
+}
+
+.orbit-design-system .theme-light .simple-field-label {
+  color: rgba(17, 17, 19, 0.5) !important;
+}
+
+.orbit-design-system .simple-field-label-row {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+}
+
+.orbit-design-system .simple-field-wrap {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
+.orbit-design-system .simple-field-icon {
+  position: absolute !important;
+  left: 14px !important;
+  width: 15px !important;
+  height: 15px !important;
+  color: rgba(248, 246, 242, 0.3) !important;
+  pointer-events: none !important;
+  transition: color 0.3s ease !important;
+}
+
+.orbit-design-system .theme-light .simple-field-icon {
+  color: rgba(17, 17, 19, 0.4) !important;
+}
+
+.orbit-design-system .simple-field-input {
+  width: 100% !important;
+  height: 46px !important;
+  padding: 0 14px 0 38px !important;
+  border-radius: 10px !important;
+  background: rgba(0, 0, 0, 0.2) !important;
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  color: #FAFAF8 !important;
+  font-size: 0.85rem !important;
+  font-weight: 400 !important;
+  outline: none !important;
+  transition: all 0.3s ease !important;
+}
+
+.orbit-design-system .theme-light .simple-field-input {
+  background: rgba(0, 0, 0, 0.01) !important;
+  border-color: rgba(139, 115, 85, 0.14) !important;
+  color: #111113 !important;
+}
+
+.orbit-design-system .simple-field-input:focus {
+  border-color: #D8B26E !important;
+  background: rgba(0, 0, 0, 0.3) !important;
+  box-shadow: 0 0 12px rgba(216, 178, 110, 0.1) !important;
+}
+
+.orbit-design-system .theme-light .simple-field-input:focus {
+  border-color: #C89B3C !important;
+  background: #ffffff !important;
+  box-shadow: 0 0 12px rgba(200, 155, 60, 0.05) !important;
+}
+
+.orbit-design-system .simple-field-wrap:focus-within .simple-field-icon {
+  color: #D8B26E !important;
+}
+
+.orbit-design-system .theme-light .simple-field-wrap:focus-within .simple-field-icon {
+  color: #C89B3C !important;
+}
+
+.orbit-design-system .simple-toggle-password {
+  position: absolute !important;
+  right: 14px !important;
+  background: transparent !important;
+  border: none !important;
+  color: rgba(248, 246, 242, 0.3) !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  padding: 0 !important;
+  transition: color 0.3s ease !important;
+}
+
+.orbit-design-system .theme-light .simple-toggle-password {
+  color: rgba(17, 17, 19, 0.4) !important;
+}
+
+.orbit-design-system .simple-toggle-password:hover {
+  color: #D8B26E !important;
+}
+
+.orbit-design-system .theme-light .simple-toggle-password:hover {
+  color: #C89B3C !important;
+}
+
+.orbit-design-system .simple-at-symbol {
+  position: absolute !important;
+  left: 14px !important;
+  color: #D8B26E !important;
+  font-weight: 600 !important;
+  font-size: 0.9rem !important;
+  pointer-events: none !important;
+}
+
+.orbit-design-system .simple-form-actions {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  margin-top: 0.2rem !important;
+}
+
+.orbit-design-system .simple-checkbox-container {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  cursor: pointer !important;
+  user-select: none !important;
+}
+
+.orbit-design-system .simple-checkbox-input {
+  position: absolute !important;
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+.orbit-design-system .simple-checkbox-box {
+  width: 16px !important;
+  height: 16px !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 4px !important;
+  background: rgba(0, 0, 0, 0.2) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.3s ease !important;
+}
+
+.orbit-design-system .theme-light .simple-checkbox-box {
+  background: #ffffff !important;
+  border-color: rgba(139, 115, 85, 0.2) !important;
+}
+
+.orbit-design-system .simple-checkbox-box::after {
+  content: '' !important;
+  width: 3px !important;
+  height: 6px !important;
+  border-right: 1.5px solid #09090B !important;
+  border-bottom: 1.5px solid #09090B !important;
+  transform: rotate(45deg) scale(0) !important;
+  transition: all 0.2s ease !important;
+}
+
+.orbit-design-system .theme-light .simple-checkbox-box::after {
+  border-right-color: #ffffff !important;
+  border-bottom-color: #ffffff !important;
+}
+
+.orbit-design-system .simple-checkbox-input:checked + .simple-checkbox-box {
+  background: #D8B26E !important;
+  border-color: #D8B26E !important;
+}
+
+.orbit-design-system .theme-light .simple-checkbox-input:checked + .simple-checkbox-box {
+  background: #C89B3C !important;
+  border-color: #C89B3C !important;
+}
+
+.orbit-design-system .simple-checkbox-input:checked + .simple-checkbox-box::after {
+  transform: rotate(45deg) scale(1) translateY(-0.5px) !important;
+}
+
+.orbit-design-system .simple-checkbox-text {
+  font-size: 0.78rem !important;
+  color: rgba(248, 246, 242, 0.45) !important;
+}
+
+.orbit-design-system .theme-light .simple-checkbox-text {
+  color: rgba(17, 17, 19, 0.6) !important;
+}
+
+.orbit-design-system .simple-forgot-link,
+.orbit-design-system .simple-signup-link {
+  font-size: 0.78rem !important;
+  color: #D8B26E !important;
+  text-decoration: none !important;
+  font-weight: 500 !important;
+  transition: color 0.3s ease !important;
+}
+
+.orbit-design-system .theme-light .simple-forgot-link,
+.orbit-design-system .theme-light .simple-signup-link {
+  color: #C89B3C !important;
+}
+
+.orbit-design-system .simple-forgot-link:hover,
+.orbit-design-system .simple-signup-link:hover {
+  color: #FAFAF8 !important;
+}
+
+.orbit-design-system .theme-light .simple-forgot-link:hover,
+.orbit-design-system .theme-light .simple-signup-link:hover {
+  color: #111113 !important;
+}
+
+.orbit-design-system .simple-signup-prompt {
+  margin-top: 1.25rem !important;
+  text-align: center !important;
+  font-size: 0.8rem !important;
+  color: rgba(248, 246, 242, 0.4) !important;
+}
+
+.orbit-design-system .theme-light .simple-signup-prompt {
+  color: rgba(17, 17, 19, 0.5) !important;
+}
+
+.orbit-design-system .btn-simple-primary {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  height: 46px !important;
+  background: #D8B26E !important;
+  border: 1px solid #D8B26E !important;
+  color: #09090B !important;
+  border-radius: 10px !important;
+  font-size: 0.875rem !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+}
+
+.orbit-design-system .theme-light .btn-simple-primary {
+  background: #C89B3C !important;
+  border-color: #C89B3C !important;
+  color: #ffffff !important;
+}
+
+.orbit-design-system .btn-simple-primary:hover {
+  background: transparent !important;
+  color: #D8B26E !important;
+  box-shadow: 0 4px 15px rgba(216, 178, 110, 0.15) !important;
+}
+
+.orbit-design-system .theme-light .btn-simple-primary:hover {
+  background: transparent !important;
+  color: #C89B3C !important;
+}
+
+.orbit-design-system .btn-simple-primary:active {
+  transform: scale(0.98) !important;
+}
+
+.orbit-design-system .simple-card-footer {
+  text-align: center !important;
+  margin-top: 2rem !important;
+  padding-top: 1.25rem !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
+  font-size: 0.65rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.1em !important;
+  color: rgba(248, 246, 242, 0.25) !important;
+}
+
+.orbit-design-system .theme-light .simple-card-footer {
+  border-top-color: rgba(0, 0, 0, 0.06) !important;
+  color: rgba(17, 17, 19, 0.35) !important;
+}
+
+.orbit-design-system .simple-error-banner {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  padding: 10px 14px !important;
+  background: rgba(239, 68, 68, 0.06) !important;
+  border: 1px solid rgba(239, 68, 68, 0.15) !important;
+  border-radius: 8px !important;
+  margin-bottom: 1.25rem !important;
+  text-align: left !important;
+}
+
+.orbit-design-system .simple-auth-form {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1.25rem !important;
+}
+
+/* Custom premium rotating vector orbit logo */
+.orbit-design-system .premium-logo-container {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 10px !important;
+  margin-bottom: 1.5rem !important;
+}
+
+.orbit-design-system .premium-orbit-logo-svg {
+  width: 64px !important;
+  height: 64px !important;
+  animation: spinPlanetOrbit 32s linear infinite !important;
+  filter: drop-shadow(0 0 20px rgba(216, 178, 110, 0.15)) !important;
+}
+
+@keyframes spinPlanetOrbit {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.orbit-design-system .premium-brand-wordmark {
+  font-family: 'Inter', -apple-system, sans-serif !important;
+  font-size: 0.9rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.35em !important;
+  color: #F8F6F2 !important;
+  text-indent: 0.35em !important;
+  text-transform: uppercase !important;
+}
+
+.orbit-design-system .theme-light .premium-brand-wordmark {
+  color: #111113 !important;
+}
+
+/* Responsive Mobile Overrides for Simple Premium Login Card */
+@media (max-width: 480px) {
+  .orbit-design-system .auth-viewport {
+    height: auto !important;
+    min-height: 100vh !important;
+    overflow-y: auto !important;
+  }
+  .orbit-design-system .simple-page-wrapper {
+    height: auto !important;
+    min-height: 100vh !important;
+    padding: 2rem 1rem !important;
+    overflow-y: auto !important;
+  }
+  .orbit-design-system .simple-auth-card {
+    padding: 1.75rem 1.25rem !important;
+    border-radius: 16px !important;
+  }
+  .orbit-design-system .simple-form-row {
+    flex-direction: column !important;
+    gap: 1.25rem !important;
+  }
+  .orbit-design-system .premium-logo-container {
+    margin-bottom: 1.25rem !important;
+  }
+  .orbit-design-system .simple-card-header {
+    margin-bottom: 1.25rem !important;
+  }
+  .orbit-design-system .simple-card-title {
+    font-size: 1.5rem !important;
+  }
+  .orbit-design-system .simple-field-input {
+    height: 40px !important;
+    font-size: 0.8rem !important;
+  }
+  .orbit-design-system .btn-simple-primary {
+    height: 40px !important;
+    font-size: 0.8rem !important;
+  }
+}
+
+/* Height-based media queries to ensure zero scrolling and perfect vertical centering on small screens */
+@media (max-height: 820px) {
+  .orbit-design-system .simple-auth-card {
+    padding: 1.5rem 2rem !important;
+  }
+  .orbit-design-system .premium-logo-container {
+    margin-bottom: 1rem !important;
+  }
+  .orbit-design-system .premium-orbit-logo-svg {
+    width: 48px !important;
+    height: 48px !important;
+  }
+  .orbit-design-system .simple-card-header {
+    margin-bottom: 1rem !important;
+  }
+  .orbit-design-system .simple-card-title {
+    font-size: 1.5rem !important;
+  }
+  .orbit-design-system .simple-auth-form {
+    gap: 0.75rem !important;
+  }
+  .orbit-design-system .simple-card-footer {
+    margin-top: 1rem !important;
+    padding-top: 0.75rem !important;
+  }
+}
+
+@media (max-height: 680px) {
+  .orbit-design-system .simple-auth-card {
+    padding: 1.25rem 1.75rem !important;
+  }
+  .orbit-design-system .premium-logo-container {
+    margin-bottom: 0.75rem !important;
+    gap: 6px !important;
+  }
+  .orbit-design-system .premium-orbit-logo-svg {
+    width: 40px !important;
+    height: 40px !important;
+  }
+  .orbit-design-system .premium-brand-wordmark {
+    font-size: 0.8rem !important;
+  }
+  .orbit-design-system .simple-card-header {
+    margin-bottom: 0.75rem !important;
+  }
+  .orbit-design-system .simple-card-title {
+    font-size: 1.35rem !important;
+  }
+  .orbit-design-system .simple-card-subtitle {
+    font-size: 0.75rem !important;
+  }
+  .orbit-design-system .simple-field-input,
+  .orbit-design-system .btn-simple-primary {
+    height: 38px !important;
+  }
+  .orbit-design-system .simple-auth-form {
+    gap: 0.65rem !important;
+  }
+  .orbit-design-system .simple-card-footer {
+    margin-top: 0.75rem !important;
+    padding-top: 0.5rem !important;
+  }
+}
+
+/* ==========================================================================
+   11. REAL-TIME USERNAME CHECK PULSE ANIMATION
+   ========================================================================== */
+@keyframes pulseChecking {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+.orbit-design-system .checking-spinner-dot {
+  width: 6px;
+  height: 6px;
+  background-color: #a5b4fc;
+  border-radius: 50%;
+  display: inline-block;
+  animation: pulseChecking 1s infinite;
+}
+
+/* ==========================================================================
+   12. REDESIGNED PREMIUM HEADER NAV STYLES
+   ========================================================================== */
+.orbit-design-system .premium-navbar {
+  background: linear-gradient(to bottom, rgba(8, 8, 16, 0.75) 0%, rgba(8, 8, 16, 0.5) 100%) !important;
+  backdrop-filter: blur(24px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  padding: 0.85rem 0 !important;
+  margin-bottom: 3.5rem !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35) !important;
+}
+
+.orbit-design-system .nav-container {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  max-width: 1440px !important;
+  margin: 0 auto !important;
+  padding: 0 2.5rem !important;
+}
+
+.orbit-design-system .brand-block {
+  display: flex !important;
+  align-items: center !important;
+  gap: 1rem !important;
+}
+
+/* Premium Logo SVG and Glow */
+.orbit-design-system .brand-logo-glow {
+  width: 38px;
+  height: 38px;
+  background: rgba(99, 102, 241, 0.08);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 0 15px rgba(99, 102, 241, 0.2);
+  transition: all 0.3s ease;
+}
+
+.orbit-design-system .brand-logo-glow:hover {
+  transform: rotate(15deg) scale(1.05);
+  box-shadow: 0 0 25px rgba(99, 102, 241, 0.4);
+  background: rgba(99, 102, 241, 0.15);
+}
+
+.orbit-design-system .brand-logo-svg {
+  width: 24px;
+  height: 24px;
+}
+
+.orbit-design-system .nav-brand-title {
+  font-size: 1.35rem !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.02em !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.35rem !important;
+  background: linear-gradient(90deg, #ffffff 40%, #a5b4fc 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+.orbit-design-system .nav-brand-title-sub {
+  font-weight: 300 !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+  font-size: 0.75rem !important;
+  opacity: 0.6 !important;
+  background: #a5b4fc !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+.orbit-design-system .theme-toggle-pill {
+  background: rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  padding: 6px 14px !important;
+  border-radius: 100px !important;
+  height: 32px !important;
+  font-size: 0.8rem !important;
+  font-weight: 500 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  color: #94a3b8 !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.orbit-design-system .theme-toggle-pill:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+}
+
+.orbit-design-system .nav-actions-hub {
+  display: flex !important;
+  align-items: center !important;
+  gap: 1.25rem !important;
+}
+
+/* Project Control Pod */
+.orbit-design-system .project-control-pod {
+  display: flex !important;
+  align-items: center !important;
+  background: rgba(255, 255, 255, 0.02) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  border-radius: 14px !important;
+  padding: 4px 6px 4px 14px !important;
+  gap: 8px !important;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.02) !important;
+  transition: all 0.3s ease !important;
+}
+
+.orbit-design-system .project-control-pod:focus-within {
+  border-color: rgba(99, 102, 241, 0.3) !important;
+  box-shadow: 0 0 12px rgba(99, 102, 241, 0.1) !important;
+}
+
+.orbit-design-system .project-selector-glass {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+}
+
+.orbit-design-system .selector-prefix {
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  color: #64748b !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+}
+
+.orbit-design-system .dropdown-trigger-btn {
+  color: #c7d2fe !important;
+  font-weight: 600 !important;
+  font-size: 0.9rem !important;
+  min-width: 110px !important;
+  padding: 4px 8px !important;
+  transition: color 0.2s ease !important;
+}
+
+.orbit-design-system .dropdown-trigger-btn:hover {
+  color: #ffffff !important;
+}
+
+.orbit-design-system .project-action-buttons-group {
+  display: flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  border-left: 1px solid rgba(255, 255, 255, 0.08) !important;
+  padding-left: 6px !important;
+}
+
+.orbit-design-system .project-action-buttons-group .action-icon-btn {
+  background: transparent !important;
+  border: 1px solid transparent !important;
+  border-radius: 8px !important;
+  width: 28px !important;
+  height: 28px !important;
+  min-width: 28px !important;
+  transition: all 0.2s ease !important;
+}
+
+.orbit-design-system .project-action-buttons-group .action-icon-btn:hover {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  transform: translateY(-1px) !important;
+}
+
+.orbit-design-system .project-action-buttons-group .action-icon-btn.btn-destructive:hover {
+  background: rgba(239, 68, 68, 0.15) !important;
+  border-color: rgba(239, 68, 68, 0.3) !important;
+  color: #ef4444 !important;
+}
+
+/* Manage Users Trigger Button */
+.orbit-design-system .manage-users-trigger-btn {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(99, 102, 241, 0.03) 100%) !important;
+  border: 1px solid rgba(99, 102, 241, 0.3) !important;
+  color: #a5b4fc !important;
+  padding: 8px 16px !important;
+  border-radius: 12px !important;
+  font-weight: 600 !important;
+  font-size: 0.85rem !important;
+  height: 38px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+}
+
+.orbit-design-system .manage-users-trigger-btn:hover {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(99, 102, 241, 0.1) 100%) !important;
+  border-color: rgba(99, 102, 241, 0.5) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 20px rgba(99, 102, 241, 0.2) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* User Hub Pod */
+.orbit-design-system .user-hub-pod {
+  display: flex !important;
+  align-items: center !important;
+  gap: 1rem !important;
+  background: rgba(255, 255, 255, 0.02) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  border-radius: 16px !important;
+  padding: 4px 10px 4px 6px !important;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.02) !important;
+}
+
+.orbit-design-system .user-profile-badge {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  height: auto !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+/* Avatar Circular Initials Glow */
+.orbit-design-system .avatar-circle-glow {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #818cf8, #c084fc);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: white;
+  box-shadow: 0 0 10px rgba(129, 140, 248, 0.4);
+  position: relative;
+}
+
+.orbit-design-system .avatar-initials {
+  font-family: inherit;
+}
+
+.orbit-design-system .user-details-text {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.orbit-design-system .user-fullname {
+  font-weight: 600 !important;
+  color: #f1f5f9 !important;
+  font-size: 0.82rem !important;
+  line-height: 1.2 !important;
+}
+
+.orbit-design-system .user-username {
+  font-family: monospace !important;
+  font-weight: 700 !important;
+  color: #818cf8 !important;
+  font-size: 0.72rem !important;
+  line-height: 1.1 !important;
+}
+
+.orbit-design-system .user-action-buttons {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  border-left: 1px solid rgba(255, 255, 255, 0.08) !important;
+  padding-left: 10px !important;
+}
+
+.orbit-design-system .user-action-buttons .logout-btn-outline {
+  height: 30px !important;
+  padding: 0 10px !important;
+  border-radius: 8px !important;
+  font-size: 0.75rem !important;
+  background: rgba(255, 255, 255, 0.02) !important;
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  color: #94a3b8 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+}
+
+.orbit-design-system .user-action-buttons .logout-btn-outline:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  transform: translateY(-1px) !important;
+}
+
+.orbit-design-system .user-action-buttons .purge-profile-btn {
+  border-color: rgba(239, 68, 68, 0.15) !important;
+  color: #fca5a5 !important;
+}
+
+.orbit-design-system .user-action-buttons .purge-profile-btn:hover {
+  background: rgba(239, 68, 68, 0.1) !important;
+  border-color: rgba(239, 68, 68, 0.4) !important;
+  color: #ef4444 !important;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.15) !important;
+}
+
+/* Light theme overrides for premium redesigned navbar */
+.orbit-design-system .theme-light .premium-navbar {
+  background: rgba(255, 255, 255, 0.7) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05) !important;
+}
+
+.orbit-design-system .theme-light .nav-brand-title {
+  background: linear-gradient(90deg, #0f172a 40%, #4f46e5 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+.orbit-design-system .theme-light .nav-brand-title-sub {
+  background: #4f46e5 !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+.orbit-design-system .theme-light .theme-toggle-pill {
+  background: rgba(0, 0, 0, 0.02) !important;
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+  color: #475569 !important;
+}
+
+.orbit-design-system .theme-light .theme-toggle-pill:hover {
+  background: rgba(0, 0, 0, 0.05) !important;
+  color: #0f172a !important;
+}
+
+.orbit-design-system .theme-light .project-control-pod {
+  background: rgba(0, 0, 0, 0.02) !important;
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+}
+
+.orbit-design-system .theme-light .dropdown-trigger-btn {
+  color: #4f46e5 !important;
+}
+
+.orbit-design-system .theme-light .dropdown-trigger-btn:hover {
+  color: #312e81 !important;
+}
+
+.orbit-design-system .theme-light .project-action-buttons-group {
+  border-left-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+.orbit-design-system .theme-light .project-action-buttons-group .action-icon-btn:hover {
+  background: rgba(0, 0, 0, 0.03) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+.orbit-design-system .theme-light .user-hub-pod {
+  background: rgba(0, 0, 0, 0.02) !important;
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+}
+
+.orbit-design-system .theme-light .user-fullname {
+  color: #0f172a !important;
+}
+
+.orbit-design-system .theme-light .user-username {
+  color: #4f46e5 !important;
+}
+
+.orbit-design-system .theme-light .user-action-buttons {
+  border-left-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+.orbit-design-system .theme-light .user-action-buttons .logout-btn-outline {
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  color: #475569 !important;
+}
+
+.orbit-design-system .theme-light .user-action-buttons .logout-btn-outline:hover {
+  background: rgba(0, 0, 0, 0.03) !important;
+  color: #0f172a !important;
+}
+
+.orbit-design-system .theme-light .user-action-buttons .purge-profile-btn {
+  border-color: rgba(239, 68, 68, 0.2) !important;
+  color: #ef4444 !important;
+}
+
+.orbit-design-system .theme-light .user-action-buttons .purge-profile-btn:hover {
+  background: rgba(239, 68, 68, 0.05) !important;
+  color: #dc2626 !important;
+}
+
+
+
+
+
+

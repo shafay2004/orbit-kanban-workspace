@@ -1,12 +1,13 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
+import { KanbanBoardComponent } from './components/kanban-board/kanban-board';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.html',
-  styleUrl: './app.css'
+  standalone: true,
+  imports: [KanbanBoardComponent],
+  templateUrl: './app.html', // <-- Matches your exact file tree name!
+  styleUrls: ['./app.css']    // <-- Matches your exact file tree name!
 })
-export class App {
-  protected readonly title = signal('orbit-frontend');
-}
+export class AppComponent {
+  title = 'orbit-frontend';
+} 

@@ -1,0 +1,1020 @@
+<div class="orbit-design-system">
+  <div class="luxury-bg-wrapper">
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+    <div class="glow-orb orb-3"></div>
+  </div>
+
+  <div class="auth-viewport" *ngIf="!isAuthenticated" [ngClass]="isDarkMode ? 'theme-dark' : 'theme-light'">
+    <div class="luxury-noise-overlay"></div>
+    <div class="ambient-glows">
+      <div class="ambient-glow-circle circle-1"></div>
+      <div class="ambient-glow-circle circle-2"></div>
+      <div class="ambient-glow-circle circle-3"></div>
+    </div>
+
+    <button class="theme-toggle-pill auth-theme-toggle" (click)="toggleTheme()">
+      <span class="toggle-icon">{{ isDarkMode ? '☀️' : '🌙' }}</span>
+      <span class="toggle-text">{{ isDarkMode ? 'Light Space' : 'Dark Space' }}</span>
+    </button>
+
+    <div class="simple-page-wrapper">
+      <main class="simple-form-panel">
+        
+        <div class="simple-auth-card animate-fade-rise">
+          <div class="premium-logo-container">
+            <svg class="premium-orbit-logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="50" r="13" fill="url(#orbitGoldGrad)" />
+              <ellipse cx="50" cy="50" rx="38" ry="8" transform="rotate(-28 50 50)" stroke="url(#orbitGoldGrad)" stroke-width="1.8" stroke-dasharray="100" />
+              <ellipse cx="50" cy="50" rx="38" ry="8" transform="rotate(32 50 50)" stroke="url(#orbitGoldGrad)" stroke-width="0.8" stroke-dasharray="60" stroke-opacity="0.3" />
+              <defs>
+                <linearGradient id="orbitGoldGrad" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#D8B26E" />
+                  <stop offset="0.5" stop-color="#C89B3C" />
+                  <stop offset="1" stop-color="#B9895D" />
+                </linearGradient>
+              </defs>
+            </svg>
+            <span class="premium-brand-wordmark">ORBIT</span>
+          </div>
+
+          <header class="simple-card-header">
+            <h2 class="simple-card-title">{{ isSignUpState ? 'Create Account' : 'Sign In' }}</h2>
+            <p class="simple-card-subtitle">
+              {{ isSignUpState ? 'Set up a secure developer identity to access the gateway.' : 'Access your secure engineering workspaces and dashboards.' }}
+            </p>
+          </header>
+
+          <div *ngIf="authErrorMessage" class="simple-error-banner animate-shake">
+            <svg class="error-banner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/>
+            </svg>
+            <span class="error-banner-text">{{ authErrorMessage }}</span>
+          </div>
+
+          <form class="simple-auth-form" *ngIf="!isSignUpState" (submit)="$event.preventDefault(); executeAuthLogin(loginEmail.value, loginPassword.value)">
+            <div class="simple-field-group">
+              <label class="simple-field-label" for="email">Corporate Email Address</label>
+              <div class="simple-field-wrap">
+                <svg class="simple-field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                </svg>
+                <input
+                  type="email"
+                  id="email"
+                  #loginEmail
+                  class="simple-field-input"
+                  placeholder="name@orbit.com"
+                  value="shafay@orbit.com"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="simple-field-group">
+              <div class="simple-field-label-row">
+                <label class="simple-field-label" for="password">Security Password</label>
+                <a href="javascript:void(0)" class="simple-forgot-link">Forgot password?</a>
+              </div>
+              <div class="simple-field-wrap">
+                <svg class="simple-field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                </svg>
+                <input
+                  [type]="showLoginPassword ? 'text' : 'password'"
+                  id="password"
+                  #loginPassword
+                  class="simple-field-input"
+                  placeholder="••••••••"
+                  value="securehash123"
+                  required
+                />
+                <button type="button" class="simple-toggle-password" (click)="showLoginPassword = !showLoginPassword" aria-label="Toggle password visibility">
+                  <svg *ngIf="!showLoginPassword" class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  <svg *ngIf="showLoginPassword" class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="simple-form-actions">
+              <label class="simple-checkbox-container">
+                <input type="checkbox" id="rememberMe" name="rememberMe" class="simple-checkbox-input" />
+                <span class="simple-checkbox-box" aria-hidden="true"></span>
+                <span class="simple-checkbox-text">Keep me signed in</span>
+              </label>
+            </div>
+
+            <button type="submit" class="btn-simple-primary" id="submitBtn">
+              <span>Sign In</span>
+            </button>
+          </form>
+
+          <form class="simple-auth-form" *ngIf="isSignUpState" (submit)="$event.preventDefault(); executePublicUserRegistration()">
+            <div class="simple-form-row">
+              <div class="simple-field-group">
+                <label class="simple-field-label" for="fullName">Full Name</label>
+                <div class="simple-field-wrap">
+                  <svg class="simple-field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                  </svg>
+                  <input
+                    type="text"
+                    id="fullName"
+                    [(ngModel)]="newUserName"
+                    name="publicRegisterFullNameField"
+                    class="simple-field-input"
+                    placeholder="John Doe"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="simple-field-group">
+                <label class="simple-field-label" for="publicUsername">Tech Handle</label>
+                <div class="simple-field-wrap">
+                  <span class="simple-at-symbol">@</span>
+                  <input
+                    type="text"
+                    id="publicUsername"
+                    [(ngModel)]="newUserUsername"
+                    (ngModelChange)="onUsernameChange()"
+                    name="publicRegisterUsernameField"
+                    class="simple-field-input"
+                    placeholder="username"
+                    style="padding-left: 36px !important;"
+                    maxlength="16"
+                    required
+                  />
+                </div>
+                <!-- Real-time Username Availability Telemetry -->
+                <div class="username-availability-feedback animate-fade-in" *ngIf="usernameAvailabilityStatus !== 'none' && newUserUsername && newUserUsername.trim().length >= 3" style="margin-top: 6px; font-size: 0.8rem; display: flex; align-items: center; gap: 6px; font-weight: 500;">
+                  <span *ngIf="usernameAvailabilityStatus === 'checking'" style="color: #a5b4fc; display: flex; align-items: center; gap: 6px;">
+                    <span class="checking-spinner-dot"></span> Checking handle availability...
+                  </span>
+                  <span *ngIf="usernameAvailabilityStatus === 'available'" style="color: #10b981;">
+                    ✓ Handle is available to register
+                  </span>
+                  <span *ngIf="usernameAvailabilityStatus === 'taken'" style="color: #ef4444;">
+                    ✗ Handle is already allocated to another profile
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="simple-field-group">
+              <label class="simple-field-label" for="regEmail">Corporate Email Address</label>
+              <div class="simple-field-wrap">
+                <svg class="simple-field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                </svg>
+                <input
+                  type="email"
+                  id="regEmail"
+                  [(ngModel)]="newUserEmail"
+                  name="publicRegisterEmailField"
+                  class="simple-field-input"
+                  placeholder="name@orbit.com"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="simple-form-row">
+              <div class="simple-field-group">
+                <label class="simple-field-label" for="regPassword">Password</label>
+                <div class="simple-field-wrap">
+                  <svg class="simple-field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                  </svg>
+                  <input
+                    [type]="showRegisterPassword ? 'text' : 'password'"
+                    id="regPassword"
+                    [(ngModel)]="newUserPass"
+                    name="publicRegisterPassField"
+                    class="simple-field-input"
+                    placeholder="••••••••"
+                    required
+                  />
+                  <button type="button" class="simple-toggle-password" (click)="showRegisterPassword = !showRegisterPassword" aria-label="Toggle password visibility">
+                    <svg *ngIf="!showRegisterPassword" class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    <svg *ngIf="showRegisterPassword" class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <div class="simple-field-group">
+                <label class="simple-field-label" for="regConfirmPassword">Confirm Password</label>
+                <div class="simple-field-wrap">
+                  <svg class="simple-field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                  </svg>
+                  <input
+                    [type]="showConfirmPassword ? 'text' : 'password'"
+                    id="regConfirmPassword"
+                    [(ngModel)]="newUserConfirmPass"
+                    name="publicRegisterConfirmPassField"
+                    class="simple-field-input"
+                    placeholder="••••••••"
+                    required
+                  />
+                  <button type="button" class="simple-toggle-password" (click)="showConfirmPassword = !showConfirmPassword" aria-label="Toggle password visibility">
+                    <svg *ngIf="!showConfirmPassword" class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    <svg *ngIf="showConfirmPassword" class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-simple-primary" id="regSubmitBtn">
+              <span>Register Account</span>
+            </button>
+          </form>
+
+          <p class="simple-signup-prompt" *ngIf="!isSignUpState">
+            Don't have an account?
+            <a href="javascript:void(0)" class="simple-signup-link" (click)="toggleSignUpState(true)">Sign up</a>
+          </p>
+
+          <p class="simple-signup-prompt" *ngIf="isSignUpState">
+            Already have an account?
+            <a href="javascript:void(0)" class="simple-signup-link" (click)="toggleSignUpState(false)">Log in</a>
+          </p>
+
+          <footer class="simple-card-footer" role="contentinfo">
+            <span>SECURE GATEWAY ENVIRONMENT</span>
+          </footer>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div class="workspace-viewport animate-fade-in" *ngIf="isAuthenticated" [ngClass]="isDarkMode ? 'theme-dark' : 'theme-light'">
+    <header class="premium-navbar">
+      <div class="nav-container">
+
+        <div class="brand-block">
+          <!-- Premium Logo Icon -->
+          <div class="brand-logo-glow">
+            <svg class="brand-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <circle cx="12" cy="12" r="9" stroke="url(#orbitGradient)" />
+              <circle cx="12" cy="12" r="3" fill="url(#coreGradient)" />
+              <ellipse cx="12" cy="12" rx="9" ry="2.5" stroke="url(#ringGradient)" transform="rotate(-30 12 12)" />
+              <defs>
+                <linearGradient id="orbitGradient" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#818cf8" />
+                  <stop offset="100%" stop-color="#c084fc" />
+                </linearGradient>
+                <linearGradient id="coreGradient" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#fbbf24" />
+                  <stop offset="100%" stop-color="#f59e0b" />
+                </linearGradient>
+                <linearGradient id="ringGradient" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#f472b6" />
+                  <stop offset="100%" stop-color="#818cf8" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <h1 class="nav-brand-title">Orbit <span class="nav-brand-title-sub">Workspace</span></h1>
+          <button class="theme-toggle-pill" (click)="toggleTheme()" [title]="isDarkMode ? 'Switch to Light Space' : 'Switch to Dark Space'">
+            <span class="toggle-icon">{{ isDarkMode ? '☀️' : '🌙' }}</span>
+            <span class="toggle-text">{{ isDarkMode ? 'Light Space' : 'Dark Space' }}</span>
+          </button>
+        </div>
+
+        <div class="nav-actions-hub">
+          <!-- Project Control Pod -->
+          <div class="project-control-pod">
+            <div class="project-selector-glass">
+              <span class="selector-prefix">📁 Project</span>
+              <div class="custom-dropdown-container">
+                <button type="button" class="dropdown-trigger-btn"
+                  (click)="$event.stopPropagation(); isProjectDropdownOpen = !isProjectDropdownOpen">
+                  <span class="current-value">{{ getCurrentProjectName() }}</span>
+                  <span class="luxury-arrow" [class.rotated]="isProjectDropdownOpen">▼</span>
+                </button>
+
+                <div class="luxury-dropdown-menu" [class.open]="isProjectDropdownOpen">
+                  <div class="dropdown-search-wrapper" style="padding: 10px 14px; border-bottom: 1px solid rgba(255, 255, 255, 0.08);" (click)="$event.stopPropagation()">
+                    <input type="text" class="premium-input-field project-search-input" placeholder="🔍 Search project..." [(ngModel)]="projectSearchText" style="width: 100%; height: 34px; padding: 6px 12px; font-size: 0.85rem; background: rgba(0, 0, 0, 0.25); border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; color: white; outline: none;" />
+                  </div>
+                  <div class="dropdown-options-list">
+                    <div *ngIf="filteredProjectList().length === 0" class="luxury-option-item disabled-option">
+                      <span class="option-text">No matching projects found</span>
+                    </div>
+                    <div *ngFor="let proj of filteredProjectList()" class="luxury-option-item" [class.selected-item]="proj.projectId === currentProjectId" (click)="onProjectChange(proj.projectId.toString()); isProjectDropdownOpen = false; projectSearchText = '';">
+                      <span class="option-icon">🚀</span>
+                      <span class="option-text">{{ proj.name }}</span>
+                      <span class="assigned-badge" *ngIf="proj.isAssigned">Assigned</span>
+                      <span class="checked-badge" *ngIf="proj.projectId === currentProjectId">✦</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Action buttons contextually attached to active selector -->
+            <div class="project-action-buttons-group" *ngIf="isCurrentProjectOwner()">
+              <button type="button" class="action-icon-btn btn-secondary" title="Edit Project Settings" (click)="openEditProjectModal()">
+                <span class="icon">✏️</span>
+              </button>
+              <button type="button" class="action-icon-btn btn-destructive" title="Delete Project" (click)="deleteCurrentProject()">
+                <span class="icon">🗑️</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Admin Portal Trigger -->
+          <button *ngIf="authService.CurrentUserValue?.role === 'Admin'" type="button" class="manage-users-trigger-btn" (click)="$event.stopPropagation(); openUserManagementModal()">
+            <span class="icon">👥</span>
+            <span>Manage Users</span>
+          </button>
+
+          <!-- User Hub Pod -->
+          <div class="user-hub-pod" *ngIf="authService.CurrentUserValue">
+            <div class="user-profile-badge">
+              <div class="avatar-circle-glow">
+                <span class="avatar-initials">{{ (authService.CurrentUserValue?.fullName || 'U').substring(0, 2).toUpperCase() }}</span>
+              </div>
+              <div class="user-details-text">
+                <span class="user-fullname">{{ authService.CurrentUserValue?.fullName }}</span>
+                <span class="user-username">@{{ authService.CurrentUserValue?.username || (authService.CurrentUserValue?.email || '').split('@')[0] }}</span>
+              </div>
+            </div>
+
+            <div class="user-action-buttons">
+              <button type="button" class="logout-btn-outline purge-profile-btn" (click)="openDeleteAccountModal()" title="Permanently Delete My User Profile">
+                <span class="btn-icon">🗑️</span>
+                <span class="btn-text">Purge Profile</span>
+              </button>
+
+              <button type="button" class="logout-btn-outline" (click)="triggerSessionLogout()" title="Log out of session">
+                <span class="btn-icon">🚪</span>
+                <span class="btn-text">Logout</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </header>
+
+    <main class="workspace-content max-width-container">
+      <section class="workspace-hero-section text-center mb-5">
+        <div class="hero-badge animate-float">Enterprise Agility Control Matrix</div>
+        <h2 class="hero-main-title">Streamline High-Velocity Delivery Loops</h2>
+        <p class="hero-sub-text">Real-time optimization engine and telemetry mapping for cross-functional sprint boards.</p>
+      </section>
+
+      <section class="metrics-grid-layout mb-5">
+        <div class="metrics-cards-subgrid">
+          <div class="premium-glass-card metric-widget span-full interactive-card" (mousemove)="onCardMouseMove($event)">
+            <div class="card-glow-overlay"></div>
+            <div class="metric-card-content">
+              <div class="metric-text-details">
+                <p class="metric-label">Total Tasks Scope</p>
+                <h3 class="metric-value text-gradient-purple">{{ totalTasksCount }}</h3>
+              </div>
+              <div class="metric-visual-container">
+                <svg class="sparkline-svg" viewBox="0 0 100 30">
+                  <defs>
+                    <linearGradient id="sparkline-line-grad" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#6366f1" /><stop offset="50%" stop-color="#8b5cf6" /><stop offset="100%" stop-color="#3b82f6" /></linearGradient>
+                    <linearGradient id="sparkline-fill-grad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#6366f1" stop-opacity="0.3" /><stop offset="100%" stop-color="#6366f1" stop-opacity="0" /></linearGradient>
+                  </defs>
+                  <path class="sparkline-fill" d="M 0,30 Q 20,15 40,25 T 80,10 T 100,15 L 100,30 Z" fill="url(#sparkline-fill-grad)" />
+                  <path class="sparkline-line" d="M 0,30 Q 20,15 40,25 T 80,10 T 100,15" fill="none" stroke="url(#sparkline-line-grad)" stroke-width="2.5" />
+                  <circle cx="100" cy="15" r="3" fill="#3b82f6" class="sparkline-dot" />
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="premium-glass-card metric-widget interactive-card" (mousemove)="onCardMouseMove($event)">
+            <div class="card-glow-overlay"></div>
+            <div class="metric-card-content">
+              <div class="metric-text-details">
+                <p class="metric-label text-warning-label">Pending Work</p>
+                <h3 class="metric-value text-warning">{{ pendingTasksCount }}</h3>
+              </div>
+              <div class="metric-visual-container">
+                <div class="radial-progress-wrapper">
+                  <svg class="radial-progress-svg" viewBox="0 0 36 36">
+                    <path class="ring-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                    <path class="ring-fg ring-pending" [attr.stroke-dasharray]="getPendingPercentage() + ', 100'" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                  </svg>
+                  <span class="radial-percentage text-warning">{{ getPendingPercentage() }}%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="premium-glass-card metric-widget interactive-card" (mousemove)="onCardMouseMove($event)">
+            <div class="card-glow-overlay"></div>
+            <div class="metric-card-content">
+              <div class="metric-text-details">
+                <p class="metric-label text-success-label">Completed Items</p>
+                <h3 class="metric-value text-success">{{ completedTasksCount }}</h3>
+              </div>
+              <div class="metric-visual-container">
+                <div class="radial-progress-wrapper">
+                  <svg class="radial-progress-svg" viewBox="0 0 36 36">
+                    <path class="ring-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                    <path class="ring-fg ring-completed" [attr.stroke-dasharray]="getCompletedPercentage() + ', 100'" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                  </svg>
+                  <span class="radial-percentage text-success">{{ getCompletedPercentage() }}%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="premium-glass-card chart-analytics-widget interactive-card" (mousemove)="onChartMouseMove($event)" (mouseleave)="onChartMouseLeave($event)">
+          <div class="chart-header-wrapper d-flex align-items-center gap-2 mb-3">
+            <span class="chart-pulse-dot"></span>
+            <h6 class="chart-widget-title m-0 fw-bold text-uppercase small" style="color: var(--text-muted);">Telemetry Distribution Analytics</h6>
+          </div>
+          <div class="canvas-relative-container" style="position: relative; width: 100%; height: 155px;">
+            <canvas id="orbitAnalyticsChart"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <section class="filter-control-panel-hub mb-5">
+        <div class="premium-glass-card filter-card-wrapper" (mousemove)="onCardMouseMove($event)">
+          <div class="filter-flex-row">
+            <div class="filter-input-container search-block">
+              <span class="filter-inner-badge">🔍 Search</span>
+              <input type="text" class="filter-search-input" placeholder="Type title or keyword..." [(ngModel)]="searchText" (input)="applyLiveFilters()">
+            </div>
+
+            <div class="filter-input-container priority-block text-center">
+              <span class="filter-label-text">Priority Segment</span>
+              <div class="premium-segmented-control">
+                <button type="button" class="segment-btn" [class.active]="selectedPriorityFilter === 'All'" (click)="selectedPriorityFilter = 'All'; applyLiveFilters()">All</button>
+                <button type="button" class="segment-btn btn-high" [class.active]="selectedPriorityFilter === 'High'" (click)="selectedPriorityFilter = 'High'; applyLiveFilters()">High 🔥</button>
+                <button type="button" class="segment-btn btn-med" [class.active]="selectedPriorityFilter === 'Medium'" (click)="selectedPriorityFilter = 'Medium'; applyLiveFilters()">Med</button>
+                <button type="button" class="segment-btn btn-low" [class.active]="selectedPriorityFilter === 'Low'" (click)="selectedPriorityFilter = 'Low'; applyLiveFilters()">Low</button>
+              </div>
+            </div>
+
+            <div class="filter-input-container owner-block">
+              <span class="filter-inner-badge">👤 Owner</span>
+              <div class="custom-dropdown-container">
+                <button type="button" class="premium-select-dropdown-trigger" (click)="toggleOwnerDropdown()">
+                  <span class="current-value">{{ getSelectedUserFilterName() }}</span>
+                  <span class="luxury-arrow" [class.rotated]="isOwnerDropdownOpen">▼</span>
+                </button>
+
+                <div class="luxury-dropdown-menu" [class.open]="isOwnerDropdownOpen">
+                  <div class="dropdown-search-wrapper" style="padding: 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.08);">
+                    <input type="text" 
+                           class="dropdown-search-input" 
+                           placeholder="Search username or name..." 
+                           [(ngModel)]="ownerSearchText"
+                           (click)="$event.stopPropagation()">
+                  </div>
+                  <div class="dropdown-options-list" style="max-height: 220px; overflow-y: auto;">
+                    <div class="luxury-option-item" [class.selected-item]="selectedUserFilter === 'All'" (click)="selectOwnerFilter('All')">
+                      <span class="option-icon">👥</span>
+                      <span class="option-text">All Team Members</span>
+                      <span class="checked-badge" *ngIf="selectedUserFilter === 'All'">✦</span>
+                    </div>
+                    <div *ngFor="let usr of getFilteredUserList()" class="luxury-option-item" [class.selected-item]="selectedUserFilter.toString() === usr.userId.toString()" (click)="selectOwnerFilter(usr.userId.toString())">
+                      <span class="option-icon">👤</span>
+                      <div style="display: flex; flex-direction: column; text-align: left;">
+                        <span class="option-text" style="font-weight: 600; font-size: 0.9rem;">{{ usr.fullName }}</span>
+                        <span style="color: var(--purple-royal); font-size: 0.75rem; font-family: monospace; font-weight: 700;">@{{ usr.username }}</span>
+                      </div>
+                      <span class="checked-badge" *ngIf="selectedUserFilter.toString() === usr.userId.toString()">✦</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="dual-creation-grid mb-5">
+        <div class="premium-glass-card creation-form-card" (mousemove)="onCardMouseMove($event)">
+          <div class="card-accent-line accent-gold"></div>
+          <h5 class="form-section-title"><span class="icon-spark">✨</span> Create New Task</h5>
+          <div *ngIf="projectList && projectList.length > 0; else noProjectsTaskTemplate" class="form-inputs-stack">
+            <input type="text" #taskTitle class="premium-input-field" placeholder="Task Title...">
+            <input type="text" #taskDesc class="premium-input-field" placeholder="Task Description (Markdown Support Included)...">
+            <div class="dropdown-side-by-side-row" style="display: flex; gap: 14px; width: 100%;">
+              <div class="custom-dropdown-container priority-creation-dropdown" style="flex: 1; min-width: 0;">
+                <button type="button" class="premium-select-dropdown-trigger compact-trigger" (click)="isPriorityDropdownOpen = !isPriorityDropdownOpen">
+                  <span class="current-value">{{ selectedPriorityCreation }} Priority</span>
+                  <span class="luxury-arrow" [class.rotated]="isPriorityDropdownOpen">▼</span>
+                </button>
+
+                <div class="luxury-dropdown-menu compact-menu" [class.open]="isPriorityDropdownOpen">
+                  <div class="dropdown-options-list">
+                    <div class="luxury-option-item compact-option" [class.selected-item]="selectedPriorityCreation === 'Low'" (click)="selectedPriorityCreation = 'Low'; isPriorityDropdownOpen = false;">
+                      <span class="option-text">Low Priority</span>
+                    </div>
+                    <div class="luxury-option-item compact-option" [class.selected-item]="selectedPriorityCreation === 'Medium'" (click)="selectedPriorityCreation = 'Medium'; isPriorityDropdownOpen = false;">
+                      <span class="option-text">Medium Priority</span>
+                    </div>
+                    <div class="luxury-option-item compact-option" [class.selected-item]="selectedPriorityCreation === 'High'" (click)="selectedPriorityCreation = 'High'; isPriorityDropdownOpen = false;">
+                      <span class="option-text">High Priority 🔥</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="custom-dropdown-container assignee-creation-dropdown" style="flex: 1; min-width: 0;">
+                <button type="button" class="premium-select-dropdown-trigger compact-trigger" (click)="toggleAssigneeDropdown()">
+                  <span class="current-value">{{ getSelectedAssigneeCreationName() }}</span>
+                  <span class="luxury-arrow" [class.rotated]="isAssigneeDropdownOpen">▼</span>
+                </button>
+
+                <div class="luxury-dropdown-menu compact-menu" [class.open]="isAssigneeDropdownOpen">
+                  <div class="dropdown-search-wrapper" style="padding: 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.08);" (click)="$event.stopPropagation()">
+                    <input type="text" 
+                           class="dropdown-search-input" 
+                           placeholder="Search username or name..." 
+                           [(ngModel)]="assigneeSearchText">
+                  </div>
+                  <div class="dropdown-options-list" style="max-height: 200px; overflow-y: auto;">
+                    <div class="luxury-option-item compact-option" [class.selected-item]="selectedAssigneeCreationId === null" (click)="selectAssigneeCreation(null)">
+                      <span class="option-icon">👤</span>
+                      <span class="option-text">Assigned User</span>
+                    </div>
+                    <div *ngFor="let usr of getFilteredAssigneeCreationList()" class="luxury-option-item compact-option" [class.selected-item]="selectedAssigneeCreationId === usr.userId" (click)="selectAssigneeCreation(usr.userId)">
+                      <span class="option-icon">👤</span>
+                      <div style="display: flex; flex-direction: column; text-align: left;">
+                        <span class="option-text" style="font-weight: 600; font-size: 0.85rem;">{{ usr.fullName }}</span>
+                        <span style="color: var(--purple-royal); font-size: 0.7rem; font-family: monospace; font-weight: 700;">@{{ usr.username }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button class="premium-btn btn-gold-action w-100 mt-2" (click)="addNewTask(taskTitle.value, taskDesc.value, selectedPriorityCreation, selectedAssigneeCreationId, taskTitle, taskDesc)">
+              Add Task Card
+            </button>
+          </div>
+
+          <ng-template #noProjectsTaskTemplate>
+            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center; padding: 2rem; min-height: 220px;">
+              <span style="font-size: 2.5rem; margin-bottom: 1rem;">📁</span>
+              <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.5; margin: 0;">
+                No active projects mapped to your workspace context. Create a new project board to start tracking tasks!
+              </p>
+            </div>
+          </ng-template>
+        </div>
+
+        <div class="premium-glass-card creation-form-card" (mousemove)="onCardMouseMove($event)">
+          <div class="card-accent-line accent-purple"></div>
+          <h5 class="form-section-title"><span class="icon-spark">📁</span> Create New Project Board</h5>
+          <div class="form-inputs-stack">
+            <input type="text" #projName class="premium-input-field" placeholder="Project Name...">
+            <textarea #projDesc class="premium-input-field project-desc-textarea" placeholder="Project Description (Optional)..."></textarea>
+            <button class="premium-btn btn-purple-action w-100 mt-2" (click)="addNewProject(projName.value, projDesc.value); projName.value=''; projDesc.value=''">
+              Create Project Board
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section *ngIf="projectList && projectList.length > 0" class="kanban-board-grid-layout" cdkDropListGroup>
+        <div class="kanban-column-wrapper">
+          <div class="premium-glass-card kanban-column-card" (mousemove)="onCardMouseMove($event)">
+            <div class="column-header-bar border-todo">
+              <div class="column-title-pack">
+                <span class="status-indicator dot-todo"></span>
+                <h4 class="column-heading">To-Do</h4>
+              </div>
+              <span class="column-counter-badge">{{ todoTasks.length }}</span>
+            </div>
+
+            <div id="todoList" class="kanban-cards-dropzone" cdkDropList [cdkDropListData]="todoTasks" (cdkDropListDropped)="drop($event, 'To-Do')">
+              <div *ngFor="let task of todoTasks" cdkDrag (click)="openEditModal(task, $event)" class="kanban-task-card premium-glass-card high-end-interactive priority-todo-box" (mousemove)="onCardMouseMove($event)">
+                <div class="task-card-inner">
+                  <div class="task-header-row">
+                    <h5 class="task-title-text">{{ task.title }}</h5>
+                    <button class="task-delete-trigger" (click)="deleteSingleTask(task.taskId, $event)" title="Delete Card">🗑️</button>
+                  </div>
+                  <div class="task-desc-text markdown-preview-node" [innerHTML]="task.description | markdown"></div>
+                  <div class="task-footer-row">
+                    <span class="task-priority-tag tag-med">{{ task.priority }}</span>
+                    <div class="task-assignee-avatar">
+                      <span class="avatar-icon">👤</span>
+                      <span class="avatar-name">{{ getUsernameById(task.assignedToUserId) }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="kanban-column-wrapper">
+          <div class="premium-glass-card kanban-column-card" (mousemove)="onCardMouseMove($event)">
+            <div class="column-header-bar border-progress">
+              <div class="column-title-pack">
+                <span class="status-indicator dot-progress"></span>
+                <h4 class="column-heading text-gradient-blue">In-Progress</h4>
+              </div>
+              <span class="column-counter-badge bg-blue-badge">{{ inProgressTasks.length }}</span>
+            </div>
+
+            <div id="inProgressList" class="kanban-cards-dropzone" cdkDropList [cdkDropListData]="inProgressTasks" (cdkDropListDropped)="drop($event, 'In-Progress')">
+              <div *ngFor="let task of inProgressTasks" cdkDrag (click)="openEditModal(task, $event)" class="kanban-task-card premium-glass-card high-end-interactive priority-progress-box" (mousemove)="onCardMouseMove($event)">
+                <div class="task-card-inner">
+                  <div class="task-header-row">
+                    <h5 class="task-title-text">{{ task.title }}</h5>
+                    <button class="task-delete-trigger" (click)="deleteSingleTask(task.taskId, $event)" title="Delete Card">🗑️</button>
+                  </div>
+                  <div class="task-desc-text markdown-preview-node" [innerHTML]="task.description | markdown"></div>
+                  <div class="task-footer-row">
+                    <span class="task-priority-tag tag-high">{{ task.priority }}</span>
+                    <div class="task-assignee-avatar">
+                      <span class="avatar-icon">👤</span>
+                      <span class="avatar-name">{{ getUsernameById(task.assignedToUserId) }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="kanban-column-wrapper">
+          <div class="premium-glass-card kanban-column-card" (mousemove)="onCardMouseMove($event)">
+            <div class="column-header-bar border-done">
+              <div class="column-title-pack">
+                <span class="status-indicator dot-done"></span>
+                <h4 class="column-heading text-gradient-green">Done</h4>
+              </div>
+              <span class="column-counter-badge bg-green-badge">{{ doneTasks.length }}</span>
+            </div>
+
+            <div id="doneList" class="kanban-cards-dropzone" cdkDropList [cdkDropListData]="doneTasks" (cdkDropListDropped)="drop($event, 'Done')">
+              <div *ngFor="let task of doneTasks" cdkDrag (click)="openEditModal(task, $event)" class="kanban-task-card premium-glass-card high-end-interactive priority-done-box" (mousemove)="onCardMouseMove($event)">
+                <div class="task-card-inner">
+                  <div class="task-header-row">
+                    <h5 class="task-title-text">{{ task.title }}</h5>
+                    <button class="task-delete-trigger" (click)="deleteSingleTask(task.taskId, $event)" title="Delete Card">🗑️</button>
+                  </div>
+                  <div class="task-desc-text markdown-preview-node" [innerHTML]="task.description | markdown"></div>
+                  <div class="task-footer-row">
+                    <span class="task-priority-tag tag-success">{{ task.priority }}</span>
+                    <div class="task-assignee-avatar">
+                      <span class="avatar-icon">👤</span>
+                      <span class="avatar-name">{{ getUsernameById(task.assignedToUserId) }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Premium Empty State Placeholder when user has 0 projects -->
+      <div *ngIf="!projectList || projectList.length === 0" class="premium-glass-card" style="margin-top: 2rem; padding: 4rem 2rem; text-align: center; border-radius: 24px; border: 1px solid rgba(255, 255, 255, 0.08); background: linear-gradient(135deg, rgba(20, 20, 35, 0.6), rgba(10, 10, 20, 0.8)); box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);">
+        <div style="font-size: 4rem; margin-bottom: 1.5rem; filter: drop-shadow(0 10px 20px rgba(99, 102, 241, 0.3));">🛸</div>
+        <h2 style="font-size: 2rem; font-weight: 700; color: white; margin-bottom: 0.75rem; background: linear-gradient(90deg, #a5b4fc, #e0e7ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Welcome to your Orbit Space!</h2>
+        <p style="color: #94a3b8; font-size: 1.1rem; max-width: 540px; margin: 0 auto; line-height: 1.6;">
+          Your workspace contains 0 project boards. Create your first project board using the panel below to unlock tasks, status feeds, and team telemetry controls!
+        </p>
+      </div>
+
+      <section class="activity-audit-log-feed-section mt-5 mb-4">
+        <div class="premium-glass-card audit-log-container p-4" (mousemove)="onCardMouseMove($event)">
+          <div class="audit-header d-flex justify-content-between align-items-center mb-3 border-bottom pb-2" style="border-color: rgba(255,255,255,0.08) !important;">
+            <div class="d-flex align-items-center gap-2">
+              <span class="status-pulse" style="background: var(--neon-blue); box-shadow: 0 0 10px var(--neon-blue);"></span>
+              <h5 class="m-0 fw-bold text-uppercase small tracking-wider" style="letter-spacing: 0.08em; font-size: 0.82rem; color: #a5b4fc;">Live System Audit Telemetry Feed</h5>
+            </div>
+            <button class="theme-toggle-pill py-1 px-3" style="font-size: 0.75rem;" (click)="loadProjectLogs()">Refresh Logs 🔄</button>
+          </div>
+
+          <div class="audit-logs-stream d-flex flex-column gap-2" style="max-height: 160px; overflow-y: auto;">
+            <div *ngFor="let log of projectActivityLogs" class="log-stream-row d-flex justify-content-between align-items-center py-2 px-3" style="font-family: 'Courier New', Courier, monospace; font-size: 0.85rem; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.04); border-radius: 8px;">
+              <div class="log-message-wrapper d-flex align-items-center gap-2">
+                <span style="color: var(--neon-blue); font-weight: 700;">[SYSTEM_NODE]:</span>
+                <span style="color: #cbd5e1;">{{ log.message }}</span>
+              </div>
+              <small style="color: var(--text-muted); font-weight: 600;">{{ log.timestamp | date:'yyyy-MM-dd HH:mm:ss' }}</small>
+            </div>
+            <div *ngIf="projectActivityLogs.length === 0" class="text-center py-3 small italic" style="color: var(--text-muted);">
+              No system telemetry recorded on active core layout nodes yet.
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    
+    <footer class="workspace-footer mt-5">
+      <div class="max-width-container d-flex justify-content-between align-items-center complex-footer-row">
+        <p class="footer-copy">© 2026 Orbit Workspace Platforms Inc. All secure streams authorized.</p>
+        <div class="footer-status-tag">
+          <span class="status-pulse"></span> Nodes Operational
+        </div>
+      </div>
+    </footer>
+
+    <div *ngIf="isModalOpen" class="modal-blur-viewport animate-fade-in" [class.animate-fade-out]="isModalClosing" (click)="onModalOverlayClick($event)">
+      <div class="modal-glass-card task-edit-modal-card animate-scale-up" [class.animate-scale-down]="isModalClosing">
+        <div class="modal-accent-top-glow"></div>
+
+        <div class="modal-header-block">
+          <h4 class="modal-title-text">🛠️ Edit Task Settings</h4>
+          <button class="modal-close-trigger" (click)="closeEditModal()">✕</button>
+        </div>
+
+        <div class="modal-body-stack task-edit-grid">
+          <div class="modal-col-left" style="display: flex; flex-direction: column; gap: 16px;">
+            <div class="input-field-group">
+              <label class="premium-label">Task Heading Title</label>
+              <input type="text" class="premium-input-field font-semibold" [(ngModel)]="editingTask.title" placeholder="Task Title...">
+            </div>
+
+            <div class="input-field-group markdown-editor-split" style="display: flex; flex-direction: column; gap: 8px;">
+              <label class="premium-label">Detailed Log Description (Markdown Supported ✨)</label>
+              
+              <div class="description-grid-wrapper">
+                <textarea class="premium-input-field resize-none" rows="5" 
+                          [(ngModel)]="editingTask.description" 
+                          placeholder="Use markdown syntax here:&#10;* Use bullets&#10;* `code blocks`&#10;* **Bold metrics**&#10;- [ ] Checklist tasks"
+                          style="font-family: 'Courier New', Courier, monospace; font-size: 13px; line-height: 1.5; padding: 12px; background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; color: white;"></textarea>
+                
+                <div class="markdown-live-viewer-stream" [innerHTML]="editingTask.description | markdown"
+                     style="padding: 12px; background: rgba(255, 255, 255, 0.02); border: 1px dashed rgba(99, 102, 241, 0.2); border-radius: 8px; max-height: 140px; overflow-y: auto; font-size: 13px; color: #cbd5e1; line-height: 1.6;">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-col-right" style="display: flex; flex-direction: column; gap: 16px;">
+            <div class="modal-split-fields">
+              <div class="input-field-group width-half">
+                <label class="premium-label">Priority Ranking Level</label>
+                <div class="custom-dropdown-container edit-priority-dropdown">
+                  <button type="button" class="premium-select-dropdown-trigger compact-trigger text-danger font-bold" (click)="isEditPriorityDropdownOpen = !isEditPriorityDropdownOpen">
+                    <span class="current-value">{{ getSelectedPriorityEditName() }}</span>
+                    <span class="luxury-arrow" [class.rotated]="isEditPriorityDropdownOpen">▼</span>
+                  </button>
+
+                  <div class="luxury-dropdown-menu compact-menu" [class.open]="isEditPriorityDropdownOpen">
+                    <div class="dropdown-options-list">
+                      <div class="luxury-option-item compact-option" [class.selected-item]="editingTask.priority === 'Low'" (click)="editingTask.priority = 'Low'; isEditPriorityDropdownOpen = false;">
+                        <span class="option-text">Low Priority</span>
+                      </div>
+                      <div class="luxury-option-item compact-option" [class.selected-item]="editingTask.priority === 'Medium'" (click)="editingTask.priority = 'Medium'; isEditPriorityDropdownOpen = false;">
+                        <span class="option-text">Medium Priority</span>
+                      </div>
+                      <div class="luxury-option-item compact-option" [class.selected-item]="editingTask.priority === 'High'" (click)="editingTask.priority = 'High'; isEditPriorityDropdownOpen = false;">
+                        <span class="option-text">High Priority 🔥</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="input-field-group width-half">
+                <label class="premium-label">Assign Team Member Profile</label>
+                <div class="custom-dropdown-container edit-assignee-dropdown">
+                  <button type="button" class="premium-select-dropdown-trigger compact-trigger text-primary font-bold" [disabled]="authService.CurrentUserValue?.role !== 'Admin'" [style.opacity]="authService.CurrentUserValue?.role !== 'Admin' ? 0.6 : 1" [style.cursor]="authService.CurrentUserValue?.role !== 'Admin' ? 'not-allowed' : 'pointer'" (click)="toggleEditAssigneeDropdown()">
+                    <span class="current-value">{{ getSelectedAssigneeEditName() }}</span>
+                    <span class="luxury-arrow" *ngIf="authService.CurrentUserValue?.role === 'Admin'" [class.rotated]="isEditAssigneeDropdownOpen">▼</span>
+                  </button>
+
+                  <div class="luxury-dropdown-menu compact-menu" [class.open]="isEditAssigneeDropdownOpen">
+                    <div class="dropdown-search-wrapper" style="padding: 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.08);" (click)="$event.stopPropagation()">
+                      <input type="text" 
+                             class="dropdown-search-input" 
+                             placeholder="Search username or name..." 
+                             [(ngModel)]="editAssigneeSearchText">
+                    </div>
+                    <div class="dropdown-options-list" style="max-height: 200px; overflow-y: auto;">
+                      <div class="luxury-option-item compact-option" [class.selected-item]="!editingTask.assignedToUserId" (click)="selectAssigneeEdit(null)">
+                        <span class="option-icon">👤</span>
+                        <span class="option-text">Unassigned</span>
+                      </div>
+                      <div *ngFor="let usr of getFilteredAssigneeEditList()" class="luxury-option-item compact-option" [class.selected-item]="editingTask.assignedToUserId?.toString() === usr.userId.toString()" (click)="selectAssigneeEdit(usr.userId)">
+                        <span class="option-icon">👤</span>
+                        <div style="display: flex; flex-direction: column; text-align: left;">
+                          <span class="option-text" style="font-weight: 600; font-size: 0.85rem;">{{ usr.fullName }}</span>
+                          <span style="color: var(--purple-royal); font-size: 0.7rem; font-family: monospace; font-weight: 700;">@{{ usr.username }}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="comments-section-hub" style="margin-top: 0; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.08);">
+              <h6 style="color: #a5b4fc; font-weight: 700; text-transform: uppercase; font-size: 11px; letter-spacing: 0.5px; margin-bottom: 12px; display: flex; align-items: center; gap: 6px;">
+                <span>💬</span> Task Discussion Matrix Feed ({{ taskComments.length }})
+              </h6>
+
+              <div class="comment-input-grid" style="display: flex; gap: 10px; margin-bottom: 12px;">
+                <input type="text" [(ngModel)]="newCommentText" placeholder="Write a collaborative technical update comment..." 
+                       style="flex: 1; padding: 10px 14px; background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; color: white; font-size: 13px; outline: none;"
+                       (keyup.enter)="submitNewComment(editingTask.taskId)">
+                <button type="button" (click)="submitNewComment(editingTask.taskId)"
+                        style="padding: 0 16px; background: linear-gradient(135deg, #6366f1, #4f46e5); color: white; border: none; border-radius: 8px; font-weight: 600; font-size: 12px; cursor: pointer; transition: opacity 0.2s;"
+                        onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
+                  Send
+                </button>
+              </div>
+
+              <div class="comments-stream-container" style="max-height: 120px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; padding-right: 4px;">
+                <div *ngFor="let comm of taskComments" class="comment-row-card" 
+                     style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); padding: 10px 12px; border-radius: 8px; display: flex; flex-direction: column; gap: 4px;">
+                  <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="color: #e2e8f0; font-weight: 600; font-size: 12px;">👤 {{ comm.userFullName }}</span>
+                    <small style="color: #64748b; font-size: 10px; font-weight: 500;">{{ comm.createdAt | date:'shortTime' }}</small>
+                  </div>
+                  <p style="margin: 0; color: #cbd5e1; font-size: 13px; line-height: 1.4; word-break: break-word;">{{ comm.message }}</p>
+                </div>
+                
+                <div *ngIf="taskComments.length === 0" style="text-align: center; padding: 16px; color: #64748b; font-size: 12px; font-style: italic;">
+                  No peer comments mapped to this execution card node yet.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-actions-footer">
+          <button class="premium-btn btn-secondary-dim px-4" (click)="closeEditModal()">Cancel</button>
+          <button class="premium-btn btn-purple-action px-4" (click)="saveTaskEdits()">Save Updates</button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="customAlertOpen" class="modal-blur-viewport alert-modal-viewport animate-fade-in" [class.animate-fade-out]="customAlertClosing" (click)="handleCustomAlertResponse(true)">
+      <div class="modal-glass-card alert-modal-card animate-scale-up" [class.animate-scale-down]="customAlertClosing" (click)="$event.stopPropagation()">
+        <div class="modal-accent-top-glow alert-accent-glow"></div>
+        
+        <div class="alert-content-wrapper text-center">
+          <div class="alert-icon-ring alert-icon-animate">
+            <span class="alert-icon-emoji">{{ customAlertIcon }}</span>
+          </div>
+          
+          <h4 class="alert-title">{{ customAlertTitle }}</h4>
+          <p class="alert-message">{{ customAlertMessage }}</p>
+        </div>
+
+        <div class="alert-actions-footer text-center mt-4 d-flex justify-content-center gap-3">
+          <button *ngIf="!customAlertConfirmOnly" class="premium-btn btn-secondary-dim px-4" (click)="handleCustomAlertResponse(false)">Cancel</button>
+          <button class="premium-btn btn-purple-action px-5" (click)="handleCustomAlertResponse(true)">Confirm</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-blur-viewport animate-fade-in" *ngIf="isUserModalOpen" [class.animate-fade-out]="isUserModalClosing" (click)="$event.target === $event.currentTarget && closeUserManagementModal()">
+      <div class="modal-glass-card animate-scale-up user-registry-modal-container" [class.animate-scale-down]="isUserModalClosing">
+        <div class="modal-accent-top-glow"></div>
+        
+        <div class="user-registry-header">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 24px;">👥</span>
+            <div>
+              <h3 class="user-registry-title">Orbit User Directory</h3>
+              <p class="user-registry-subtitle">Register team members matrix parameters</p>
+            </div>
+          </div>
+          <button class="close-luxury-btn" style="background: transparent; border: none; color: #64748b; font-size: 18px; cursor: pointer;" (click)="closeUserManagementModal()">✕</button>
+        </div>
+
+        <div class="premium-modal-form-body" style="display: flex; flex-direction: column; gap: 14px;">
+          <div class="form-input-wrapper">
+            <label class="user-registry-label">Full Identity Name</label>
+            <input type="text" [(ngModel)]="newUserName" placeholder="e.g. Rahul Sharma" class="user-registry-input" />
+          </div>
+
+          <div class="form-input-wrapper">
+            <label class="user-registry-label">Unique Tech Handle (Username)</label>
+            <div style="position: relative; display: flex; align-items: center; width: 100%;">
+              <span style="position: absolute; left: 12px; color: var(--purple-royal); font-weight: 700; font-size: 13px;">@</span>
+              <input type="text" [(ngModel)]="newUserUsername" placeholder="shafay_dev" class="user-registry-input" style="padding-left: 26px !important;" />
+            </div>
+          </div>
+
+          <div class="form-input-wrapper">
+            <label class="user-registry-label">Corporate Email Address</label>
+            <input type="email" [(ngModel)]="newUserEmail" placeholder="name@orbit.com" class="user-registry-input" />
+          </div>
+
+          <div class="form-input-wrapper">
+            <label class="user-registry-label">Secure Vault Password</label>
+            <div style="position: relative; display: flex; align-items: center; width: 100%;">
+              <input [type]="showRegisterPassword ? 'text' : 'password'" [(ngModel)]="newUserPass" placeholder="••••••••" class="user-registry-input password-input-field" />
+              <button type="button" class="eye-toggle-btn" (click)="showRegisterPassword = !showRegisterPassword" style="position: absolute; right: 12px; background: transparent; border: none; color: #64748b; cursor: pointer; display: flex; align-items: center;" aria-label="Toggle password visibility">
+                <svg *ngIf="!showRegisterPassword" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/><path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/></svg>
+                <svg *ngIf="showRegisterPassword" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474L2.234 4.334a10.855 10.855 0 0 0-1.803 2.827c.075.127.19.264.335.412a2.316 2.316 0 0 0 .378.337C2.96 9.58 5.122 11.5 8 11.5c.573 0 1.127-.075 1.65-.213l.81.81c.007.006.015.011.022.017zm4.24-1.122A10.97 10.97 0 0 0 16 8s-3-5.5-8-5.5a9.953 9.953 0 0 0-2.634.354L3.87 1.374A.5.5 0 1 0 3.13 2.05l11.74 11.74a.5.5 0 1 0 .707-.707l-1.047-1.048zm-1.8-1.8L9.9 6.666a2.5 2.5 0 0 0-3.232 3.232l3.562 3.562c.007-.006.015-.011.022-.016h.002a2.5 2.5 0 0 0 3.036-3.036z"/><path d="M12.44 9.44 9.44 12.44a3.5 3.5 0 0 1-4.004-4.004L2.44 5.44A10.87 10.87 0 0 0 1 8s3 5.5 8 5.5c1.61 0 3.09-.4 4.33-1.06z" /></svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="form-input-wrapper">
+            <label class="user-registry-label">Platform Dynamic Role Authorization</label>
+            <select [(ngModel)]="newUserRoleSelected" class="user-registry-select">
+              <option value="Admin">Admin (Full Infrastructure Operations)</option>
+              <option value="Developer">Developer (Board Control Execution)</option>
+              <option value="Project Manager">Project Manager (Flow Management)</option>
+              <option value="QA Engineer">QA Engineer (Quality Verification)</option>
+              <option value="Viewer">Viewer (Read-Only Interface Viewport)</option>
+            </select>
+          </div>
+
+          <div style="display: flex; gap: 10px; margin-top: 14px;">
+            <button type="button" (click)="closeUserManagementModal()" style="flex: 1; padding: 10px; background: rgba(255,255,255,0.05); border: none; color: #cbd5e1; border-radius: 8px; font-weight: 600; font-size: 13px; cursor: pointer;">Cancel</button>
+            <button type="button" (click)="executeCorporateUserRegistration()" style="flex: 2; padding: 10px; background: linear-gradient(135deg, #10b981, #059669); border: none; color: white; border-radius: 8px; font-weight: 600; font-size: 13px; cursor: pointer; box-shadow: 0 4px 12px rgba(16,185,129,0.2);">Provision Account</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-blur-viewport animate-fade-in" *ngIf="isEditProjectModalOpen" [class.animate-fade-out]="isEditProjectModalClosing" (click)="$event.target === $event.currentTarget && closeEditProjectModal()">
+      <div class="modal-glass-card animate-scale-up alert-modal-card" [class.animate-scale-down]="isEditProjectModalClosing" style="max-width: 500px !important;">
+        <div class="modal-accent-top-glow"></div>
+        
+        <div class="modal-header-block" style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+          <h4 class="modal-title-text" style="margin: 0; font-size: 1.1rem; display: flex; align-items: center; gap: 8px;">
+            <span>✏️</span> Edit Project Settings
+          </h4>
+          <button class="modal-close-trigger" style="background: transparent; border: none; color: #64748b; font-size: 16px; cursor: pointer;" (click)="closeEditProjectModal()">✕</button>
+        </div>
+
+        <div class="premium-modal-form-body" style="display: flex; flex-direction: column; gap: 14px;">
+          <div class="form-input-wrapper" style="display: flex; flex-direction: column; gap: 6px;">
+            <label class="user-registry-label" style="font-size: 11px; font-weight: 700; color: #a5b4fc; text-transform: uppercase; letter-spacing: 0.5px;">Project Name</label>
+            <input type="text" [(ngModel)]="editProjectName" placeholder="Project Name..." class="user-registry-input" style="width: 100%; padding: 10px 14px; background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; color: white; font-size: 13px; outline: none;" />
+          </div>
+
+          <div class="form-input-wrapper" style="display: flex; flex-direction: column; gap: 6px;">
+            <label class="user-registry-label" style="font-size: 11px; font-weight: 700; color: #a5b4fc; text-transform: uppercase; letter-spacing: 0.5px;">Project Description</label>
+            <textarea rows="3" [(ngModel)]="editProjectDescription" placeholder="Project Description..." class="user-registry-input resize-none" style="width: 100%; padding: 10px 14px; background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; color: white; font-size: 13px; outline: none; font-family: inherit;"></textarea>
+          </div>
+
+          <div style="display: flex; gap: 10px; margin-top: 14px;">
+            <button type="button" class="premium-btn btn-secondary-dim px-4" (click)="closeEditProjectModal()" style="flex: 1;">Cancel</button>
+            <button type="button" class="premium-btn btn-purple-action px-4" (click)="saveProjectEdits()" style="flex: 2;">Save Changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-blur-viewport animate-fade-in" *ngIf="isDeleteAccountModalOpen" [class.animate-fade-out]="isDeleteAccountModalClosing" (click)="$event.target === $event.currentTarget && closeDeleteAccountModal()">
+      <div class="modal-glass-card animate-scale-up alert-modal-card" [class.animate-scale-down]="isDeleteAccountModalClosing" style="max-width: 480px !important;">
+        <div class="modal-accent-top-glow" style="background: linear-gradient(90deg, transparent, #ef4444, transparent) !important;"></div>
+        
+        <div class="modal-header-block" style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+          <h4 class="modal-title-text" style="margin: 0; font-size: 1.1rem; display: flex; align-items: center; gap: 8px; color: #f87171;">
+            <span>⚠️</span> Confirm Account Deletion
+          </h4>
+          <button class="modal-close-trigger" style="background: transparent; border: none; color: #64748b; font-size: 16px; cursor: pointer;" (click)="closeDeleteAccountModal()">✕</button>
+        </div>
+
+        <div class="premium-modal-form-body" style="display: flex; flex-direction: column; gap: 14px;">
+          <div style="font-size: 13px; color: #cbd5e1; line-height: 1.6;">
+            Warning: This action is permanent and will completely purge your workspace profile, comments, and task assignments. This account cannot be restored.
+          </div>
+
+          <div class="form-input-wrapper" style="display: flex; flex-direction: column; gap: 6px;">
+            <label class="user-registry-label" style="font-size: 11px; font-weight: 700; color: #f87171; text-transform: uppercase; letter-spacing: 0.5px;">Account Password</label>
+            <div style="position: relative; display: flex; align-items: center; width: 100%;">
+              <input [type]="showDeletePassword ? 'text' : 'password'" [(ngModel)]="deleteAccountPassword" placeholder="Enter your password to verify ownership..." class="user-registry-input" style="width: 100%; padding: 10px 14px; background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; color: white; font-size: 13px; outline: none; padding-right: 40px;" />
+              <button type="button" class="eye-toggle-btn" (click)="showDeletePassword = !showDeletePassword" style="position: absolute; right: 12px; background: transparent; border: none; color: #64748b; cursor: pointer; display: flex; align-items: center;" aria-label="Toggle password visibility">
+                <svg *ngIf="!showDeletePassword" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/><path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/></svg>
+                <svg *ngIf="showDeletePassword" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474L2.234 4.334a10.855 10.855 0 0 0-1.803 2.827c.075.127.19.264.335.412a2.316 2.316 0 0 0 .378.337C2.96 9.58 5.122 11.5 8 11.5c.573 0 1.127-.075 1.65-.213l.81.81c.007.006.015.011.022.017zm4.24-1.122A10.97 10.97 0 0 0 16 8s-3-5.5-8-5.5a9.953 9.953 0 0 0-2.634.354L3.87 1.374A.5.5 0 1 0 3.13 2.05l11.74 11.74a.5.5 0 1 0 .707-.707l-1.047-1.048zm-1.8-1.8L9.9 6.666a2.5 2.5 0 0 0-3.232 3.232l3.562 3.562c.007-.006.015-.011.022-.016h.002a2.5 2.5 0 0 0 3.036-3.036z"/><path d="M12.44 9.44 9.44 12.44a3.5 3.5 0 0 1-4.004-4.004L2.44 5.44A10.87 10.87 0 0 0 1 8s3 5.5 8 5.5c1.61 0 3.09-.4 4.33-1.06z" /></svg>
+              </button>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 10px; margin-top: 14px;">
+            <button type="button" class="premium-btn btn-secondary-dim px-4" (click)="closeDeleteAccountModal()" style="flex: 1;">Cancel</button>
+            <button type="button" class="premium-btn btn-destructive px-4" (click)="executeAccountDeletion()" style="flex: 2; background: linear-gradient(135deg, #ef4444, #dc2626) !important; color: white !important;">Delete Permanently</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
