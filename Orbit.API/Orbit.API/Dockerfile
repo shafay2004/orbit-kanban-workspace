@@ -5,7 +5,6 @@ ENV ASPNETCORE_URLS=http://+:10000
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-# Dono files same directory mein hain, isliye seedha copy hoga
 COPY ["Orbit.API.csproj", "./"]
 RUN dotnet restore "Orbit.API.csproj"
 COPY . .
