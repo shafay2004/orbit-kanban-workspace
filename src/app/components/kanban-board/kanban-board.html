@@ -142,7 +142,7 @@
                     type="text"
                     id="publicUsername"
                     [(ngModel)]="newUserUsername"
-                    (ngModelChange)="onUsernameChange()"
+                    (ngModelChange)="onUsernameChange($event)"
                     name="publicRegisterUsernameField"
                     class="simple-field-input"
                     placeholder="username"

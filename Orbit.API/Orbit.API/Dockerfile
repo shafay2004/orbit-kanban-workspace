@@ -5,13 +5,16 @@ ENV ASPNETCORE_URLS=http://+:10000
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-COPY ["Orbit.API.csproj", "./"]
-RUN dotnet restore "Orbit.API.csproj"
+
+# Pura repository content copy karenge taaki context maintain rahe
 COPY . .
-RUN dotnet build "Orbit.API.csproj" -c Release -o /app/build
+
+# Ab nested dynamic path se package restore aur build chalayenge
+RUN dotnet restore "Orbit.API/Orbit.API/Orbit.API.csproj"
+RUN dotnet build "Orbit.API/Orbit.API/Orbit.API.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Orbit.API.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "Orbit.API/Orbit.API/Orbit.API.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
