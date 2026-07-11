@@ -147,4 +147,3 @@ D:\Project-Orbit\Orbit.API\Orbit.API\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnal
 D:\Project-Orbit\Orbit.API\Orbit.API\bin\Debug\net8.0\Npgsql.dll
 D:\Project-Orbit\Orbit.API\Orbit.API\bin\Debug\net8.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
 D:\Project-Orbit\Orbit.API\Orbit.API\obj\Debug\net8.0\Orbit.API.sourcelink.json
-D:\Project-Orbit\Orbit.API\Orbit.API\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

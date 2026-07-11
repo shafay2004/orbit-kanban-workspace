@@ -164,7 +164,6 @@ namespace Orbit.API.Controllers
     // 🎯 UNIFIED & DECODED VERIFICATION GATEWAY: GET api/auth/verify-email
     // (Saves record to SQL DB *ONLY* upon click activation execution + Auto-Redirects Client Token with User State parameters)
     [HttpGet("verify-email")]
-    [HttpGet("verify-email")]
     public async Task<IActionResult> VerifyEmail([FromQuery] string token)
     {
       if (string.IsNullOrWhiteSpace(token)) return BadRequest("Invalid verification request signature token data parameter mapping.");

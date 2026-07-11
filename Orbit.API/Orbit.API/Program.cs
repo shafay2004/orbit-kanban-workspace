@@ -21,12 +21,13 @@ builder.Services.AddSwaggerGen();
 // 2. Enable CORS (Cross-Origin Resource Sharing)
 builder.Services.AddCors(options =>
 {
-  options.AddPolicy("AllowAll",
+  options.AddPolicy("AllowAngular",
       policy =>
       {
-        policy.AllowAnyOrigin()
-                .AllowAnyHeader()
-                .AllowAnyMethod();
+        policy.WithOrigins("http://localhost:4200", "https://orbit-frontend-live.onrender.com")
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials();
       });
 });
 
@@ -64,12 +65,6 @@ if (app.Environment.IsDevelopment())
 
 // 4. CRITICAL MIDDLEWARE EXECUTION PIPELINE ORDER
 app.UseCors("AllowAngular"); // CORS must stay on top layers
-
-app.UseCors(policy => policy
-    .WithOrigins("http://localhost:4200") // Your Angular app node route
-    .AllowAnyMethod()
-    .AllowAnyHeader()
-    .AllowCredentials());
 
 app.MapHub<NotificationHub>("/orbitNotificationHub");
 
