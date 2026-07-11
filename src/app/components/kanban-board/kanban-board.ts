@@ -61,6 +61,7 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
   inProgressTasks: TaskItem[] = [];
   doneTasks: TaskItem[] = [];
 
+  usernameAvailabilityStatus: string = ''; // ya 'available' / 'taken' jo bhi aap set karte ho
   projectList: ProjectItem[] = [];
   userList: UserItem[] = [];
   currentProjectId: number = 1;
