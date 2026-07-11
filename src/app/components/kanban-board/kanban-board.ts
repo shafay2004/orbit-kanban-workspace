@@ -5,7 +5,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Chart, registerables } from 'chart.js';
-import { MarkdownPipe } from '../../pipes/markdown.pipe'; // Adjust path based on your exact file level
+import { MarkdownPipe } from '../../pipes/markdown.pipe'; 
 import { NotificationService } from '../../services/notification.service'; 
 import { environment } from '../../../environments/environment';
 
@@ -16,7 +16,7 @@ export interface UserItem {
   userId: number;
   fullName: string;
   email: string;
-  username: string; // 🎯 NET ARCHITECTURE LOCK: Globally unique user handle handle identifier
+  username: string; 
   role?: string;
 }
 
@@ -25,7 +25,7 @@ export interface UserSession {
   newUserEmail: string;
   newUserPass: string;
   newUserRoleSelected: string;
-  newUserUsername: string; // Dynamic handle state track parameters
+  newUserUsername: string; 
 }
 
 export interface ProjectItem {
@@ -52,7 +52,7 @@ export interface TaskItem {
 @Component({
   selector: 'app-kanban-board',
   standalone: true,
-  imports: [CommonModule, DragDropModule, HttpClientModule, FormsModule, MarkdownPipe], // 🎯 ADD MarkdownPipe HERE
+  imports: [CommonModule, DragDropModule, HttpClientModule, FormsModule, MarkdownPipe], 
   templateUrl: './kanban-board.html',
   styleUrls: ['./kanban-board.css']
 })
@@ -61,38 +61,34 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
   inProgressTasks: TaskItem[] = [];
   doneTasks: TaskItem[] = [];
 
-  usernameAvailabilityStatus: string = ''; // ya 'available' / 'taken' jo bhi aap set karte ho
+  // 🎯 DUP LOCK FIX: Double declaration removed from bottom block context safely
+  usernameAvailabilityStatus: string = ''; 
   projectList: ProjectItem[] = [];
   userList: UserItem[] = [];
   currentProjectId: number = 1;
 
-  // 🎯 ADD THESE CONTROL STRINGS INSIDE KANBANBOARDCOMPONENT CLASS VARIABLES:
   isUsernameChecking: boolean = false;
   usernameAvailabilityMsg: string = '';
   isUsernameAvailable: boolean | null = null;
   private usernameDebounceTimeout: any = null;
 
-  // --- USER CREATION CONTROL ENGINE STATES ---
   isUserModalOpen: boolean = false;
   isUserModalClosing: boolean = false;
 
   taskComments: any[] = [];
   newCommentText: string = '';
 
-  // 🎯 REFERENCE INPUT MODELS BOUND TO MODAL FIELD BINDINGS
   newUserName: string = '';
   newUserEmail: string = '';
-  newUserUsername: string = ''; // 🎯 INTERACTIVE MODEL STATE: Unique tech username handle data track slot
+  newUserUsername: string = ''; 
   newUserPass: string = '';
   newUserConfirmPass: string = '';
   newUserRoleSelected: string = 'Developer';
 
-  // KPI Metrics Counter Variables
   totalTasksCount: number = 0;
   pendingTasksCount: number = 0;
   completedTasksCount: number = 0;
 
-  // --- COMPONENT STATE FLAGS ---
   isDarkMode: boolean = false;
   isModalOpen: boolean = false;
   isModalClosing: boolean = false;
@@ -123,15 +119,12 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
   isEditPriorityDropdownOpen: boolean = false;
   isEditAssigneeDropdownOpen: boolean = false;
 
-  // Live Activity Logs Buffer Array Matrix
   projectActivityLogs: any[] = [];
   private autoCloseAlertTimeout: any = null;
   ownerSearchText: string = '';
 
-  // --- CHART REFERENCE TRACKING ---
   orbitChart: any = null;
 
-  // --- FILTER STATE TRACKING VARIABLES ---
   searchText: string = '';
   selectedPriorityFilter: string = 'All';
   selectedUserFilter: number | string = 'All';
@@ -139,7 +132,6 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
 
   editingTask: TaskItem = { taskId: 0, title: '', description: '', status: 'To-Do', priority: 'Medium', projectId: 1, displayOrder: 0 };
 
-  // --- CUSTOM ALERT DIALOG STATE ---
   customAlertOpen: boolean = false;
   customAlertClosing: boolean = false;
   customAlertTitle: string = 'Security Gateway Notice';
@@ -150,14 +142,12 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
 
   private logRefreshInterval: any = null;
 
-  // Mouse-tracking glow properties
   private targetX: number = 0;
   private targetY: number = 0;
   private currentX: number = 0;
   private currentY: number = 0;
   private rafId: any = null;
 
-  // 🎯 FIX LOAD NODE: Changing authService visibility scope from private to public for direct template binding
   constructor(
     private http: HttpClient, 
     private cdr: ChangeDetectorRef, 
@@ -166,54 +156,45 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+    const urlParams = new URLSearchParams(window.location.search);
+    const autoId = urlParams.get('autoId');
+    const autoName = urlParams.get('autoName');
+    const autoEmail = urlParams.get('autoEmail');
+    const autoRole = urlParams.get('autoRole');
+    const autoUsername = urlParams.get('autoUsername');
 
-          // 🎯 ADD THIS INSIDE THE VERY TOP OF ngOnInit() IN kanban-board.ts:
-      const urlParams = new URLSearchParams(window.location.search);
-      const autoId = urlParams.get('autoId');
-      const autoName = urlParams.get('autoName');
-      const autoEmail = urlParams.get('autoEmail');
-      const autoRole = urlParams.get('autoRole');
-      const autoUsername = urlParams.get('autoUsername');
-
-      if (autoId && autoName && autoEmail && autoRole) {
-        console.log('⚡ AUTO LOGIN DISPATCH ACTIVE MATRIX RECEIVED:', autoName);
-        
-        // Directly set local session cache state manually matching authService structures
-        const mockUserPayload = {
-          userId: parseInt(autoId, 10),
-          fullName: decodeURIComponent(autoName),
-          email: autoEmail,
-          role: autoRole,
-          username: autoUsername ? decodeURIComponent(autoUsername) : autoEmail.split('@')[0]
-        };
-        
-        this.authService.setUserSession(mockUserPayload, 'mock_orbit_secured_token_hash');
-        
-        // Clean clean URL path strings completely in the browser so parameters disappear nicely
-        window.history.replaceState({}, document.title, "/");
-        
-        // Re-verify framework authentication variables
-        this.isAuthenticated = true;
-        this.loadAllProjects();
-        this.loadAllUsers();
-        this.startRealTimeLogPolling();
-        this.cdr.detectChanges();
-        return;
-      }
+    if (autoId && autoName && autoEmail && autoRole) {
+      console.log('⚡ AUTO LOGIN DISPATCH ACTIVE MATRIX RECEIVED:', autoName);
+      
+      const mockUserPayload = {
+        userId: parseInt(autoId, 10),
+        fullName: decodeURIComponent(autoName),
+        email: autoEmail,
+        role: autoRole,
+        username: autoUsername ? decodeURIComponent(autoUsername) : autoEmail.split('@')[0]
+      };
+      
+      this.authService.setUserSession(mockUserPayload, 'mock_orbit_secured_token_hash');
+      window.history.replaceState({}, document.title, "/");
+      
+      this.isAuthenticated = true;
+      this.loadAllProjects();
+      this.loadAllUsers();
+      this.startRealTimeLogPolling();
+      this.cdr.detectChanges();
+      return;
+    }
     console.log('--- Kanban Board Component Initialized ---');
 
-    // 🎯 ROUTE LOCKING: Live status checking from session cache
     this.isAuthenticated = this.authService.isLoggedIn();
 
     if (this.isAuthenticated) {
-      // User logged in hai, toh data load karo
       this.loadAllProjects();
       this.loadAllUsers();
       this.startRealTimeLogPolling();
     } else {
-      // 🔐 FORCE REDIRECT: Agar logged in nahi hai, toh force system to stay on login page state
       this.isAuthenticated = false;
-      this.triggerSessionLogout(); // Safely clears any corrupted half-session parameters
+      this.triggerSessionLogout(); 
     }
 
     const savedTheme = localStorage.getItem('orbit_theme');
@@ -232,7 +213,6 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
     this.targetX = event.clientX - rect.left;
     this.targetY = event.clientY - rect.top;
     
-    // Start the animation loop if not already running
     if (!this.rafId) {
       this.currentX = this.targetX;
       this.currentY = this.targetY;
@@ -303,12 +283,9 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
     });
   }
 
-  // 🎯 RECONFIGURED LOOKUP CONTEXT MODEL
   getUsernameById(userId?: number): string {
     if (!userId) return 'Unassigned';
     const foundUser = this.userList.find(u => u.userId === userId);
-    
-    // Returns exact structured professional username tag
     return foundUser ? `@${foundUser.username}` : 'Unassigned';
   }
 
@@ -321,10 +298,7 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
           this.projectList = projects;
           this.loadCachedData();
           this.loadProjectTasks(this.currentProjectId);
-          
-          // 🎯 INITIAL ROOM SUBSCRIPTION MATRIX: Locks the SignalR pipeline to the default loaded project right on boot
           this.notificationService.switchProjectRoom(this.currentProjectId);
-          
           this.cdr.detectChanges();
         } else {
           this.runFallbackSequence();
@@ -358,8 +332,6 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
   getSelectedUserFilterName(): string {
     if (this.selectedUserFilter === 'All') return 'All Team Members';
     const foundUser = this.userList.find(u => u.userId === Number(this.selectedUserFilter));
-    
-    // Custom formatted visual string loop handle
     return foundUser ? `${foundUser.fullName} (@${foundUser.username})` : 'All Team Members';
   }
 
@@ -457,7 +429,7 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
   }
 
   selectAssigneeEdit(userId: number | null) {
-    this.setEditingTaskAssignee(userId);
+    this.selectAssigneeCreation(userId);
     this.isEditAssigneeDropdownOpen = false;
     this.editAssigneeSearchText = '';
   }
@@ -472,8 +444,6 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
     return Math.round((this.completedTasksCount / this.totalTasksCount) * 100);
   }
 
-  // 🎯 FIX DROPDOWN LOCK ENGINE: Optimized HostListener to prevent instant closure and type errors
-  // 🎯 FIX LIVE CLICK CONFLICT: Optimized HostListener to prevent user modal from instant closure
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
@@ -482,38 +452,25 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
     }
 
     try {
-      // 1. Project Dropdown Handler Check
       if (this.isProjectDropdownOpen && !target.closest('.project-selector-glass')) {
         this.isProjectDropdownOpen = false;
         this.projectSearchText = '';
       }
-      
-      // 2. Priority Dropdown Handler Check
       if (this.isPriorityDropdownOpen && !target.closest('.priority-creation-dropdown')) {
         this.isPriorityDropdownOpen = false;
       }
-      
-      // 3. Assignee Dropdown Handler Check
       if (this.isAssigneeDropdownOpen && !target.closest('.assignee-creation-dropdown')) {
         this.isAssigneeDropdownOpen = false;
       }
-
-      // 4. Owner Dropdown Handler Check
       if (this.isOwnerDropdownOpen && !target.closest('.owner-block')) {
         this.isOwnerDropdownOpen = false;
       }
-
-      // 5. Edit Priority Dropdown Handler Check
       if (this.isEditPriorityDropdownOpen && !target.closest('.edit-priority-dropdown')) {
         this.isEditPriorityDropdownOpen = false;
       }
-
-      // 6. Edit Assignee Dropdown Handler Check
       if (this.isEditAssigneeDropdownOpen && !target.closest('.edit-assignee-dropdown')) {
         this.isEditAssigneeDropdownOpen = false;
       }
-
-      // 👥 7. CRITICAL USER MODAL SAFETY CHECK: Prevent background clicks from locking the modal instantly
       if (this.isUserModalOpen && !target.closest('.user-registry-modal-container') && !target.closest('.manage-users-trigger-btn')) {
         this.isUserModalOpen = false;
       }
@@ -584,7 +541,6 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
     this.completedTasksCount = tasks.filter(t => t.status === 'Done').length;
 
     setTimeout(() => this.renderPremiumAnalyticsChart(), 50);
-
     this.cdr.detectChanges();
   }
 
@@ -736,109 +692,100 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
     });
   }
 
-  // 🎯 PUBLIC REGISTRATION GATEWAY OVERHAUL WITH EXPLICIT HANDLE TRACK
   executePublicUserRegistration() {
-  this.authErrorMessage = null;
+    this.authErrorMessage = null;
 
-  // 🛡️ Step 1: Strict Identity Field Null Verification Checks
-  if (!this.newUserName.trim() || !this.newUserEmail.trim() || !this.newUserUsername.trim() || !this.newUserPass.trim() || !this.newUserConfirmPass.trim()) {
-    this.authErrorMessage = 'Please fill out all identity configuration parameter fields, including a handle.';
-    this.cdr.detectChanges();
-    return;
-  }
-
-  const email = this.newUserEmail.trim();
-  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  if (!emailRegex.test(email)) {
-    this.authErrorMessage = 'Please enter a valid corporate email address (e.g. name@orbit.com).';
-    this.cdr.detectChanges();
-    return;
-  }
-
-  const pass = this.newUserPass.trim();
-  const confirmPass = this.newUserConfirmPass.trim();
-
-  if (pass !== confirmPass) {
-    this.authErrorMessage = 'Passwords do not match.';
-    this.cdr.detectChanges();
-    return;
-  }
-
-  // 🛡️ Step 2: Password Complexity Constraint Verification Rules
-  if (pass.length < 8 || pass.length > 16) {
-    this.authErrorMessage = 'Password must be between 8 and 16 characters.';
-    this.cdr.detectChanges();
-    return;
-  }
-
-  if (!/[A-Z]/.test(pass)) {
-    this.authErrorMessage = 'Password must contain at least one capital letter.';
-    this.cdr.detectChanges();
-    return;
-  }
-
-  if (!/[a-z]/.test(pass)) {
-    this.authErrorMessage = 'Password must contain at least one small letter.';
-    this.cdr.detectChanges();
-    return;
-  }
-
-  if (!/[0-9]/.test(pass)) {
-    this.authErrorMessage = 'Password must contain at least one number.';
-    this.cdr.detectChanges();
-    return;
-  }
-
-  if (!/[^a-zA-Z0-9]/.test(pass)) {
-    this.authErrorMessage = 'Password must contain at least one special character.';
-    this.cdr.detectChanges();
-    return;
-  }
-
-  // 🛡️ Step 3: Staging Object Payload Assembly
-  const registrationPayload = {
-    fullName: this.newUserName.trim(),
-    email: email,
-    username: this.newUserUsername.replace('@', '').trim().toLowerCase(), // Auto strips handles prefix
-    passwordHash: pass,
-    role: 'Developer'
-  };
-
-  // 🚀 Step 4: Dispatch Deferred Gateway Call to .NET Core Server
-  this.http.post(`${environment.apiUrl}/api/auth/register`, registrationPayload).subscribe({
-    next: async (res: any) => {
-      // Show native browser popup to ensure absolute visibility
-      window.alert(`Confirm your email ID by clicking on the secure activation link we sent to your email address (${email}).`);
-
-      // 🎯 FIXED POPUP NOTIFICATION INTERFACE ENGINE
-      await this.showCustomAlert(
-        `Confirm your email ID by clicking on the secure activation link we sent to your email address (${email}). Your account will be registered and logged in instantly upon verification!`, 
-        '✉️', 
-        'Confirm Email Address',
-        false // do not auto close
-      );
-      
-      // Clear forms context state values cleanly
-      this.newUserName = '';
-      this.newUserEmail = '';
-      this.newUserUsername = '';
-      this.newUserPass = '';
-      this.newUserConfirmPass = '';
-      this.showRegisterPassword = false;
-      this.showConfirmPassword = false;
-      
-      // Strict Authentication Gate Lockdown: Keeps dashboard completely invisible until link click trace
-      this.isAuthenticated = false; 
-      this.isSignUpState = false; // Sends user gracefully back to Sign In template viewport block
+    if (!this.newUserName.trim() || !this.newUserEmail.trim() || !this.newUserUsername.trim() || !this.newUserPass.trim() || !this.newUserConfirmPass.trim()) {
+      this.authErrorMessage = 'Please fill out all identity configuration parameter fields, including a handle.';
       this.cdr.detectChanges();
-    },
-    error: (err) => {
-      console.error('Registration token dispatch failure exception trace:', err);
-      this.authErrorMessage = typeof err.error === 'string' ? err.error : 'Username handle or email allocation conflict.';
-      this.cdr.detectChanges();
+      return;
     }
-  });
-}
+
+    const email = this.newUserEmail.trim();
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailRegex.test(email)) {
+      this.authErrorMessage = 'Please enter a valid corporate email address (e.g. name@orbit.com).';
+      this.cdr.detectChanges();
+      return;
+    }
+
+    const pass = this.newUserPass.trim();
+    const confirmPass = this.newUserConfirmPass.trim();
+
+    if (pass !== confirmPass) {
+      this.authErrorMessage = 'Passwords do not match.';
+      this.cdr.detectChanges();
+      return;
+    }
+
+    if (pass.length < 8 || pass.length > 16) {
+      this.authErrorMessage = 'Password must be between 8 and 16 characters.';
+      this.cdr.detectChanges();
+      return;
+    }
+
+    if (!/[A-Z]/.test(pass)) {
+      this.authErrorMessage = 'Password must contain at least one capital letter.';
+      this.cdr.detectChanges();
+      return;
+    }
+
+    if (!/[a-z]/.test(pass)) {
+      this.authErrorMessage = 'Password must contain at least one small letter.';
+      this.cdr.detectChanges();
+      return;
+    }
+
+    if (!/[0-9]/.test(pass)) {
+      this.authErrorMessage = 'Password must contain at least one number.';
+      this.cdr.detectChanges();
+      return;
+    }
+
+    if (!/[^a-zA-Z0-9]/.test(pass)) {
+      this.authErrorMessage = 'Password must contain at least one special character.';
+      this.cdr.detectChanges();
+      return;
+    }
+
+    const registrationPayload = {
+      fullName: this.newUserName.trim(),
+      email: email,
+      username: this.newUserUsername.replace('@', '').trim().toLowerCase(), 
+      passwordHash: pass,
+      role: 'Developer'
+    };
+
+    this.http.post(`${environment.apiUrl}/api/auth/register`, registrationPayload).subscribe({
+      next: async (res: any) => {
+        window.alert(`Confirm your email ID by clicking on the secure activation link we sent to your email address (${email}).`);
+
+        await this.showCustomAlert(
+          `Confirm your email ID by clicking on the secure activation link we sent to your email address (${email}). Your account will be registered and logged in instantly upon verification!`, 
+          '✉️', 
+          'Confirm Email Address',
+          false 
+        );
+        
+        this.newUserName = '';
+        this.newUserEmail = '';
+        this.newUserUsername = '';
+        this.newUserPass = '';
+        this.newUserConfirmPass = '';
+        this.showRegisterPassword = false;
+        this.showConfirmPassword = false;
+        
+        this.isAuthenticated = false; 
+        this.isSignUpState = false; 
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        console.error('Registration token dispatch failure exception trace:', err);
+        this.authErrorMessage = typeof err.error === 'string' ? err.error : 'Username handle or email allocation conflict.';
+        this.cdr.detectChanges();
+      }
+    });
+  }
 
   toggleSignUpState(state: boolean) {
     this.isSignUpState = state;
@@ -950,18 +897,14 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
     this.http.get<any[]>(`http://localhost:5262/api/tasks/task/${taskId}/comments`).subscribe({
       next: (comments) => {
         if (comments) {
-          // 🎯 HARD FIX: Parse string array and ensure exact UTC format indicator
           this.taskComments = comments.map(c => {
             let cleanDateStr = c.createdAt ? c.createdAt.trim() : '';
-            
-            // Agar end mein 'Z' nahi hai aur decimal dot hai, toh clean context sync karein
             if (cleanDateStr && !cleanDateStr.endsWith('Z') && !cleanDateStr.includes('+')) {
               cleanDateStr = cleanDateStr + 'Z';
             }
-
             return {
               ...c,
-              createdAt: cleanDateStr ? new Date(cleanDateStr) : new Date() // Fallback to current local system time
+              createdAt: cleanDateStr ? new Date(cleanDateStr) : new Date() 
             };
           });
         } else {
@@ -985,8 +928,8 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
 
     this.http.post(`${environment.apiUrl}/api/tasks/comment`, commentPayload).subscribe({
       next: () => {
-        this.newCommentText = ''; // Clear input box
-        this.loadTaskComments(taskId); // Refresh view stream
+        this.newCommentText = ''; 
+        this.loadTaskComments(taskId); 
       }
     });
   }
@@ -1065,7 +1008,6 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
     }
 
     const currentUserId = this.authService.CurrentUserValue?.userId || 0;
-
     const newProjectPayload = {
       name: name.trim(),
       description: description ? description.trim() : '',
@@ -1086,7 +1028,6 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
       },
       error: (err) => {
         console.error('Failed to register project workspace:', err);
-        
         let errorMessage = 'Conflict detected during global directory save sequence.';
         if (err.error) {
           if (typeof err.error === 'string') {
@@ -1100,6 +1041,31 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
     });
   }
   
+  // 🎯 STRICT PRODUCTION FIX ENGINE: Exact mapped method handler signature
+  onUsernameChange(event: any): void {
+    const username = typeof event === 'string' ? event : event?.target?.value;
+    
+    if (!username || username.trim() === '') {
+      this.usernameAvailabilityStatus = '';
+      return;
+    }
+
+    this.usernameAvailabilityStatus = 'checking';
+
+    this.http.get(`https://orbit-backend-api-15tq.onrender.com/api/auth/check-username/${username}`)
+      .subscribe({
+        next: (response: any) => {
+          this.usernameAvailabilityStatus = response.isAvailable ? 'available' : 'taken';
+          this.cdr.detectChanges(); // Secure lock UI trigger
+        },
+        error: (err) => {
+          console.error('Username check failed:', err);
+          this.usernameAvailabilityStatus = ''; 
+          this.cdr.detectChanges();
+        }
+      });
+  }
+
   async deleteCurrentProject() {
     const confirmed = await this.showCustomConfirm(`Delete entire project?`, '🗑️', 'Delete Project');
     if (!confirmed) return;
@@ -1249,7 +1215,6 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
     }
 
     const movedTask = event.container.data[event.currentIndex];
-
     const targetColumnTasks = event.container.data;
     targetColumnTasks.forEach((task, index) => {
       task.status = newStatus;
@@ -1314,7 +1279,6 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
 
   handleCustomAlertResponse(approved: boolean) {
     if (this.customAlertClosing) return;
-    
     if (this.autoCloseAlertTimeout) {
       clearTimeout(this.autoCloseAlertTimeout);
       this.autoCloseAlertTimeout = null;
@@ -1333,12 +1297,11 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
     }, 200);
   }
  
-  // 👥 REGISTRY ENGINE NESTED INSIDE COMPONENT CONTEXT GRID
   openUserManagementModal() {
-    console.log('--- Manage Users Button Triggered Live ---'); // 🎯 Telemetry tracking print lagaya
+    console.log('--- Manage Users Button Triggered Live ---'); 
     this.isUserModalOpen = true;
     this.isUserModalClosing = false;
-    this.cdr.detectChanges(); // Force UI refresh loop
+    this.cdr.detectChanges(); 
   }
 
   closeUserManagementModal() {
@@ -1358,7 +1321,6 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
     }, 200);
   }
 
-  // 🎯 CORPORATE REGISTER ENDPOINT SYNC WITH UNIQUE USERNAME CONTROL
   executeCorporateUserRegistration() {
     if (!this.newUserName.trim() || !this.newUserEmail.trim() || !this.newUserUsername.trim() || !this.newUserPass.trim()) {
       this.showCustomAlert('Please fill out all identity configuration parameter text spaces including unique handle.', '⚠️', 'Validation Error');
@@ -1375,7 +1337,7 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
     const registrationPayload = {
       fullName: this.newUserName.trim(),
       email: email,
-      username: this.newUserUsername.replace('@', '').trim().toLowerCase(), // Auto strips handles prefix internally
+      username: this.newUserUsername.replace('@', '').trim().toLowerCase(), 
       passwordHash: this.newUserPass.trim(),
       role: this.newUserRoleSelected
     };
