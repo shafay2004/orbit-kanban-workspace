@@ -292,7 +292,7 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
   loadAllProjects() {
     const currentLoggedInUserId = this.authService.CurrentUserValue?.userId || 0;
 
-    this.http.get<ProjectItem[]>(`http://localhost:5262/api/tasks/projects?userId=${currentLoggedInUserId}`).subscribe({
+    this.http.get<ProjectItem[]>(`${environment.apiUrl}/api/tasks/projects?userId=${currentLoggedInUserId}`).subscribe({
       next: (projects) => {
         if (projects && projects.length > 0) {
           this.projectList = projects;
@@ -480,7 +480,7 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
   }
 
   loadProjectTasks(projectId: number) {
-    this.http.get<TaskItem[]>(`http://localhost:5262/api/tasks/project/${projectId}`).subscribe({
+    this.http.get<TaskItem[]>(`${environment.apiUrl}/api/tasks/project/${projectId}`).subscribe({
       next: (tasks) => {
         if (tasks) {
           localStorage.setItem(`orbit_tasks_cache_p${projectId}`, JSON.stringify(tasks));
@@ -493,7 +493,7 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
   }
 
   loadProjectLogs() {
-    this.http.get<any[]>(`http://localhost:5262/api/tasks/project/${this.currentProjectId}/logs`).subscribe({
+    this.http.get<any[]>(`${environment.apiUrl}/api/tasks/project/${this.currentProjectId}/logs`).subscribe({
       next: (logs) => {
         this.projectActivityLogs = logs;
         this.cdr.detectChanges();
@@ -894,7 +894,7 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
   }
 
   loadTaskComments(taskId: number) {
-    this.http.get<any[]>(`http://localhost:5262/api/tasks/task/${taskId}/comments`).subscribe({
+    this.http.get<any[]>(`${environment.apiUrl}/api/tasks/task/${taskId}/comments`).subscribe({
       next: (comments) => {
         if (comments) {
           this.taskComments = comments.map(c => {
@@ -977,7 +977,7 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
     const confirmed = await this.showCustomConfirm(`Are you sure you want to delete task card #${taskId}?`, '🗑️', 'Delete Card');
     if (!confirmed) return;
 
-    this.http.delete(`http://localhost:5262/api/tasks/${taskId}`, {
+    this.http.delete(`${environment.apiUrl}/api/tasks/${taskId}`, {
       headers: {
         'X-Action-User': this.authService.CurrentUserValue?.username || this.authService.CurrentUserValue?.fullName || 'System User'
       }
@@ -1052,7 +1052,7 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
 
     this.usernameAvailabilityStatus = 'checking';
 
-    this.http.get(`https://orbit-backend-api-15tq.onrender.com/api/auth/check-username/${username}`)
+    this.http.get(`${environment.apiUrl}/api/auth/check-username/${username}`)
       .subscribe({
         next: (response: any) => {
           this.usernameAvailabilityStatus = response.isAvailable ? 'available' : 'taken';
@@ -1072,7 +1072,7 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
 
     const currentUserId = this.authService.CurrentUserValue?.userId || 0;
 
-    this.http.delete(`http://localhost:5262/api/tasks/project/${this.currentProjectId}`, {
+    this.http.delete(`${environment.apiUrl}/api/tasks/project/${this.currentProjectId}`, {
       headers: {
         'X-Action-User-Id': currentUserId.toString(),
         'X-Action-User': this.authService.CurrentUserValue?.username || this.authService.CurrentUserValue?.fullName || 'System User'
@@ -1131,7 +1131,7 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
       description: this.editProjectDescription.trim()
     };
 
-    this.http.put<ProjectItem>(`http://localhost:5262/api/tasks/project/${this.currentProjectId}`, payload, {
+    this.http.put<ProjectItem>(`${environment.apiUrl}/api/tasks/project/${this.currentProjectId}`, payload, {
       headers: {
         'X-Action-User-Id': currentUserId.toString()
       }
@@ -1177,7 +1177,7 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
 
     const currentUserId = this.authService.CurrentUserValue?.userId || 0;
     
-    this.http.delete(`http://localhost:5262/api/auth/delete-account?password=${encodeURIComponent(this.deleteAccountPassword)}`, {
+    this.http.delete(`${environment.apiUrl}/api/auth/delete-account?password=${encodeURIComponent(this.deleteAccountPassword)}`, {
       headers: {
         'X-Action-User-Id': currentUserId.toString()
       }

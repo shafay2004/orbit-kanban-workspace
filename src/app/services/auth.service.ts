@@ -20,7 +20,7 @@ export interface UserSession {
 })
 export class AuthService {
   // 🚀 HARD RESOLVE: Replaced hardcoded localhost string with global environment variable endpoint path matrix
-  private apiUrl = `${environment.apiUrl}/auth`;
+  private apiUrl = `${environment.apiUrl}/api/auth`;
   
   private currentUserSubject: BehaviorSubject<UserSession | null>;
   public currentUser: Observable<UserSession | null>;
