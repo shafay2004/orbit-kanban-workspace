@@ -142,87 +142,90 @@ namespace Orbit.API.Controllers
             return Ok(new { message = "Staged successfully. Verification mail dispatched." });
         }
 
-        // GET: api/Auth/check-username?username=messi
-        [HttpGet("check-username")]
-        public async Task<IActionResult> CheckUsername([FromQuery] string username)
+      // GET: api/Auth/check-username?username=messi
+      // GET: api/auth/check-username/messi10
+      [HttpGet("check-username/{username}")] // 🎯 ROUTE SIGNATURE FIXED FOR PATH BINDING
+      public async Task<IActionResult> CheckUsername([FromRoute] string username) // Changed from FromQuery to FromRoute
+      {
+        if (string.IsNullOrWhiteSpace(username))
         {
-            if (string.IsNullOrWhiteSpace(username))
-            {
-                return BadRequest(new { message = "Username cannot be empty." });
-            }
-
-            var cleanUsername = username.ToLower().Trim();
-
-            // Check if there is a verified user with this username
-            var isTaken = await _context.Users.AnyAsync(u => u.IsEmailVerified && u.Username.ToLower().Trim() == cleanUsername);
-
-            return Ok(new { available = !isTaken });
+          return BadRequest(new { isAvailable = false, message = "Username cannot be empty." });
         }
 
-        // 🎯 UNIFIED & DECODED VERIFICATION GATEWAY: GET api/auth/verify-email
-        // (Saves record to SQL DB *ONLY* upon click activation execution + Auto-Redirects Client Token with User State parameters)
-        [HttpGet("verify-email")]
-        public async Task<IActionResult> VerifyEmail([FromQuery] string token)
+        var cleanUsername = username.ToLower().Trim();
+
+        // Check if there is a verified user with this username
+        bool isTaken = await _context.Users.AnyAsync(u => u.IsEmailVerified && u.Username.ToLower().Trim() == cleanUsername);
+
+        // 🎯 RESPONSE FIXED: Returns property 'isAvailable' matching your Angular frontend response model exactly
+        return Ok(new { isAvailable = !isTaken });
+      }
+
+    // 🎯 UNIFIED & DECODED VERIFICATION GATEWAY: GET api/auth/verify-email
+    // (Saves record to SQL DB *ONLY* upon click activation execution + Auto-Redirects Client Token with User State parameters)
+    [HttpGet("verify-email")]
+    [HttpGet("verify-email")]
+    public async Task<IActionResult> VerifyEmail([FromQuery] string token)
+    {
+      if (string.IsNullOrWhiteSpace(token)) return BadRequest("Invalid verification request signature token data parameter mapping.");
+
+      try
+      {
+        // 🔓 UNWRAP BASE64 TEXT BACK INTO ARRAYS STRING MEMORY BLOCKS
+        byte[] base64EncodedBytes = Convert.FromBase64String(token);
+        string decryptedPayload = Encoding.UTF8.GetString(base64EncodedBytes);
+        string[] parts = decryptedPayload.Split("||");
+
+        string fullName = parts[0];
+        string email = parts[1];
+        string username = parts[2];
+        string passwordHash = parts[3];
+        string role = parts[4];
+
+        // Delete any existing unverified user with the same email or username before saving the verified one
+        var existingUnverifiedUser = await _context.Users.FirstOrDefaultAsync(u => u.Email.ToLower().Trim() == email.ToLower().Trim() || u.Username.ToLower().Trim() == username.ToLower().Trim());
+        if (existingUnverifiedUser != null)
         {
-            if (string.IsNullOrWhiteSpace(token)) return BadRequest("Invalid verification request signature token data parameter mapping.");
-
-            try
-            {
-                // 🔓 UNWRAP BASE64 TEXT BACK INTO ARRAYS STRING MEMORY BLOCKS
-                byte[] base64EncodedBytes = Convert.FromBase64String(token);
-                string decryptedPayload = Encoding.UTF8.GetString(base64EncodedBytes);
-                string[] parts = decryptedPayload.Split("||");
-
-                string fullName = parts[0];
-                string email = parts[1];
-                string username = parts[2];
-                string passwordHash = parts[3];
-                string role = parts[4];
-
-                // Delete any existing unverified user with the same email or username before saving the verified one
-                var existingUnverifiedUser = await _context.Users.FirstOrDefaultAsync(u => u.Email.ToLower().Trim() == email.ToLower().Trim() || u.Username.ToLower().Trim() == username.ToLower().Trim());
-                if (existingUnverifiedUser != null)
-                {
-                    if (existingUnverifiedUser.IsEmailVerified)
-                    {
-                        return BadRequest("Conflict: This email address or username is already taken by a verified account.");
-                    }
-                    else
-                    {
-                        _context.Users.Remove(existingUnverifiedUser);
-                        await _context.SaveChangesAsync();
-                    }
-                }
-
-                // 📝 STEP 1: CONCRETE PHYSICAL TABLE DATA WRITE TO SQL SERVER ROWS
-                var verifiedUser = new Orbit.API.Data.User
-                {
-                    FullName = fullName,
-                    Email = email,
-                    Username = username,
-                    PasswordHash = passwordHash,
-                    Role = role,
-                    IsEmailVerified = true,
-                    VerificationToken = null
-                };
-
-                _context.Users.Add(verifiedUser);
-                await _context.SaveChangesAsync();
-
-                // 🚀 STEP 2: AUTO LOGIN REDIRECT STREAM PIPELINE BYPASS
-                // Pass target values to query hooks so Angular instantly grabs state models on bootstrap launch
-                string autoLoginRedirectUrl = $"http://localhost:4200/?autoId={verifiedUser.UserId}&autoName={Uri.EscapeDataString(verifiedUser.FullName)}&autoEmail={verifiedUser.Email}&autoRole={verifiedUser.Role}&autoUsername={Uri.EscapeDataString(verifiedUser.Username)}";
-
-                return Redirect(autoLoginRedirectUrl);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest($"Verification token parameters corrupted or trace structure expired. Logic error: {ex.Message}");
-            }
+          if (existingUnverifiedUser.IsEmailVerified)
+          {
+            return BadRequest("Conflict: This email address or username is already taken by a verified account.");
+          }
+          else
+          {
+            _context.Users.Remove(existingUnverifiedUser);
+            await _context.SaveChangesAsync();
+          }
         }
 
-        // DELETE: api/auth/delete-account
-        [HttpDelete("delete-account")]
+        // 📝 STEP 1: CONCRETE PHYSICAL TABLE DATA WRITE TO SQL SERVER ROWS
+        var verifiedUser = new Orbit.API.Data.User
+        {
+          FullName = fullName,
+          Email = email,
+          Username = username,
+          PasswordHash = passwordHash,
+          Role = role,
+          IsEmailVerified = true,
+          VerificationToken = null
+        };
+
+        _context.Users.Add(verifiedUser);
+        await _context.SaveChangesAsync();
+
+        // 🚀 STEP 2: AUTO LOGIN REDIRECT STREAM PIPELINE BYPASS
+        // 🎯 PRODUCTION LOCK FIXED: Switched host destination target URL from localhost to your live Render platform
+        string autoLoginRedirectUrl = $"https://orbit-frontend-live.onrender.com/?autoId={verifiedUser.UserId}&autoName={Uri.EscapeDataString(verifiedUser.FullName)}&autoEmail={verifiedUser.Email}&autoRole={verifiedUser.Role}&autoUsername={Uri.EscapeDataString(verifiedUser.Username)}";
+
+        return Redirect(autoLoginRedirectUrl);
+      }
+      catch (Exception ex)
+      {
+        return BadRequest($"Verification token parameters corrupted or trace structure expired. Logic error: {ex.Message}");
+      }
+    }
+
+    // DELETE: api/auth/delete-account
+    [HttpDelete("delete-account")]
         public async Task<IActionResult> DeleteAccount([FromQuery] string password)
         {
             string rawUserId = Request.Headers["X-Action-User-Id"].ToString();
