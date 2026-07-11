@@ -21,9 +21,10 @@ builder.Services.AddSwaggerGen();
 // 2. Enable CORS (Cross-Origin Resource Sharing)
 builder.Services.AddCors(options => {
     options.AddPolicy("AllowAngular", policy => {
-        policy.WithOrigins("http://localhost:4200")
+        policy.WithOrigins("https://orbit-frontend-live.onrender.com")
               .AllowAnyMethod()
-              .AllowAnyHeader();
+              .AllowAnyHeader()
+              .AllowCredentials();
     });
 });
 
