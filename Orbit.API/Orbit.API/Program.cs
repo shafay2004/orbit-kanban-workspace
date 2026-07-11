@@ -19,13 +19,15 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // 2. Enable CORS (Cross-Origin Resource Sharing)
-builder.Services.AddCors(options => {
-    options.AddPolicy("AllowAngular", policy => {
-        policy.WithOrigins("https://orbit-frontend-live.onrender.com")
-              .AllowAnyMethod()
-              .AllowAnyHeader()
-              .AllowCredentials();
-    });
+builder.Services.AddCors(options =>
+{
+  options.AddPolicy("AllowAll",
+      policy =>
+      {
+        policy.AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+      });
 });
 
 // 3. PHASE 3: Configure JWT Authentication Services
