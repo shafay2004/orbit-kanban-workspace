@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://your-live-backend-url.com/api' // Live backend deploy hone par replace hoga
+  apiUrl: 'https://orbit-backend-api-15tq.onrender.com/api'
 };
