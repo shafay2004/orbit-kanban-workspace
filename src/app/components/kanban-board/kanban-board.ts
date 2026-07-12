@@ -61,7 +61,6 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
   inProgressTasks: TaskItem[] = [];
   doneTasks: TaskItem[] = [];
 
-  // 🎯 DUP LOCK FIX: Double declaration removed from bottom block context safely
   usernameAvailabilityStatus: string = ''; 
   projectList: ProjectItem[] = [];
   userList: UserItem[] = [];
@@ -692,6 +691,7 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
     });
   }
 
+  // 🎯 PUBLIC USER REGISTRATION UPGRADED WITH EXPLICIT 400 ERROR RESPONSE EXTRACTION
   executePublicUserRegistration() {
     this.authErrorMessage = null;
 
@@ -781,7 +781,17 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
       },
       error: (err) => {
         console.error('Registration token dispatch failure exception trace:', err);
-        this.authErrorMessage = typeof err.error === 'string' ? err.error : 'Username handle or email allocation conflict.';
+        
+        // 🎯 PARSE STRATEGY FIXED: Safely intercept 400 validation duplicate errors from .NET Backend
+        if (err.error && typeof err.error === 'string') {
+          this.authErrorMessage = err.error;
+        } else if (err.error && err.error.message) {
+          this.authErrorMessage = err.error.message;
+        } else {
+          this.authErrorMessage = 'Username handle or email allocation conflict.';
+        }
+         
+        this.showCustomAlert(this.authErrorMessage || 'Registration Conflict', '❌', 'Identity Conflict');
         this.cdr.detectChanges();
       }
     });
@@ -1041,7 +1051,6 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
     });
   }
   
-  // 🎯 STRICT PRODUCTION FIX ENGINE: Exact mapped method handler signature
   onUsernameChange(event: any): void {
     const username = typeof event === 'string' ? event : event?.target?.value;
     
@@ -1056,7 +1065,7 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (response: any) => {
           this.usernameAvailabilityStatus = response.isAvailable ? 'available' : 'taken';
-          this.cdr.detectChanges(); // Secure lock UI trigger
+          this.cdr.detectChanges(); 
         },
         error: (err) => {
           console.error('Username check failed:', err);
@@ -1321,6 +1330,7 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
     }, 200);
   }
 
+  // 🎯 CORPORATE USER REGISTRATION UPGRADED WITH EXPLICIT 400 ERROR RESPONSE EXTRACTION
   executeCorporateUserRegistration() {
     if (!this.newUserName.trim() || !this.newUserEmail.trim() || !this.newUserUsername.trim() || !this.newUserPass.trim()) {
       this.showCustomAlert('Please fill out all identity configuration parameter text spaces including unique handle.', '⚠️', 'Validation Error');
@@ -1350,8 +1360,18 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
       },
       error: (err) => {
         console.error('Registration framework pipeline exception error:', err);
-        const failMessage = typeof err.error === 'string' ? err.error : 'Handle allocation conflict node matching duplicate values.';
-        this.showCustomAlert(failMessage, '❌', 'Identity Conflict');
+        
+        // 🎯 PARSE STRATEGY FIXED: Safely intercept 400 validation duplicate errors from .NET Backend
+        if (err.error && typeof err.error === 'string') {
+          this.authErrorMessage = err.error;
+        } else if (err.error && err.error.message) {
+          this.authErrorMessage = err.error.message;
+        } else {
+          this.authErrorMessage = 'Handle allocation conflict node matching duplicate values.';
+        }
+        
+        this.showCustomAlert(this.authErrorMessage || 'Identity Conflict', '❌', 'Identity Conflict');
+        this.cdr.detectChanges();
       }
     });
   }
