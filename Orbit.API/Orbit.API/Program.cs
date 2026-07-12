@@ -7,10 +7,18 @@ using Orbit.API.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 1. Hook up our SQL Server Database Connection String
-// ?? UPDATE THIS ENGINE PATH MATRIX INSIDE Program.cs:
-builder.Services.AddDbContext<OrbitDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+// 1. Hook up our Database Context dynamically based on connection string type
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+if (connectionString != null && (connectionString.Contains("Host=") || connectionString.Contains("postgresql://") || connectionString.Contains("Port=")))
+{
+    builder.Services.AddDbContext<OrbitDbContext>(options =>
+        options.UseNpgsql(connectionString));
+}
+else
+{
+    builder.Services.AddDbContext<OrbitDbContext>(options =>
+        options.UseSqlServer(connectionString));
+}
 
 builder.Services.AddSignalR();
 

@@ -2,7 +2,7 @@
   {
     "ContainingType": "Orbit.API.Controllers.AuthController",
     "Method": "CheckUsername",
-    "RelativePath": "api/auth/check-username",
+    "RelativePath": "api/auth/check-username/{username}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -10,7 +10,7 @@
       {
         "Name": "username",
         "Type": "System.String",
-        "IsRequired": false
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
