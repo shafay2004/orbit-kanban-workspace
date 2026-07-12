@@ -67,7 +67,7 @@
         }
       }
     },
-    "/api/auth/check-username": {
+    "/api/auth/check-username/{username}": {
       "get": {
         "tags": [
           "Auth"
@@ -75,7 +75,8 @@
         "parameters": [
           {
             "name": "username",
-            "in": "query",
+            "in": "path",
+            "required": true,
             "schema": {
               "type": "string"
             }
